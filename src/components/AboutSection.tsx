@@ -1,27 +1,32 @@
 import Image from "next/image";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
-import { UnderlineDraw } from "@/components/motion/UnderlineDraw";
 
 const highlights = [
-  {
-    title: "Strategic legal advisory",
-    body: "Counsel positioned ahead of the decision, not filed after it.",
-  },
-  {
-    title: "Corporate & litigation expertise",
-    body: "One team across the deal and the dispute, so nothing gets lost in the handoff.",
-  },
-  {
-    title: "Pan-India presence",
-    body: "Local standing where your business actually operates.",
-  },
+  "Strategic legal advisory",
+  "Corporate & litigation expertise",
+  "Pan-India presence",
 ];
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5 shrink-0 text-rust">
+      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M6.5 10.2 8.8 12.5 13.5 7.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export function AboutSection() {
   return (
-    <Section theme="light" stagger staggerChildren={0.15}>
-      <StaggerItem className="max-w-2xl">
+    <Section theme="light" stagger staggerChildren={0.15} className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
+      <StaggerItem className="max-w-lg">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
           About Avira
         </p>
@@ -29,42 +34,49 @@ export function AboutSection() {
           Passion, precision, and professionalism in law
         </h2>
         <p className="mt-6 font-sans text-base leading-7 text-ink/70">
-          We&apos;re a boutique legal practice built for how modern businesses actually operate,
-          backed by <span className="text-ink">40+ years</span>{" "}
-          of combined experience —
+          We&apos;re a boutique legal practice built for how modern businesses actually operate —
           pairing rigorous legal craft with the kind of responsive, plain-spoken counsel clients
           don&apos;t have to chase down.
         </p>
+
+        <ul className="mt-8 flex flex-col gap-4">
+          {highlights.map((item) => (
+            <li key={item} className="flex items-center gap-3 font-sans text-base font-medium text-ink">
+              <CheckIcon />
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href="#contact"
+          className="mt-10 inline-flex items-center gap-2 rounded-lg bg-ink px-8 py-4 font-sans text-sm font-medium uppercase tracking-widest text-cream transition-colors hover:bg-ink/90"
+        >
+          Learn more
+          <span aria-hidden>↗</span>
+        </a>
       </StaggerItem>
 
-      <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:gap-20">
-        <StaggerItem className="overflow-hidden rounded-2xl">
+      <StaggerItem variant="slideInRight" className="relative">
+        <div className="relative aspect-4/5 w-full overflow-hidden rounded-2xl sm:aspect-5/6">
           <Image
             src="https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg"
             alt="Statue of Lady Justice holding the scales"
-            width={900}
-            height={1080}
-            className="aspect-4/5 w-full object-cover"
+            fill
+            sizes="(min-width: 1024px) 40vw, 90vw"
+            className="object-cover"
           />
-        </StaggerItem>
+        </div>
 
-        <StaggerItem className="flex flex-col justify-center gap-10">
-          {highlights.map((item) => (
-            <div key={item.title}>
-              <p className="font-serif text-xl text-ink">{item.title}</p>
-              <p className="mt-2 max-w-sm font-sans text-sm leading-6 text-ink/60">{item.body}</p>
-            </div>
-          ))}
-
-          <a
-            href="#contact"
-            className="group inline-flex w-fit flex-col font-sans text-sm font-medium uppercase tracking-widest text-ink"
-          >
-            Learn more about our approach
-            <UnderlineDraw className="mt-1 h-px w-full bg-rust" />
-          </a>
-        </StaggerItem>
-      </div>
+        <div className="absolute -bottom-8 -left-6 rounded-xl bg-paper px-8 py-6 shadow-xl sm:-left-10">
+          <p className="font-serif text-4xl text-ink">40+</p>
+          <p className="mt-1 font-sans text-xs font-medium uppercase tracking-[0.15em] text-rust">
+            Years combined
+            <br />
+            experience
+          </p>
+        </div>
+      </StaggerItem>
     </Section>
   );
 }
