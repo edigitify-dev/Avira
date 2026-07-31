@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { ImpactSection } from "@/components/ImpactSection";
 import { AboutSection } from "@/components/AboutSection";
+import { WhyChooseUsSection } from "@/components/WhyChooseUsSection";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <ImpactSection />
       <AboutSection />
+      <WhyChooseUsSection />
     </div>
   );
 }
