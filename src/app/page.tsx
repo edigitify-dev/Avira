@@ -1,3 +1,4 @@
+import { Hero } from "@/components/Hero";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
@@ -21,13 +22,7 @@ const practiceAreas = [
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
-      <Section theme="dark" variant="fadeUp" className="flex min-h-screen flex-col items-center justify-center gap-6 text-center">
-        <p className={`${eyebrow} text-cream/70`}>Legal Platform</p>
-        <h1 className="font-serif text-6xl font-medium italic sm:text-7xl">Ako</h1>
-        <p className="max-w-md font-sans text-lg leading-8 text-cream/80">
-          Counsel built around how modern businesses actually move.
-        </p>
-      </Section>
+      <Hero />
 
       <Section theme="light" stagger staggerChildren={0.15} className="flex flex-col items-center gap-16">
         <StaggerItem className="text-center">
