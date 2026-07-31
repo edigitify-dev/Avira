@@ -1,81 +1,85 @@
-import Image from "next/image";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { UnderlineDraw } from "@/components/motion/UnderlineDraw";
+import { ParallaxImage } from "@/components/motion/ParallaxImage";
 
-const highlights = [
-  "Strategic legal advisory",
-  "Corporate & litigation expertise",
-  "Pan-India presence",
+const timeline = [
+  {
+    index: "01",
+    title: "Strategic legal advisory",
+    body: "Counsel positioned ahead of the decision, not filed after it.",
+  },
+  {
+    index: "02",
+    title: "Corporate & litigation expertise",
+    body: "One team across the deal and the dispute, so nothing gets lost in the handoff.",
+  },
+  {
+    index: "03",
+    title: "Pan-India presence",
+    body: "Local standing where your business actually operates.",
+  },
 ];
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5 shrink-0 text-rust">
-      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M6.5 10.2 8.8 12.5 13.5 7.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export function AboutSection() {
   return (
-    <Section theme="light" stagger staggerChildren={0.15} className="grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
-      <StaggerItem className="max-w-lg">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
-          About Avira
-        </p>
-        <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-          Passion, precision, and professionalism in law
-        </h2>
-        <p className="mt-6 font-sans text-base leading-7 text-ink/70">
-          We&apos;re a boutique legal practice built for how modern businesses actually operate —
-          pairing rigorous legal craft with the kind of responsive, plain-spoken counsel clients
-          don&apos;t have to chase down.
-        </p>
+    <Section
+      theme="light"
+      stagger
+      staggerChildren={0.15}
+      className="grid grid-cols-1 items-stretch gap-16 px-0! py-0! lg:grid-cols-12 lg:gap-x-12"
+    >
+      <div className="flex flex-col justify-center px-6 py-24 sm:px-16 sm:py-32 lg:col-span-6 lg:py-32 lg:pr-0">
+        <StaggerItem>
+          <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
+            About Avira
+          </p>
+          <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
+            Passion, precision, and professionalism in law
+          </h2>
+        </StaggerItem>
 
-        <ul className="mt-8 flex flex-col gap-4">
-          {highlights.map((item) => (
-            <li key={item} className="flex items-center gap-3 font-sans text-base font-medium text-ink">
-              <CheckIcon />
-              {item}
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href="#contact"
-          className="mt-10 inline-flex items-center gap-2 rounded-lg bg-ink px-8 py-4 font-sans text-sm font-medium uppercase tracking-widest text-cream transition-colors hover:bg-ink/90"
-        >
-          Learn more
-          <span aria-hidden>↗</span>
-        </a>
-      </StaggerItem>
-
-      <StaggerItem variant="slideInRight" className="relative">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl sm:aspect-[5/6]">
-          <Image
-            src="https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg"
-            alt="Statue of Lady Justice holding the scales"
-            fill
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className="object-cover"
-          />
-        </div>
-
-        <div className="absolute -bottom-8 -left-6 rounded-xl bg-paper px-8 py-6 shadow-xl sm:-left-10">
-          <p className="font-serif text-4xl text-ink">40+</p>
-          <p className="mt-1 font-sans text-xs font-medium uppercase tracking-[0.15em] text-rust">
+        <StaggerItem className="mt-8 flex items-center gap-6 border-y border-ink/10 py-6">
+          <span className="font-serif text-5xl text-ink">40+</span>
+          <span className="h-10 w-px bg-ink/15" />
+          <span className="font-sans text-sm leading-6 text-ink/70">
             Years combined
             <br />
             experience
-          </p>
-        </div>
+          </span>
+        </StaggerItem>
+
+        <StaggerItem className="mt-10 flex flex-col">
+          {timeline.map((item, i) => (
+            <div key={item.index} className="relative flex gap-6 pb-8 last:pb-0">
+              {i < timeline.length - 1 && (
+                <span className="absolute left-[0.6rem] top-8 bottom-0 w-px bg-ink/10" />
+              )}
+              <span className="font-serif text-sm text-rust">{item.index}</span>
+              <div>
+                <p className="font-sans text-base font-medium text-ink">{item.title}</p>
+                <p className="mt-1 max-w-sm font-sans text-sm leading-6 text-ink/60">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </StaggerItem>
+
+        <StaggerItem>
+          <a href="#contact" className="group mt-4 inline-flex w-fit flex-col font-sans text-sm font-medium uppercase tracking-widest text-ink">
+            Learn more about our approach
+            <UnderlineDraw className="mt-1 h-px w-full bg-ink" />
+          </a>
+        </StaggerItem>
+      </div>
+
+      <StaggerItem variant="fadeIn" className="relative lg:col-span-6">
+        <ParallaxImage
+          src="https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg"
+          alt="Statue of Lady Justice holding the scales"
+          className="h-80 w-full sm:h-112 lg:h-full lg:min-h-144"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-forest mix-blend-multiply opacity-30" />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink/40 to-transparent" />
       </StaggerItem>
     </Section>
   );
