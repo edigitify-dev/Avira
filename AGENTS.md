@@ -23,3 +23,14 @@ Do not default to these unless the supplied UI/typography spec calls for them:
 
 Wait for the actual UI and typography spec before styling components — treat the above as defaults to actively avoid, not fill in ahead of time.
 
+## Scroll animations (Framer Motion)
+
+Every top-level section must reveal on enter and reverse on exit — use `<AnimatedSection>` from `src/components/motion/AnimatedSection.tsx`, never raw `motion.section` inline.
+
+- Timing: `easePremium` = `[0.16, 1, 0.3, 1]` (expo-out), 0.8s. No spring/bounce, no elastic overshoot — that reads as a toy, not premium.
+- Distance: subtle (24–32px translate, or 0.96 scale). Big travel distances feel cheap.
+- `viewport.once` stays `false` (the default) so leaving the viewport reverses back to hidden — that reversal *is* the exit animation. Don't set `once: true` unless a section should only ever play once (e.g. a one-time success state).
+- Grouped content (heading + copy + cards) uses `stagger` + `<StaggerItem>` children instead of animating the whole block as one unit — sequenced reveals read as premium, simultaneous ones read as default.
+- `MotionConfig reducedMotion="user"` is wired at the root layout — don't bypass it with raw CSS transitions that ignore `prefers-reduced-motion`.
+- Reference implementation: `src/lib/motion.ts` (variants) + `src/app/page.tsx` (usage demo).
+
