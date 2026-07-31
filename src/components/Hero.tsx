@@ -13,7 +13,7 @@ export function Hero() {
         priority
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/35 to-ink/10" />
 
       <div className="relative z-10 flex flex-1 flex-col justify-between px-6 py-8 sm:px-16 sm:py-10">
         <AnimatedSection as="div" variant="fadeDown">

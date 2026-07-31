@@ -4,7 +4,7 @@ const links = ["Home", "About", "Services", "Leadership", "Contact"];
 export function NavBar() {
   return (
     <nav className="flex items-center justify-between">
-      <span className="font-serif text-2xl font-medium text-cream">Ako</span>
+      <span className="font-serif text-2xl font-medium text-cream">Avira</span>
       <ul className="hidden gap-10 sm:flex">
         {links.map((link) => (
           <li key={link}>
