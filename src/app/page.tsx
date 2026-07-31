@@ -1,77 +1,61 @@
-import Image from "next/image";
-import { AnimatedSection } from "@/components/motion/AnimatedSection";
+import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
-const features = [
+const eyebrow = "font-sans text-sm font-medium uppercase tracking-[0.2em]";
+
+const practiceAreas = [
   {
-    title: "Enter",
-    body: "Sections fade and rise into place as they cross into view, timed with an expo-out ease for a settled, weighted feel.",
+    title: "Corporate",
+    body: "Structuring, contracts, and governance for growing businesses.",
   },
   {
-    title: "Exit",
-    body: "Scroll back past a section and it reverses the same way it arrived — no snap, no jump cut.",
+    title: "Litigation",
+    body: "Representation and strategy for disputes, from filing to resolution.",
   },
   {
-    title: "Stagger",
-    body: "Grouped content (headings, copy, cards) reveals in sequence rather than all at once.",
+    title: "Advisory",
+    body: "Ongoing counsel so decisions get made with the risk already priced in.",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 bg-zinc-50 font-sans dark:bg-black">
-      <AnimatedSection
-        as="section"
-        variant="fadeUp"
-        className="flex min-h-screen w-full flex-col items-center justify-center gap-6 px-16 text-center"
-      >
-        <Image className="dark:invert" src="/next.svg" alt="Next.js logo" width={100} height={20} priority />
-        <h1 className="max-w-xl text-4xl font-semibold leading-tight tracking-tight text-black dark:text-zinc-50">
-          Scroll to see enter and exit animations
-        </h1>
-        <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-          Every section below reveals on the way in and reverses on the way out.
+    <div className="flex flex-col flex-1">
+      <Section theme="dark" variant="fadeUp" className="flex min-h-screen flex-col items-center justify-center gap-6 text-center">
+        <p className={`${eyebrow} text-cream/70`}>Legal Platform</p>
+        <h1 className="font-serif text-6xl font-medium italic sm:text-7xl">Ako</h1>
+        <p className="max-w-md font-sans text-lg leading-8 text-cream/80">
+          Counsel built around how modern businesses actually move.
         </p>
-      </AnimatedSection>
+      </Section>
 
-      <AnimatedSection
-        as="section"
-        stagger
-        staggerChildren={0.15}
-        className="flex min-h-screen w-full flex-col items-center justify-center gap-12 px-16"
-      >
-        <StaggerItem>
-          <h2 className="text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
-            Features
-          </h2>
+      <Section theme="light" stagger staggerChildren={0.15} className="flex flex-col items-center gap-16">
+        <StaggerItem className="text-center">
+          <p className={`${eyebrow} text-slate`}>What we do</p>
+          <h2 className="mt-3 font-serif text-4xl font-medium sm:text-5xl">Practice areas</h2>
         </StaggerItem>
         <div className="grid w-full max-w-4xl gap-6 sm:grid-cols-3">
-          {features.map((feature) => (
-            <StaggerItem
-              key={feature.title}
-              className="rounded-2xl border border-black/8 bg-white p-6 dark:border-white/10 dark:bg-zinc-950"
-            >
-              <h3 className="mb-2 text-lg font-medium text-black dark:text-zinc-50">
-                {feature.title}
-              </h3>
-              <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400">{feature.body}</p>
+          {practiceAreas.map((area) => (
+            <StaggerItem key={area.title} className="rounded-2xl bg-paper p-8 shadow-sm">
+              <h3 className="font-serif text-xl font-medium text-ink">{area.title}</h3>
+              <p className="mt-3 font-sans text-sm leading-6 text-ink/70">{area.body}</p>
             </StaggerItem>
           ))}
         </div>
-      </AnimatedSection>
+      </Section>
 
-      <AnimatedSection
-        as="section"
-        variant="scaleIn"
-        className="flex min-h-screen w-full flex-col items-center justify-center gap-6 px-16 text-center"
-      >
-        <h2 className="max-w-lg text-3xl font-semibold tracking-tight text-black dark:text-zinc-50">
-          Ready for the real UI
+      <Section theme="forest" variant="scaleIn" className="flex flex-col items-center gap-6 text-center">
+        <p className={`${eyebrow} text-cream/70`}>Get in touch</p>
+        <h2 className="max-w-lg font-serif text-4xl font-medium sm:text-5xl">
+          Let&apos;s talk about where your business is headed
         </h2>
-        <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-          Send over the design and typography and this same pattern wraps every section.
-        </p>
-      </AnimatedSection>
+        <a
+          href="#"
+          className="mt-4 rounded-full bg-rust px-8 py-3 font-sans text-sm font-medium uppercase tracking-widest text-cream transition-colors hover:bg-rust/90"
+        >
+          Book a consultation
+        </a>
+      </Section>
     </div>
   );
 }

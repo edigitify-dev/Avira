@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Ako brand palette */
+  --color-ink: #202e2a;
+  --color-slate: #4f6b6c;
+  --color-forest: #3e4a34;
+  --color-rust: #8b4b34;
+  --color-cream: #ede6d8;
+  --color-paper: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ink: var(--color-ink);
+  --color-slate: var(--color-slate);
+  --color-forest: var(--color-forest);
+  --color-rust: var(--color-rust);
+  --color-cream: var(--color-cream);
+  --color-paper: var(--color-paper);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
 }
