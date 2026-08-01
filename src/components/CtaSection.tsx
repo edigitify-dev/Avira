@@ -3,7 +3,7 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 
 export function CtaSection() {
   return (
-    <Section theme="dark" stagger staggerChildren={0.12} className="flex flex-col items-center gap-8 text-center">
+    <Section theme="forest" stagger staggerChildren={0.12} className="flex flex-col items-center gap-8 text-center">
       <StaggerItem className="max-w-xl">
         <h2 className="font-serif text-4xl leading-tight sm:text-5xl">
           Ready to talk to counsel who gets it?

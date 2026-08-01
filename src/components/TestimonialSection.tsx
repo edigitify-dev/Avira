@@ -47,7 +47,7 @@ export function TestimonialSection() {
 
   return (
     <Section
-      theme="forest"
+      theme="dark"
       stagger
       staggerChildren={0.15}
       className="grid items-center gap-16 lg:grid-cols-12 lg:gap-20"
