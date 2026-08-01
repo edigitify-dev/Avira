@@ -53,6 +53,10 @@ Hex values are read off the brand board image, not exact brand-guide values — 
 
 Eyebrow labels follow the brand board's style: `font-sans text-sm font-medium uppercase tracking-[0.2em]`, colored to contrast at ~70% opacity against whichever section background it sits on.
 
+**Icons**: `lucide-react` for general UI icons (see `WhyChooseUsSection.tsx`). It no longer ships brand/social marks (LinkedIn, X/Twitter, Instagram, Facebook — trademark reasons) — `Footer.tsx` hand-rolls minimal SVGs matched to lucide's stroke style (24×24 viewBox, `strokeWidth={1.5}`, round caps) for those. Reuse those three (`LinkedInIcon`/`XIcon`/`InstagramIcon`) rather than re-adding a brand-icon package.
+
+**Stock photography**: team/testimonial photos are real Pexels URLs (`images.pexels.com/photos/{id}/pexels-photo-{id}.jpeg`) verified to resolve, not guessed IDs — `next.config.ts` allowlists `images.pexels.com` for `next/image`. Team photos are rendered `grayscale` to unify photos shot in different styles/lighting into one cohesive treatment — keep that filter if more team photos are added.
+
 ## Scroll-linked pinned sections (e.g. process/steps)
 
 For a step-by-step section (not a simple grid), the signature pattern is a pinned horizontal scroll-through rather than per-card whileInView reveals — see `src/components/ProcessSection.tsx`:
