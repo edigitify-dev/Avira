@@ -53,3 +53,14 @@ Hex values are read off the brand board image, not exact brand-guide values — 
 
 Eyebrow labels follow the brand board's style: `font-sans text-sm font-medium uppercase tracking-[0.2em]`, colored to contrast at ~70% opacity against whichever section background it sits on.
 
+## Scroll-linked pinned sections (e.g. process/steps)
+
+For a step-by-step section (not a simple grid), the signature pattern is a pinned horizontal scroll-through rather than per-card whileInView reveals — see `src/components/ProcessSection.tsx`:
+
+- A tall wrapper (`height: ${n * 100}vh`) holds a `lg:sticky lg:top-0 h-screen overflow-hidden` inner viewport. A flex row of `n` full-viewport-width panels sits inside; `useScroll({ target: pinRef, offset: ["start start", "end end"] })` drives a `useTransform`'d `x` on that row, `-(n-1)*100%` at full scroll.
+- **The percentage-of-own-width gotcha**: `translateX(%)` resolves against the *track's own rendered width*, which — because the track is a normal block-level flex container — equals its containing block (one viewport width), not the sum of its overflowing children. The correct target is `-(n-1)*100%` (one full container-width per remaining panel), **not** `-(n-1)/n*100%`. Got this wrong once; verify by checking the computed inline `transform` in a browser at scroll-end matches `-(n-1) * viewportWidth` in px, not a smaller fraction of it.
+- **The container-padding gotcha**: this pinned wrapper must cancel `Section`'s own `px-6 sm:px-16` (e.g. `-mx-6 sm:-mx-16`) or the sticky viewport is narrower than the real viewport, throwing off every width-relative calculation above. Verify with `getBoundingClientRect().width` on the sticky element — it must equal `window.innerWidth`, not something ~100–130px short.
+- `useMotionValueEvent(scrollYProgress, "change", ...)` maps progress to a discrete `active` step index in React state for the dot indicator / "0X / 0N" counter — don't try to derive discrete UI state from a motion value without this hook.
+- This pattern is desktop-only (`hidden lg:block`) — on mobile it collapses to a plain numbered stacked list (`StepsFallback` in the same file), since pinned-scroll effects add complexity without benefit at that viewport. Respect `useReducedMotion()` and fall back to the same stacked list rather than force the pin on users who've opted out.
+- When verifying this pattern works, screenshots alone aren't enough — instrument the actual scroll numbers (`getBoundingClientRect`, computed `transform`, the live motion value) and check the arithmetic, since a visually-plausible mid-scroll screenshot can still hide a completely wrong end-state.
+
