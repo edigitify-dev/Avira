@@ -12,7 +12,7 @@ const stats = [
 
 export function ImpactSection() {
   return (
-    <Section theme="dark" stagger staggerChildren={0.12} className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-24">
+    <Section theme="slate" stagger staggerChildren={0.12} className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-24">
       <StaggerItem className="max-w-md">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">By the numbers</p>
         <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">

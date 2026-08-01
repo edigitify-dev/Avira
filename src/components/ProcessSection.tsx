@@ -33,7 +33,7 @@ function StepsFallback() {
     <div className="flex flex-col divide-y divide-cream/15 border-t border-cream/15">
       {steps.map((step) => (
         <div key={step.number} className="flex gap-6 py-8">
-          <span className="font-serif text-2xl text-rust">{step.number}</span>
+          <span className="font-serif text-2xl text-cream/70">{step.number}</span>
           <div>
             <p className="font-serif text-2xl text-cream">{step.title}</p>
             <p className="mt-2 max-w-md font-sans text-base leading-7 text-cream/65">{step.body}</p>
@@ -61,7 +61,7 @@ function PinnedSteps() {
       className="relative -mx-6 hidden sm:-mx-16 lg:block"
       style={{ height: `${steps.length * 100}vh` }}
     >
-      <div className="sticky top-0 h-screen overflow-hidden bg-ink">
+      <div className="sticky top-0 h-screen overflow-hidden bg-rust">
         <motion.div style={{ x }} className="flex h-full">
           {steps.map((step) => (
             <div key={step.number} className="relative flex h-full w-screen shrink-0 items-center px-6 sm:px-16 lg:px-24">
@@ -69,7 +69,7 @@ function PinnedSteps() {
                 {step.number}
               </span>
               <div className="relative max-w-xl">
-                <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
+                <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/70">
                   Step {step.number}
                 </p>
                 <h3 className="mt-6 font-serif text-5xl leading-tight text-cream sm:text-6xl">
@@ -90,7 +90,7 @@ function PinnedSteps() {
             <span
               key={step.number}
               className={`h-1.5 w-8 rounded-full transition-colors duration-500 ${
-                i === active ? "bg-rust" : "bg-cream/20"
+                i === active ? "bg-cream" : "bg-cream/25"
               }`}
             />
           ))}
@@ -104,9 +104,9 @@ export function ProcessSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <Section theme="dark" stagger staggerChildren={0.12} className="flex flex-col gap-20 lg:pb-0">
+    <Section theme="rust" stagger staggerChildren={0.12} className="flex flex-col gap-20 lg:pb-0">
       <StaggerItem className="max-w-2xl">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">Our process</p>
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/70">Our process</p>
         <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">Our expertise & process</h2>
         <p className="mt-5 font-sans text-base leading-7 text-cream/70">
           Strategic legal guidance tailored to ensure compliance, strengthen businesses, and resolve

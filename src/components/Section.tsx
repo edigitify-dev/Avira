@@ -7,6 +7,7 @@ const themes = {
   white: "bg-paper text-ink",
   slate: "bg-slate text-cream",
   forest: "bg-forest text-cream",
+  rust: "bg-rust text-cream",
 } as const;
 
 type SectionProps = {

@@ -41,7 +41,7 @@ Colors and fonts are global theme tokens (`src/app/globals.css` `@theme`), not o
 - `bg-ink` / `text-ink` — #202e2a, darkest section background / body text on light sections
 - `bg-slate` / `text-slate` — #4f6b6c, secondary dark background, muted accents
 - `bg-forest` / `text-forest` — #3e4a34, alternate dark background
-- `bg-rust` / `text-rust` — #8b4b34, single accent color — CTAs and highlights only, never a background wash
+- `bg-rust` / `text-rust` — #8b4b34, primarily an accent color (CTAs, underlines, small icons). `ProcessSection` is an explicit exception using `theme="rust"` as a full section background — when rust is the *background*, every element that would normally use `text-rust`/`bg-rust` as an accent switches to cream (`text-cream/70`, `bg-cream`) instead, since rust-on-rust is invisible. Don't reintroduce `text-rust` inside a `theme="rust"` section.
 - `bg-cream` / `text-cream` — #ede6d8, primary light background
 - `bg-paper` — #ffffff, card surfaces sitting on a cream section
 
@@ -49,7 +49,7 @@ Hex values are read off the brand board image, not exact brand-guide values — 
 
 **Fonts**: `font-serif` (headings, brand name, pull quotes) and `font-sans` (body copy, eyebrow labels, buttons). `font-serif` currently resolves to **Fraunces** as a free stand-in for the brand's actual "Butler" typeface — swap the `next/font/google` import in `src/app/layout.tsx` for `next/font/local` the moment real Butler font files are available; nothing else in the codebase needs to change since everything references the `font-serif` token, not the font name.
 
-**Section-wise theming**: pages are built from `<Section theme="dark" | "light" | "white" | "slate" | "forest">` (`src/components/Section.tsx`), alternating backgrounds down the page per the brand board — never one flat background for the whole page, and never two of the same theme back to back. `light` (cream) and `white` (paper) are both "light" tonally but read as visually distinct — fine to sit adjacent, unlike repeating the exact same theme twice. `Section` already wraps `AnimatedSection`, so enter/exit motion is automatic; pass `variant`, `stagger`, etc. straight through.
+**Section-wise theming**: pages are built from `<Section theme="dark" | "light" | "white" | "slate" | "forest" | "rust">` (`src/components/Section.tsx`), alternating backgrounds down the page per the brand board — never one flat background for the whole page, and never two of the same theme back to back. `light` (cream) and `white` (paper) are both "light" tonally but read as visually distinct — fine to sit adjacent, unlike repeating the exact same theme twice. `Section` already wraps `AnimatedSection`, so enter/exit motion is automatic; pass `variant`, `stagger`, etc. straight through.
 
 Eyebrow labels follow the brand board's style: `font-sans text-sm font-medium uppercase tracking-[0.2em]`, colored to contrast at ~70% opacity against whichever section background it sits on.
 
