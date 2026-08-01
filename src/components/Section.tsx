@@ -4,6 +4,7 @@ import { AnimatedSection } from "@/components/motion/AnimatedSection";
 const themes = {
   dark: "bg-ink text-cream",
   light: "bg-cream text-ink",
+  white: "bg-paper text-ink",
   slate: "bg-slate text-cream",
   forest: "bg-forest text-cream",
 } as const;

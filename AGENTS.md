@@ -49,7 +49,7 @@ Hex values are read off the brand board image, not exact brand-guide values — 
 
 **Fonts**: `font-serif` (headings, brand name, pull quotes) and `font-sans` (body copy, eyebrow labels, buttons). `font-serif` currently resolves to **Fraunces** as a free stand-in for the brand's actual "Butler" typeface — swap the `next/font/google` import in `src/app/layout.tsx` for `next/font/local` the moment real Butler font files are available; nothing else in the codebase needs to change since everything references the `font-serif` token, not the font name.
 
-**Section-wise theming**: pages are built from `<Section theme="dark" | "light" | "slate" | "forest">` (`src/components/Section.tsx`), alternating dark/light down the page per the brand board — never one flat background for the whole page. `Section` already wraps `AnimatedSection`, so enter/exit motion is automatic; pass `variant`, `stagger`, etc. straight through.
+**Section-wise theming**: pages are built from `<Section theme="dark" | "light" | "white" | "slate" | "forest">` (`src/components/Section.tsx`), alternating backgrounds down the page per the brand board — never one flat background for the whole page, and never two of the same theme back to back. `light` (cream) and `white` (paper) are both "light" tonally but read as visually distinct — fine to sit adjacent, unlike repeating the exact same theme twice. `Section` already wraps `AnimatedSection`, so enter/exit motion is automatic; pass `variant`, `stagger`, etc. straight through.
 
 Eyebrow labels follow the brand board's style: `font-sans text-sm font-medium uppercase tracking-[0.2em]`, colored to contrast at ~70% opacity against whichever section background it sits on.
 
