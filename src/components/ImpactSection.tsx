@@ -13,7 +13,7 @@ const stats = [
 export function ImpactSection() {
   return (
     <Section
-      theme="dark"
+      theme="slate"
       topLine
       stagger
       staggerChildren={0.12}

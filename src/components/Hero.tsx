@@ -1,47 +1,64 @@
 import Image from "next/image";
-import { AnimatedSection } from "@/components/motion/AnimatedSection";
+import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen flex-col overflow-hidden bg-ink">
-      <Image
-        src="/hero.jpg"
-        alt=""
-        fill
-        priority
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/40 to-ink/15" />
+    <Section
+      theme="white"
+      size="spacious"
+      stagger
+      staggerChildren={0.15}
+      className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-start lg:gap-8"
+    >
+      <StaggerItem className="lg:col-span-3">
+       
+        <div className="relative mt-8 aspect-4/5 w-40 overflow-hidden sm:w-48">
+          <Image
+            src="https://images.pexels.com/photos/4587610/pexels-photo-4587610.jpeg"
+            alt="Close-up of a vintage typewriter"
+            fill
+            sizes="200px"
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-6 max-w-50 font-sans text-sm leading-6 text-ink/60">
+          Active in 15+ countries with cross-border expertise.
+        </p>
+      </StaggerItem>
 
-      <div className="relative z-10 flex flex-1 flex-col justify-end px-6 py-8 sm:px-16 sm:py-10">
-        <AnimatedSection
-          as="div"
-          stagger
-          staggerChildren={0.15}
-          className="max-w-3xl pb-16 sm:pb-24"
-        >
-          <StaggerItem>
-            <h1 className="font-serif text-6xl leading-[1.05] text-cream sm:text-7xl">
-              Your trusted partner for every step ahead
-            </h1>
-          </StaggerItem>
-          <StaggerItem>
-            <p className="mt-7 max-w-lg font-sans text-lg leading-8 text-cream/75">
-              Counsel built around how modern businesses actually move — clear, responsive, and always in your corner.
-            </p>
-          </StaggerItem>
-          <StaggerItem>
-            <a
-              href="#contact"
-              className="mt-10 inline-flex items-center gap-2 rounded-full bg-rust px-8 py-4 font-sans text-sm font-medium uppercase tracking-widest text-cream transition-opacity hover:opacity-85"
-            >
-              Get legal help now
-              <span aria-hidden>↗</span>
-            </a>
-          </StaggerItem>
-        </AnimatedSection>
-      </div>
-    </section>
+      <StaggerItem className="lg:col-span-6">
+        <p className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.25rem]">
+          Since our inception in 2016, we have redefined what it means to
+          provide legal services by combining strategic foresight,
+          meticulous analysis, and a commitment to meaningful results.
+        </p>
+        <div className="mt-10 flex items-center gap-6">
+          <span className="h-px flex-1 bg-ink/15" />
+          <a
+            href="#contact"
+            className="inline-flex shrink-0 items-center gap-2 border border-ink/20 px-6 py-3 font-sans text-sm font-medium text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream"
+          >
+            Learn More
+            <span aria-hidden>→</span>
+          </a>
+        </div>
+      </StaggerItem>
+
+      <StaggerItem className="flex flex-col items-start gap-8 lg:col-span-3 lg:items-end lg:pt-16">
+        <p className="font-sans text-sm font-medium uppercase tracking-[0.15em] text-ink/60">
+          50+ Attorneys
+        </p>
+        <div className="relative aspect-4/5 w-48 overflow-hidden sm:w-56">
+          <Image
+            src="https://images.pexels.com/photos/8028433/pexels-photo-8028433.jpeg"
+            alt="Vintage typewriters on a table by a window"
+            fill
+            sizes="240px"
+            className="object-cover"
+          />
+        </div>
+      </StaggerItem>
+    </Section>
   );
 }

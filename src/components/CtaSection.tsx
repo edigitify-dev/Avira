@@ -4,7 +4,7 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 export function CtaSection() {
   return (
     <Section
-      theme="dark"
+      theme="slate"
       size="spacious"
       topLine
       stagger

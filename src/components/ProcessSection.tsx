@@ -26,7 +26,7 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <Section theme="dark" topLine stagger staggerChildren={0.12} className="flex flex-col gap-16">
+    <Section theme="slate" topLine stagger staggerChildren={0.12} className="flex flex-col gap-16">
       <StaggerItem className="max-w-2xl">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60">
           Our process

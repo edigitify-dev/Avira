@@ -45,7 +45,7 @@ export function Footer() {
       as="footer"
       stagger
       staggerChildren={0.1}
-      className="bg-ink px-6 pb-8 pt-20 text-cream sm:px-16"
+      className="bg-slate px-6 pb-8 pt-20 text-cream sm:px-16"
     >
       <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <StaggerItem>

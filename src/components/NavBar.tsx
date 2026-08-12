@@ -8,8 +8,8 @@ import { transitionPremiumFast } from "@/lib/motion";
 const links = ["Home", "About", "Services", "Leadership", "Contact"];
 
 /**
- * Fixed header: transparent over the hero photo at the top of the page,
- * then solid + hides on scroll-down / reappears on scroll-up once past it.
+ * Fixed header: transparent over the light hero at the top of the page (dark logo/text),
+ * then solid dark + hides on scroll-down / reappears on scroll-up once past it (cream logo/text).
  */
 export function NavBar() {
   const { scrollY } = useScroll();
@@ -37,7 +37,7 @@ export function NavBar() {
           alt="Avira Law"
           width={200}
           height={100}
-          className="h-14 w-auto brightness-0 invert"
+          className={`h-14 w-auto brightness-0 ${solid ? "invert" : ""}`}
           priority
         />
         <ul className="hidden gap-10 sm:flex">
@@ -45,7 +45,9 @@ export function NavBar() {
             <li key={link}>
               <a
                 href="#"
-                className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/80 transition-colors hover:text-cream"
+                className={`font-sans text-xs font-medium uppercase tracking-[0.15em] transition-colors ${
+                  solid ? "text-cream/80 hover:text-cream" : "text-ink/70 hover:text-ink"
+                }`}
               >
                 {link}
               </a>
