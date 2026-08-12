@@ -6,7 +6,7 @@ export function Hero() {
   return (
     <Section
       theme="white"
-      size="spacious"
+      size="tall"
       stagger
       staggerChildren={0.15}
       className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-start lg:gap-8"
@@ -15,8 +15,8 @@ export function Hero() {
        
         <div className="relative mt-8 aspect-4/5 w-40 overflow-hidden sm:w-48">
           <Image
-            src="https://images.pexels.com/photos/4587610/pexels-photo-4587610.jpeg"
-            alt="Close-up of a vintage typewriter"
+            src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg"
+            alt="Legal documents and a pen on a desk"
             fill
             sizes="200px"
             className="object-cover"
@@ -51,8 +51,8 @@ export function Hero() {
         </p>
         <div className="relative aspect-4/5 w-48 overflow-hidden sm:w-56">
           <Image
-            src="https://images.pexels.com/photos/8028433/pexels-photo-8028433.jpeg"
-            alt="Vintage typewriters on a table by a window"
+            src="https://images.pexels.com/photos/3771097/pexels-photo-3771097.jpeg"
+            alt="Attorney reviewing legal documents at a desk"
             fill
             sizes="240px"
             className="object-cover"

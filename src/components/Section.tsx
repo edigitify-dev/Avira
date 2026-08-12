@@ -14,6 +14,7 @@ const paddings = {
   slim:     "px-6 py-16 sm:px-16 sm:py-24",
   default:  "px-6 py-24 sm:px-16 sm:py-32",
   spacious: "px-6 py-32 sm:px-16 sm:py-44",
+  tall:     "px-6 py-40 sm:px-16 sm:py-56",
 } as const;
 
 type SectionProps = {
