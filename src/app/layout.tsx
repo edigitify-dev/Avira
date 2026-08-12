@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Fraunces, Montserrat } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { NavBar } from "@/components/NavBar";
+import { DisclaimerGate } from "@/components/DisclaimerGate";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -19,8 +20,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Ako | Legal Platform",
-  description: "Ako Legal Platform",
+  title: "Avira Law | Legal Platform",
+  description: "Avira Legal Platform",
 };
 
 export default function RootLayout({
@@ -35,6 +36,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <MotionProvider>
+          <DisclaimerGate />
           <NavBar />
           {children}
         </MotionProvider>
