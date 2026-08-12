@@ -38,11 +38,11 @@ Every top-level section must reveal on enter and reverse on exit — use `<Anima
 
 Colors and fonts are global theme tokens (`src/app/globals.css` `@theme`), not one-off Tailwind classes. Use them by name:
 
-- `bg-ink` / `text-ink` — #202e2a, darkest section background / body text on light sections
-- `bg-slate` / `text-slate` — #4f6b6c, secondary dark background, muted accents
-- `bg-forest` / `text-forest` — #3e4a34, alternate dark background
-- `bg-rust` / `text-rust` — #8b4b34, primarily an accent color (CTAs, underlines, small icons). `ProcessSection` is an explicit exception using `theme="rust"` as a full section background — when rust is the *background*, every element that would normally use `text-rust`/`bg-rust` as an accent switches to cream (`text-cream/70`, `bg-cream`) instead, since rust-on-rust is invisible. Don't reintroduce `text-rust` inside a `theme="rust"` section.
-- `bg-cream` / `text-cream` — #ede6d8, primary light background
+- `bg-ink` / `text-ink` — #1f2b2a, darkest section background / body text on light sections
+- `bg-slate` / `text-slate` — #6f8c89, secondary dark background, muted accents
+- `bg-forest` / `text-forest` — #3e5f5b, alternate dark background
+- `bg-rust` / `text-rust` — #3e5f5b, primarily an accent color (CTAs, underlines, small icons); shares its hex with `forest` since the brand board's swatches didn't supply a distinct accent color. `ProcessSection` is an explicit exception using `theme="rust"` as a full section background — when rust is the *background*, every element that would normally use `text-rust`/`bg-rust` as an accent switches to cream (`text-cream/70`, `bg-cream`) instead, since rust-on-rust is invisible. Don't reintroduce `text-rust` inside a `theme="rust"` section.
+- `bg-cream` / `text-cream` — #e7e1d6, primary light background
 - `bg-paper` — #ffffff, card surfaces sitting on a cream section
 
 Hex values are read off the brand board image, not exact brand-guide values — replace in `globals.css` if precise hex codes are ever supplied.

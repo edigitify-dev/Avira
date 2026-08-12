@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  /* Ako brand palette (monochrome navy-to-ice-blue, per brand board) */
-  --color-ink: #00002a;
-  --color-slate: #1a3f75;
-  --color-forest: #2c5480;
-  --color-rust: #3e6da3;
-  --color-cream: #d7e4ef;
+  /* Ako brand palette (teal-to-sand, per brand board) */
+  --color-ink: #1f2b2a;
+  --color-slate: #1f282a;
+  --color-forest: #3e5f5b;
+  --color-rust: #3e5f5b;
+  --color-cream: #e7e1d6;
   --color-paper: #ffffff;
 }
 
