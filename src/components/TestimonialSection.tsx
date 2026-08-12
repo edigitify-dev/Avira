@@ -47,13 +47,14 @@ export function TestimonialSection() {
 
   return (
     <Section
-      theme="dark"
+      theme="forest"
+      topLine
       stagger
       staggerChildren={0.15}
       className="grid items-center gap-16 lg:grid-cols-12 lg:gap-20"
     >
       <StaggerItem variant="slideInLeft" className="lg:col-span-4">
-        <div className="relative aspect-4/5 w-full max-w-sm overflow-hidden rounded-2xl">
+        <div className="relative aspect-4/5 w-full max-w-sm overflow-hidden">
           <AnimatePresence>
             <motion.div
               key={active}
@@ -76,7 +77,7 @@ export function TestimonialSection() {
       </StaggerItem>
 
       <StaggerItem className="relative lg:col-span-8">
-        <span className="pointer-events-none absolute -left-4 -top-16 select-none font-serif text-[14rem] leading-none text-cream/5 sm:-top-20 sm:text-[18rem]">
+        <span className="pointer-events-none absolute -left-4 -top-16 select-none font-serif text-[14rem] leading-none text-cream/[0.06] sm:-top-20 sm:text-[18rem]">
           &rdquo;
         </span>
 
@@ -99,10 +100,10 @@ export function TestimonialSection() {
 
         <div className="relative mt-8 flex items-center justify-between gap-6">
           <div className="flex items-center gap-4">
-            <span className="h-px w-10 bg-rust" />
+            <span className="h-px w-10 bg-cream/30" />
             <div>
               <p className="font-serif text-base text-cream">{current.name}</p>
-              <p className="font-sans text-xs uppercase tracking-[0.15em] text-cream/55">
+              <p className="font-sans text-xs uppercase tracking-[0.15em] text-cream/50">
                 {current.role}
               </p>
             </div>
@@ -115,8 +116,8 @@ export function TestimonialSection() {
                 type="button"
                 aria-label={`Show testimonial from ${testimonial.name}`}
                 onClick={() => setActive(i)}
-                className={`h-1.5 w-8 rounded-full transition-colors duration-500 ${
-                  i === active ? "bg-rust" : "bg-cream/20 hover:bg-cream/35"
+                className={`h-px w-8 transition-colors duration-500 ${
+                  i === active ? "bg-cream" : "bg-cream/20 hover:bg-cream/40"
                 }`}
               />
             ))}

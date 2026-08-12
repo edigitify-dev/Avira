@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Montserrat } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { NavBar } from "@/components/NavBar";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -33,7 +34,10 @@ export default function RootLayout({
       className={`${fraunces.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          <NavBar />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

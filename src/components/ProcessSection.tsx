@@ -1,7 +1,3 @@
-"use client";
-
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
@@ -28,96 +24,60 @@ const steps = [
   },
 ];
 
-function StepsFallback() {
-  return (
-    <div className="flex flex-col divide-y divide-cream/15 border-t border-cream/15">
-      {steps.map((step) => (
-        <div key={step.number} className="flex gap-6 py-8">
-          <span className="font-serif text-2xl text-cream/70">{step.number}</span>
-          <div>
-            <p className="font-serif text-2xl text-cream">{step.title}</p>
-            <p className="mt-2 max-w-md font-sans text-base leading-7 text-cream/65">{step.body}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function PinnedSteps() {
-  const pinRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-
-  const { scrollYProgress } = useScroll({ target: pinRef, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${(steps.length - 1) * 100}%`]);
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setActive(Math.min(steps.length - 1, Math.max(0, Math.floor(v * steps.length))));
-  });
-
-  return (
-    <div
-      ref={pinRef}
-      className="relative -mx-6 hidden sm:-mx-16 lg:block"
-      style={{ height: `${steps.length * 100}vh` }}
-    >
-      <div className="sticky top-0 h-screen overflow-hidden bg-rust">
-        <motion.div style={{ x }} className="flex h-full">
-          {steps.map((step) => (
-            <div key={step.number} className="relative flex h-full w-screen shrink-0 items-center px-6 sm:px-16 lg:px-24">
-              <span className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 select-none font-serif text-[16rem] leading-none text-cream/5 sm:left-16 lg:left-24">
-                {step.number}
-              </span>
-              <div className="relative max-w-xl">
-                <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/70">
-                  Step {step.number}
-                </p>
-                <h3 className="mt-6 font-serif text-5xl leading-tight text-cream sm:text-6xl">
-                  {step.title}
-                </h3>
-                <p className="mt-6 max-w-md font-sans text-lg leading-8 text-cream/70">{step.body}</p>
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
-        <div className="absolute right-6 top-10 font-sans text-xs uppercase tracking-[0.2em] text-cream/40 sm:right-16 lg:right-24">
-          {String(active + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}
-        </div>
-
-        <div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 gap-3">
-          {steps.map((step, i) => (
-            <span
-              key={step.number}
-              className={`h-1.5 w-8 rounded-full transition-colors duration-500 ${
-                i === active ? "bg-cream" : "bg-cream/25"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function ProcessSection() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <Section theme="rust" stagger staggerChildren={0.12} className="flex flex-col gap-20 lg:pb-0">
+    <Section theme="dark" topLine stagger staggerChildren={0.12} className="flex flex-col gap-16">
       <StaggerItem className="max-w-2xl">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/70">Our process</p>
-        <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">Our expertise & process</h2>
-        <p className="mt-5 font-sans text-base leading-7 text-cream/70">
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60">
+          Our process
+        </p>
+        <h2 className="mt-4 font-serif text-5xl leading-tight sm:text-6xl">
+          Our expertise & process
+        </h2>
+        <p className="mt-5 font-sans text-base leading-7 text-cream/65">
           Strategic legal guidance tailored to ensure compliance, strengthen businesses, and resolve
           complex corporate challenges.
         </p>
       </StaggerItem>
 
-      <div className={shouldReduceMotion ? "" : "lg:hidden"}>
-        <StepsFallback />
-      </div>
-      {!shouldReduceMotion && <PinnedSteps />}
+      {/*
+        border-t border-l on container + border-r border-b on each cell
+        = complete bordered grid, no double-borders, cards share the ink bg.
+        The cells are defined entirely by their hairline borders — no fill needed.
+      */}
+      <StaggerItem>
+        <div className="grid grid-cols-1 border-t border-l border-cream/10 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step) => (
+            <div
+              key={step.number}
+              className="relative flex min-h-80 flex-col overflow-hidden border-r border-b border-cream/10 p-8 lg:p-10"
+            >
+              {/* Large watermark numeral, clipped by overflow-hidden */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -right-2 -top-2 select-none font-serif text-[7rem] leading-none text-cream/[0.06]"
+              >
+                {step.number}
+              </span>
+
+              {/* Small step label */}
+              <p className="font-sans text-xs text-cream/30">{step.number}</p>
+
+              {/* Push content to bottom */}
+              <div className="flex-1" />
+
+              {/* Title */}
+              <p className="font-serif text-2xl text-cream">{step.title}</p>
+
+              {/* Hairline rule */}
+              <div className="mt-4 h-px w-8 bg-cream/20" />
+
+              {/* Body */}
+              <p className="mt-4 font-sans text-sm leading-6 text-cream/60">{step.body}</p>
+            </div>
+          ))}
+        </div>
+      </StaggerItem>
     </Section>
   );
 }

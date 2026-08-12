@@ -1,22 +1,58 @@
+"use client";
+
+import Image from "next/image";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useState } from "react";
+import { transitionPremiumFast } from "@/lib/motion";
+
 const links = ["Home", "About", "Services", "Leadership", "Contact"];
 
-/** Transparent nav meant to sit over a photo hero. Move into layout.tsx once more pages exist. */
+/**
+ * Fixed header: transparent over the hero photo at the top of the page,
+ * then solid + hides on scroll-down / reappears on scroll-up once past it.
+ */
 export function NavBar() {
+  const { scrollY } = useScroll();
+  const [hidden, setHidden] = useState(false);
+  const [solid, setSolid] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    setSolid(latest > 80);
+    setHidden(latest > previous && latest > 200);
+  });
+
   return (
-    <nav className="flex items-center justify-between">
-      <span className="font-serif text-2xl font-medium text-cream">Avira</span>
-      <ul className="hidden gap-10 sm:flex">
-        {links.map((link) => (
-          <li key={link}>
-            <a
-              href="#"
-              className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/80 transition-colors hover:text-cream"
-            >
-              {link}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <motion.header
+      initial={false}
+      animate={{ y: hidden ? "-100%" : "0%" }}
+      transition={transitionPremiumFast}
+      className={`fixed inset-x-0 top-0 z-50 px-6 py-8 sm:px-16 sm:py-10 ${
+        solid ? "bg-ink/95 py-5 shadow-sm backdrop-blur-sm sm:py-6" : ""
+      }`}
+    >
+      <nav className="flex items-center justify-between">
+        <Image
+          src="/logo.png"
+          alt="Avira Law"
+          width={200}
+          height={100}
+          className="h-14 w-auto brightness-0 invert"
+          priority
+        />
+        <ul className="hidden gap-10 sm:flex">
+          {links.map((link) => (
+            <li key={link}>
+              <a
+                href="#"
+                className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/80 transition-colors hover:text-cream"
+              >
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </motion.header>
   );
 }

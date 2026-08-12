@@ -31,13 +31,13 @@ const team = [
 
 export function TeamSection() {
   return (
-    <Section theme="light" stagger staggerChildren={0.12} className="flex flex-col items-center gap-16">
+    <Section theme="light" topLine stagger staggerChildren={0.12} className="flex flex-col items-center gap-16">
       <StaggerItem className="max-w-xl text-center">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">Our team</p>
         <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
           The people behind Avira
         </h2>
-        <p className="mt-5 font-sans text-base leading-7 text-ink/70">
+        <p className="mt-5 font-sans text-base leading-7 text-ink/65">
           A small bench of specialists, not a rotating cast — every matter is led by someone who
           knows it end to end.
         </p>
@@ -45,7 +45,7 @@ export function TeamSection() {
 
       <div className="grid w-full grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
         {team.map((member) => (
-          <StaggerItem key={member.name} className="group relative aspect-3/4 overflow-hidden rounded-2xl">
+          <StaggerItem key={member.name} className="group relative aspect-3/4 overflow-hidden">
             <Image
               src={member.photo}
               alt={member.name}
@@ -58,10 +58,10 @@ export function TeamSection() {
             <div className="absolute inset-x-0 bottom-0 flex flex-col p-5 sm:p-6">
               <span className="h-px w-8 bg-rust transition-all duration-500 group-hover:w-12" />
               <p className="mt-3 font-serif text-lg text-cream sm:text-xl">{member.name}</p>
-              <p className="mt-1 font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/70">
+              <p className="mt-1 font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/65">
                 {member.role}
               </p>
-              <p className="mt-2 max-h-0 overflow-hidden font-sans text-xs leading-5 text-cream/60 opacity-0 transition-all duration-500 group-hover:mt-2 group-hover:max-h-8 group-hover:opacity-100">
+              <p className="mt-0 max-h-0 overflow-hidden font-sans text-xs leading-5 text-cream/50 opacity-0 transition-all duration-500 group-hover:mt-2 group-hover:max-h-8 group-hover:opacity-100">
                 {member.focus}
               </p>
             </div>

@@ -12,9 +12,17 @@ const stats = [
 
 export function ImpactSection() {
   return (
-    <Section theme="slate" stagger staggerChildren={0.12} className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-24">
+    <Section
+      theme="slate"
+      topLine
+      stagger
+      staggerChildren={0.12}
+      className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-24"
+    >
       <StaggerItem className="max-w-md">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">By the numbers</p>
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60">
+          By the numbers
+        </p>
         <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
           Results our clients can point to
         </h2>
@@ -23,14 +31,14 @@ export function ImpactSection() {
         </p>
       </StaggerItem>
 
-      <div className="grid flex-1 grid-cols-2 divide-x divide-y divide-cream/15 border border-cream/15 sm:divide-y-0 sm:grid-cols-4">
+      <div className="grid flex-1 grid-cols-2 divide-x divide-y divide-cream/10 border border-cream/10 sm:grid-cols-4 sm:divide-y-0">
         {stats.map((stat) => (
-          <StaggerItem key={stat.label} className="flex flex-col gap-3 px-6 py-8">
-            <span className="font-serif text-4xl sm:text-5xl">
+          <StaggerItem key={stat.label} className="flex flex-col gap-4 px-6 py-10 sm:py-12">
+            <span className="font-serif text-5xl sm:text-6xl">
               <CountUp value={stat.value} suffix={stat.suffix} />
             </span>
             <UnderlineDraw className="h-px w-8 bg-rust" />
-            <span className="font-sans text-xs uppercase tracking-[0.15em] text-cream/60">
+            <span className="font-sans text-xs uppercase tracking-[0.15em] text-cream/50">
               {stat.label}
             </span>
           </StaggerItem>

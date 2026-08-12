@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
@@ -48,7 +49,13 @@ export function Footer() {
     >
       <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <StaggerItem>
-          <p className="font-serif text-2xl">Avira</p>
+          <Image
+            src="/logo.png"
+            alt="Avira Law"
+            width={200}
+            height={100}
+            className="h-16 w-auto brightness-0 invert"
+          />
           <p className="mt-4 max-w-xs font-sans text-sm leading-6 text-cream/60">
             Strategic legal counsel for modern businesses — clear, responsive, and always in your
             corner.
