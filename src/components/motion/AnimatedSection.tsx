@@ -16,6 +16,7 @@ const tagMap = {
 type AnimatedSectionProps = {
   children: React.ReactNode;
   className?: string;
+  id?: string;
   /** Element rendered — defaults to `section`. */
   as?: keyof typeof tagMap;
   /** Which entrance/exit treatment to use. */
@@ -40,6 +41,7 @@ type AnimatedSectionProps = {
 export function AnimatedSection({
   children,
   className,
+  id,
   as = "section",
   variant = "fadeUp",
   delay = 0,
@@ -66,6 +68,7 @@ export function AnimatedSection({
 
   return (
     <Component
+      id={id}
       className={className}
       initial="hidden"
       whileInView="visible"

@@ -1,11 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 import { transitionPremiumFast } from "@/lib/motion";
 
-const links = ["Home", "About", "Services", "Leadership", "Contact"];
+const links = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Leadership", href: "#" },
+  { label: "Contact", href: "#contact" },
+];
 
 /**
  * Fixed header: transparent over the light hero at the top of the page (dark logo/text),
@@ -42,15 +49,15 @@ export function NavBar() {
         />
         <ul className="hidden gap-10 sm:flex">
           {links.map((link) => (
-            <li key={link}>
-              <a
-                href="#"
+            <li key={link.label}>
+              <Link
+                href={link.href}
                 className={`font-sans text-xs font-medium uppercase tracking-[0.15em] transition-colors ${
                   solid ? "text-cream/80 hover:text-cream" : "text-ink/70 hover:text-ink"
                 }`}
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             </li>
           ))}
         </ul>
