@@ -9,12 +9,12 @@ import { transitionPremiumFast } from "@/lib/motion";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
+  { label: "Our Story", href: "/about" },
+  { label: "Our Expertise", href: "/services" },
   { label: "Leadership", href: "#" },
-  { label: "Contact", href: "/contact" },
+  { label: "Join Us", href: "/contact" },
+  { label: "Reach Out", href: "/contact" },
 ];
-
 /** Pages with a dark hero — keep navbar transparent but flip links/logo to cream. */
 const DARK_HERO_ROUTES = ["/contact"];
 
