@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { transitionPremiumFast } from "@/lib/motion";
 
 const links = [
@@ -11,14 +12,15 @@ const links = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Leadership", href: "#" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
-/**
- * Fixed header: transparent over the light hero at the top of the page (dark logo/text),
- * then solid dark + hides on scroll-down / reappears on scroll-up once past it (cream logo/text).
- */
+/** Pages with a dark hero — keep navbar transparent but flip links/logo to cream. */
+const DARK_HERO_ROUTES = ["/contact"];
+
 export function NavBar() {
+  const pathname = usePathname();
+  const darkHero = DARK_HERO_ROUTES.includes(pathname);
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
@@ -28,6 +30,8 @@ export function NavBar() {
     setSolid(latest > 80);
     setHidden(latest > previous && latest > 200);
   });
+
+  const light = solid || darkHero;
 
   return (
     <motion.header
@@ -39,21 +43,23 @@ export function NavBar() {
       }`}
     >
       <nav className="flex items-center justify-between">
-        <Image
-          src="/logo.png"
-          alt="Avira Law"
-          width={200}
-          height={100}
-          className={`h-10 w-auto brightness-0 ${solid ? "invert" : ""}`}
-          priority
-        />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="Avira Law"
+            width={200}
+            height={100}
+            className={`h-10 w-auto brightness-0 ${light ? "invert" : ""}`}
+            priority
+          />
+        </Link>
         <ul className="hidden gap-10 sm:flex">
           {links.map((link) => (
             <li key={link.label}>
               <Link
                 href={link.href}
                 className={`font-sans text-xs font-medium uppercase tracking-[0.15em] transition-colors ${
-                  solid ? "text-cream/80 hover:text-cream" : "text-ink/70 hover:text-ink"
+                  light ? "text-cream/80 hover:text-cream" : "text-ink/70 hover:text-ink"
                 }`}
               >
                 {link.label}
