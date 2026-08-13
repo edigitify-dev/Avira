@@ -11,7 +11,7 @@ const values = [
   {
     icon: ShieldCheck,
     title: "Rigor",
-    body: "Every position is stress-tested before it reaches you — no first drafts as final answers.",
+    body: "Every position is stress-tested before it reaches you, no first drafts as final answers.",
   },
   {
     icon: Handshake,
@@ -21,7 +21,7 @@ const values = [
   {
     icon: EyeOff,
     title: "Discretion",
-    body: "Sensitive matters stay sensitive — need-to-know handling as a default, not a request.",
+    body: "Sensitive matters stay sensitive, need to know handling as a default, not a request.",
   },
 ];
 
@@ -36,7 +36,7 @@ export function ValuesSection() {
           The principles behind the practice
         </h2>
         <p className="mt-5 font-sans text-base leading-7 text-cream/65">
-          Values only mean something if they show up in the work — these are the ones our
+          Values only mean something if they show up in the work, these are the ones our
           clients tell us they notice first.
         </p>
       </StaggerItem>

@@ -11,13 +11,13 @@ const pillars = [
     index: "01",
     label: "Vision",
     statement:
-      "To be the counsel businesses turn to first — not because we're the largest, but because we're the ones who actually understand what's at stake.",
+      "To be the counsel businesses turn to first, not because we're the largest, but because we're the ones who actually understand what's at stake.",
   },
   {
     index: "02",
     label: "Mission",
     statement:
-      "To deliver advice with the judgment of a partner and the responsiveness of an in-house team — clear, direct, and accountable to the outcome, every time.",
+      "To deliver advice with the judgment of a partner and the responsiveness of an in-house team, clear, direct, and accountable to the outcome, every time.",
   },
 ];
 
@@ -62,7 +62,7 @@ export function VisionMissionSection() {
                 <motion.p
                   animate={{ opacity: isOther ? 0.4 : 1 }}
                   transition={transitionPremium}
-                  className="font-serif text-2xl leading-[1.35] text-cream sm:text-3xl lg:text-[2.5rem]"
+                  className="font-serif text-xl leading-[1.4] text-cream sm:text-2xl lg:text-[1.75rem]"
                 >
                   {pillar.statement}
                 </motion.p>

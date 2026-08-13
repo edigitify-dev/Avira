@@ -27,7 +27,7 @@ export function AboutHero() {
         <p className="mt-7 max-w-md font-sans text-base leading-7 text-ink/65">
           Avira began as a two-person practice with a simple conviction: that legal advice is
           only as good as the judgment behind it. A decade on, that conviction is still the
-          entire business — a small bench of specialists who stay on your matter from the first
+          entire business  a small bench of specialists who stay on your matter from the first
           call to the last signature.
         </p>
 

@@ -19,20 +19,20 @@ export function OurStorySection() {
           A practice built one relationship at a time
         </h2>
         <p className="mt-6 font-sans text-base leading-7 text-ink/65">
-          We never set out to be the biggest firm in the room — only the one clients actually
+          We never set out to be the biggest firm in the room  only the one clients actually
           wanted to call first. That meant saying no to volume in favour of depth: fewer
           matters, held by fewer hands, each one led by a partner who knows the business behind
           the paperwork.
         </p>
         <p className="mt-5 font-sans text-base leading-7 text-ink/65">
-          A decade later, the practice has grown into a pan-India bench with cross-border reach —
+          A decade later, the practice has grown into a pan-India bench with cross-border reach,
           but the operating principle hasn&apos;t moved. Every engagement is still built around
           direct access, plain-spoken advice, and outcomes the client can point to.
         </p>
 
         <blockquote className="mt-9 border-l-2 border-rust py-1 pl-6">
           <p className="font-serif text-xl italic leading-relaxed text-ink">
-            &ldquo;We built Avira around a simple idea — that legal counsel should feel like a
+            &ldquo;We built Avira around a simple idea, that legal counsel should feel like a
             partner in the room, not a vendor on retainer.&rdquo;
           </p>
           <footer className="mt-4 font-sans text-xs font-medium uppercase tracking-[0.15em] text-ink/50">

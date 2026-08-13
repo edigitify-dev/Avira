@@ -34,8 +34,8 @@ export function NavBar() {
       initial={false}
       animate={{ y: hidden ? "-100%" : "0%" }}
       transition={transitionPremiumFast}
-      className={`fixed inset-x-0 top-0 z-50 px-6 py-8 sm:px-16 sm:py-10 ${
-        solid ? "bg-ink/95 py-5 shadow-sm backdrop-blur-sm sm:py-6" : ""
+      className={`fixed inset-x-0 top-0 z-50 px-6 py-5 sm:px-16 sm:py-6 ${
+        solid ? "bg-ink/95 py-3 shadow-sm backdrop-blur-sm sm:py-4" : ""
       }`}
     >
       <nav className="flex items-center justify-between">
@@ -44,7 +44,7 @@ export function NavBar() {
           alt="Avira Law"
           width={200}
           height={100}
-          className={`h-14 w-auto brightness-0 ${solid ? "invert" : ""}`}
+          className={`h-10 w-auto brightness-0 ${solid ? "invert" : ""}`}
           priority
         />
         <ul className="hidden gap-10 sm:flex">

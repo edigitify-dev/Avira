@@ -3,7 +3,7 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 
 export function ServicesHero() {
   return (
-    <Section theme="white" size="tall" stagger staggerChildren={0.15} className="flex flex-col gap-10">
+    <Section theme="light" size="tall" stagger staggerChildren={0.15} className="flex flex-col gap-10">
       <StaggerItem className="max-w-2xl">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
           What we do
