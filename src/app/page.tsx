@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <AboutSection />
       <ExpertiseList />
-      <VikramCard />
+      {/* <VikramCard /> */}
       <InsightsPreview />
       <CtaSection />
       <Footer />
