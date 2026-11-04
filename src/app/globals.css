@@ -8,6 +8,8 @@
   --color-rust: #3e5f5b;
   --color-cream: #e7e1d6;
   --color-paper: #ffffff;
+  /* Warm paper tint bridges the beige and teal section backgrounds. */
+  --color-ivory: color-mix(in srgb, var(--color-cream) 45%, var(--color-paper));
 }
 
 @theme inline {
@@ -17,6 +19,7 @@
   --color-rust: var(--color-rust);
   --color-cream: var(--color-cream);
   --color-paper: var(--color-paper);
+  --color-ivory: var(--color-ivory);
 
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);

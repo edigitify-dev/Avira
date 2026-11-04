@@ -48,6 +48,7 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Our Expertise", href: "/services" },
+  { label: "Join Us", href: "/join-us" },
   { label: "Reach Out", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms & Conditions", href: "/terms" },

@@ -6,7 +6,7 @@ import { StaggerItem } from "@/components/motion/StaggerItem";
 export function Hero() {
   return (
     <Section
-      theme="white"
+      theme="light"
       size="tall"
       stagger
       staggerChildren={0.15}
@@ -33,7 +33,7 @@ export function Hero() {
           <span className="h-px flex-1 bg-ink/15" />
           <Link
             href="/about"
-            className="inline-flex shrink-0 items-center gap-2 border border-ink/20 px-6 py-3 font-sans text-sm font-medium text-ink transition-colors hover:border-ink hover:bg-ink hover:text-cream"
+            className="inline-flex shrink-0 items-center gap-2 border border-forest/35 px-6 py-3 font-sans text-sm font-medium text-forest outline-offset-4 transition-colors hover:border-forest hover:bg-forest hover:text-cream focus-visible:outline-2 focus-visible:outline-forest motion-reduce:transition-none"
           >
             Learn More
             <span aria-hidden>→</span>

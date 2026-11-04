@@ -5,6 +5,7 @@ const themes = {
   dark:   { base: "bg-ink text-cream",    line: "bg-cream/10" },
   light:  { base: "bg-cream text-ink",    line: "bg-ink/10"   },
   white:  { base: "bg-paper text-ink",    line: "bg-ink/10"   },
+  ivory:  { base: "bg-ivory text-ink",    line: "bg-ink/10"   },
   slate:  { base: "bg-slate text-cream",  line: "bg-cream/10" },
   forest: { base: "bg-forest text-cream", line: "bg-cream/10" },
   rust:   { base: "bg-rust text-cream",   line: "bg-cream/10" },
