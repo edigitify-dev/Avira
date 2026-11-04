@@ -4,6 +4,7 @@ import { VisionMissionSection } from "@/components/about/VisionMissionSection";
 import { OurStorySection } from "@/components/about/OurStorySection";
 import { ValuesSection } from "@/components/about/ValuesSection";
 import { JourneySection } from "@/components/about/JourneySection";
+import { VikramProfile } from "@/components/about/VikramProfile";
 import { TeamSection } from "@/components/TeamSection";
 import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function AboutPage() {
       <OurStorySection />
       <ValuesSection />
       <JourneySection />
+      <VikramProfile />
       <TeamSection />
       <CtaSection />
       <Footer />

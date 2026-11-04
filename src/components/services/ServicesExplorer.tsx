@@ -7,6 +7,8 @@ import { practiceAreas } from "./practiceAreas";
 import { PracticeAreaCard } from "./PracticeAreaCard";
 import { ServiceDrawer } from "./ServiceDrawer";
 
+const FIRM_PROFILE_URL = "/avira-firm-profile.pdf";
+
 export function ServicesExplorer() {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -41,6 +43,30 @@ export function ServicesExplorer() {
             />
           ))}
         </div>
+      </StaggerItem>
+
+      <StaggerItem className="flex flex-col items-start gap-4">
+        <a
+          href={FIRM_PROFILE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 border border-cream/25 px-6 py-3 font-sans text-sm font-medium text-cream transition-colors hover:bg-cream hover:text-ink"
+        >
+          View the full firm profile
+          <span aria-hidden>→</span>
+        </a>
+        <p className="font-sans text-sm text-cream/55">
+          To view or download our firm profile, please click{" "}
+          <a
+            href={FIRM_PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cream underline underline-offset-4 transition-colors hover:text-rust"
+          >
+            here
+          </a>
+          .
+        </p>
       </StaggerItem>
 
       <ServiceDrawer area={selectedArea} open={drawerOpen} onClose={() => setDrawerOpen(false)} />

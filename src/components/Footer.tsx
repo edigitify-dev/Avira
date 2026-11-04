@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 /** lucide-react no longer ships brand marks — minimal glyphs matched to its stroke style. */
 function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -31,7 +33,15 @@ function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-const company = ["Home", "About", "Our team", "Contact"];
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Our Expertise", href: "/services" },
+  { label: "Reach Out", href: "/contact" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Disclaimer", href: "/disclaimer" },
+];
 const practiceAreas = ["Corporate advisory", "Litigation", "Compliance", "Transparent engagement"];
 const socials = [
   { icon: LinkedInIcon, label: "LinkedIn", href: "#" },
@@ -47,6 +57,19 @@ export function Footer() {
       staggerChildren={0.1}
       className="bg-slate px-6 pb-8 pt-20 text-cream sm:px-16"
     >
+      <StaggerItem className="mb-16 grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-24">
+        <div>
+          <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/40">
+            Subscribe
+          </p>
+          <p className="mt-4 max-w-md font-serif text-2xl leading-snug text-cream">
+            Sign up for our monthly newsletter and receive the latest legal insights and updates
+            directly in your inbox.
+          </p>
+        </div>
+        <NewsletterForm />
+      </StaggerItem>
+
       <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <StaggerItem>
           <Image
@@ -76,14 +99,17 @@ export function Footer() {
 
         <StaggerItem>
           <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/40">
-            Company
+            Quick Links
           </p>
           <ul className="mt-5 flex flex-col gap-3">
-            {company.map((item) => (
-              <li key={item}>
-                <a href="#" className="font-sans text-sm text-cream/70 transition-colors hover:text-cream">
-                  {item}
-                </a>
+            {quickLinks.map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className="font-sans text-sm text-cream/70 transition-colors hover:text-cream"
+                >
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
@@ -127,15 +153,18 @@ export function Footer() {
 
       <StaggerItem className="mt-16 flex flex-col gap-4 border-t border-cream/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
         <p className="font-sans text-xs text-cream/40">
-          © {new Date().getFullYear()} Avira Legal Platform. All rights reserved.
+          © 2026. Avira Law. All rights reserved.
         </p>
         <div className="flex gap-6">
-          <a href="#" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
-            Privacy policy
-          </a>
-          <a href="#" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
-            Terms of service
-          </a>
+          <Link href="/privacy-policy" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
+            Terms & Conditions
+          </Link>
+          <Link href="/disclaimer" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
+            Disclaimer
+          </Link>
         </div>
       </StaggerItem>
     </AnimatedSection>
