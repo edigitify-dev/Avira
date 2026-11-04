@@ -1,21 +1,21 @@
 "use client";
 
-import { useState } from "react";
+// import { useState } from "react";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
-type FormState = "idle" | "submitting" | "success";
+// type FormState = "idle" | "submitting" | "success";
 
 export function CtaSection() {
-  const [newsletterState, setNewsletterState] = useState<FormState>("idle");
+  // const [newsletterState, setNewsletterState] = useState<FormState>("idle");
 
-  async function handleNewsletterSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setNewsletterState("submitting");
-    await new Promise((r) => setTimeout(r, 1000));
-    setNewsletterState("success");
-  }
+  // async function handleNewsletterSubmit(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault();
+  //   setNewsletterState("submitting");
+  //   await new Promise((r) => setTimeout(r, 1000));
+  //   setNewsletterState("success");
+  // }
 
   return (
     <Section
@@ -48,7 +48,7 @@ export function CtaSection() {
         </Link>
       </StaggerItem>
 
-      {/* ---- Newsletter (moved from Footer), below the CTA ---- */}
+      {/* ---- Newsletter (moved from Footer), below the CTA ----
       <StaggerItem className="mt-20 grid w-full max-w-5xl gap-8 border-t border-[#1F2B2A]/15 pt-12 text-left lg:grid-cols-2 lg:items-end lg:gap-24">
         <div>
           <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-[#1F2B2A]/50">
@@ -100,6 +100,7 @@ export function CtaSection() {
           </form>
         )}
       </StaggerItem>
+      */}
     </Section>
   );
 }

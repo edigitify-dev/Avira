@@ -96,22 +96,15 @@ export function ContactPage() {
           className="w-full"
         >
           <StaggerItem>
-            <div className="rounded-3xl bg-ink p-6 text-cream shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)] sm:p-10">
+            <div className="rounded-3xl border border-[#1F2B2A]/10 bg-white p-6 text-[#1F2B2A] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.2)] sm:p-10">
               {/* Card header */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
                   <h2 className="font-serif text-[1.8rem] leading-tight sm:text-[2.15rem]">
                     Send an Enquiry
                   </h2>
-                  <span className="mt-3 block h-[3px] w-14 rounded-full bg-[#C9AA88]" />
+                  <span className="mt-3 block h-[3px] w-14 rounded-full bg-[#A67C52]" />
                 </div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2.5 font-sans text-xs text-cream/85">
-                  <ShieldCheck
-                    className="h-5 w-5 text-[#C9AA88]"
-                    strokeWidth={1.5}
-                  />
-                  Confidential &amp; Secure
-                </span>
               </div>
 
               <AnimatePresence mode="wait">
@@ -123,9 +116,9 @@ export function ContactPage() {
                     transition={{ ...transitionPremium, duration: 0.6 }}
                     className="flex min-h-[26rem] flex-col justify-center gap-5"
                   >
-                    <span className="block h-px w-10 bg-cream/30" />
+                    <span className="block h-px w-10 bg-[#1F2B2A]/30" />
                     <p className="font-serif text-[2rem]">Thank you.</p>
-                    <p className="max-w-sm font-sans text-[15px] leading-7 text-cream/80">
+                    <p className="max-w-sm font-sans text-[15px] leading-7 text-[#1F2B2A]/80">
                       Your message has been received. We&apos;ll respond within
                       one business day with a direct answer.
                     </p>
@@ -188,7 +181,7 @@ export function ContactPage() {
                       <div className="relative">
                         <Pencil
                           aria-hidden
-                          className="pointer-events-none absolute left-4 top-4 h-[18px] w-[18px] text-cream/60"
+                          className="pointer-events-none absolute left-4 top-4 h-[18px] w-[18px] text-[#1F2B2A]/60"
                           strokeWidth={1.5}
                         />
                         <textarea
@@ -199,9 +192,9 @@ export function ContactPage() {
                           value={message}
                           onChange={(e) => setMessage(e.target.value)}
                           placeholder="Briefly describe your matter…"
-                          className="w-full resize-none rounded-lg border border-cream/20 bg-cream/5 py-3.5 pb-9 pl-12 pr-4 font-sans text-sm text-cream placeholder:text-cream/50 transition-colors duration-200 focus:border-cream/60 focus:outline-none"
+                          className="w-full resize-none rounded-lg border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pb-9 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
                         />
-                        <span className="pointer-events-none absolute bottom-3 right-4 font-sans text-[11px] text-cream/60">
+                        <span className="pointer-events-none absolute bottom-3 right-4 font-sans text-[11px] text-[#1F2B2A]/60">
                           {message.length} / {MAX_MESSAGE}
                         </span>
                       </div>
@@ -212,7 +205,7 @@ export function ContactPage() {
                       <button
                         type="submit"
                         disabled={formState === "submitting"}
-                        className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-full bg-cream px-9 py-4 font-sans text-[15px] font-medium text-ink transition-colors duration-300 hover:bg-cream/85 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#1F2B2A] px-9 py-4 font-sans text-[15px] font-medium text-white transition-colors duration-300 hover:bg-[#1F2B2A]/85 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         {formState === "submitting" ? (
                           "Sending…"
@@ -222,23 +215,6 @@ export function ContactPage() {
                           </>
                         )}
                       </button>
-
-                      <span
-                        aria-hidden
-                        className="hidden h-12 w-px bg-cream/20 sm:mx-4 sm:block"
-                      />
-
-                      <div className="flex items-center gap-4">
-                        <Lock
-                          className="h-8 w-8 shrink-0 text-[#C9AA88]"
-                          strokeWidth={1.25}
-                        />
-                        <p className="font-sans text-[13px] leading-6 text-cream/80">
-                          Attorney–client privilege applies.
-                          <br />
-                          Your information is kept confidential.
-                        </p>
-                      </div>
                     </div>
                   </motion.form>
                 )}
@@ -301,13 +277,13 @@ function Field({ label, id, icon: Icon, required, ...props }: FieldProps) {
       <div className="relative">
         <Icon
           aria-hidden
-          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-cream/60"
+          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[#1F2B2A]/60"
           strokeWidth={1.5}
         />
         <input
           id={id}
           required={required}
-          className="w-full rounded-lg border border-cream/20 bg-cream/5 py-3.5 pl-12 pr-4 font-sans text-sm text-cream placeholder:text-cream/50 transition-colors duration-200 focus:border-cream/60 focus:outline-none"
+          className="w-full rounded-lg border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
           {...props}
         />
       </div>
@@ -346,29 +322,29 @@ function SelectField({
       <div className="relative">
         <Icon
           aria-hidden
-          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-cream/60"
+          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[#1F2B2A]/60"
           strokeWidth={1.5}
         />
         <select
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full cursor-pointer appearance-none rounded-lg border border-cream/20 bg-cream/5 py-3.5 pl-12 pr-11 font-sans text-sm transition-colors duration-200 [color-scheme:dark] focus:border-cream/60 focus:outline-none ${
-            value ? "text-cream" : "text-cream/50"
+          className={`w-full cursor-pointer appearance-none rounded-lg border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-11 font-sans text-sm transition-colors duration-200 [color-scheme:light] focus:border-[#1F2B2A]/60 focus:outline-none ${
+            value ? "text-[#1F2B2A]" : "text-[#1F2B2A]/50"
           }`}
         >
-          <option value="" className="bg-ink text-cream">
+          <option value="" className="bg-white text-[#1F2B2A]">
             {placeholder}
           </option>
           {options.map((o) => (
-            <option key={o} value={o} className="bg-ink text-cream">
+            <option key={o} value={o} className="bg-white text-[#1F2B2A]">
               {o}
             </option>
           ))}
         </select>
         <ChevronDown
           aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-cream/70"
+          className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#1F2B2A]/70"
           strokeWidth={1.5}
         />
       </div>

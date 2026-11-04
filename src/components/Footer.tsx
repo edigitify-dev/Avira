@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -63,6 +66,14 @@ const socials = [
 ];
 
 export function Footer() {
+  const [subscribed, setSubscribed] = useState(false);
+
+  function handleSubscribe(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // TODO: send email to your newsletter service
+    setSubscribed(true);
+  }
+
   return (
     <AnimatedSection
       as="footer"
@@ -70,7 +81,7 @@ export function Footer() {
       staggerChildren={0.1}
       className="bg-slate px-6 pb-8 pt-20 text-cream sm:px-16"
     >
-      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
         <StaggerItem>
           <Image
             src="/logo.png"
@@ -154,6 +165,37 @@ export function Footer() {
               New Delhi, India
             </li>
           </ul>
+        </StaggerItem>
+
+        <StaggerItem>
+          <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/40">
+            Newsletter
+          </p>
+          {subscribed ? (
+            <p className="mt-5 font-sans text-sm text-cream/70">
+              Thanks for subscribing.
+            </p>
+          ) : (
+            <form
+              onSubmit={handleSubscribe}
+              className="mt-5 flex flex-col gap-3"
+            >
+              <input
+                type="email"
+                required
+                aria-label="Email address"
+                placeholder="Your email"
+                autoComplete="email"
+                className="w-full border-b border-cream/25 bg-transparent pb-2 font-sans text-sm text-cream placeholder:text-cream/30 focus:border-cream focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="w-fit cursor-pointer border border-cream/30 px-5 py-2.5 font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream transition-colors duration-300 hover:bg-cream hover:text-slate"
+              >
+                Subscribe
+              </button>
+            </form>
+          )}
         </StaggerItem>
       </div>
 
