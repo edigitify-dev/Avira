@@ -3,14 +3,18 @@ import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
-import { NewsletterForm } from "@/components/NewsletterForm";
 
 /** lucide-react no longer ships brand marks — minimal glyphs matched to its stroke style. */
 function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} {...props}>
       <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" />
-      <path d="M7.5 10.5v6M7.5 7.5v.01M11.5 16.5v-4c0-1.1.9-2 2-2s2 .9 2 2v4" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M7.5 10.5v6M7.5 7.5v.01M11.5 16.5v-4c0-1.1.9-2 2-2s2 .9 2 2v4"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -18,7 +22,11 @@ function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
 function XIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} {...props}>
-      <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeLinecap="round" />
+      <path
+        d="M5 5l14 14M19 5L5 19"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -42,7 +50,12 @@ const quickLinks = [
   { label: "Terms & Conditions", href: "/terms" },
   { label: "Disclaimer", href: "/disclaimer" },
 ];
-const practiceAreas = ["Corporate advisory", "Litigation", "Compliance", "Transparent engagement"];
+const practiceAreas = [
+  "Corporate advisory",
+  "Litigation",
+  "Compliance",
+  "Transparent engagement",
+];
 const socials = [
   { icon: LinkedInIcon, label: "LinkedIn", href: "#" },
   { icon: XIcon, label: "X (Twitter)", href: "#" },
@@ -57,19 +70,6 @@ export function Footer() {
       staggerChildren={0.1}
       className="bg-slate px-6 pb-8 pt-20 text-cream sm:px-16"
     >
-      <StaggerItem className="mb-16 grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-24">
-        <div>
-          <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/40">
-            Subscribe
-          </p>
-          <p className="mt-4 max-w-md font-serif text-2xl leading-snug text-cream">
-            Sign up for our monthly newsletter and receive the latest legal insights and updates
-            directly in your inbox.
-          </p>
-        </div>
-        <NewsletterForm />
-      </StaggerItem>
-
       <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <StaggerItem>
           <Image
@@ -80,8 +80,8 @@ export function Footer() {
             className="h-16 w-auto brightness-0 invert"
           />
           <p className="mt-4 max-w-xs font-sans text-sm leading-6 text-cream/60">
-            Strategic legal counsel for modern businesses — clear, responsive, and always in your
-            corner.
+            Strategic legal counsel for modern businesses — clear, responsive,
+            and always in your corner.
           </p>
           <div className="mt-6 flex gap-4">
             {socials.map(({ icon: Icon, label, href }) => (
@@ -122,7 +122,10 @@ export function Footer() {
           <ul className="mt-5 flex flex-col gap-3">
             {practiceAreas.map((item) => (
               <li key={item}>
-                <a href="#" className="font-sans text-sm text-cream/70 transition-colors hover:text-cream">
+                <a
+                  href="#"
+                  className="font-sans text-sm text-cream/70 transition-colors hover:text-cream"
+                >
                   {item}
                 </a>
               </li>
@@ -144,7 +147,10 @@ export function Footer() {
               +91 98765 43210
             </li>
             <li className="flex items-center gap-3">
-              <MapPin className="h-4 w-4 shrink-0 text-rust" strokeWidth={1.5} />
+              <MapPin
+                className="h-4 w-4 shrink-0 text-rust"
+                strokeWidth={1.5}
+              />
               New Delhi, India
             </li>
           </ul>
@@ -156,13 +162,22 @@ export function Footer() {
           © 2026. Avira Law. All rights reserved.
         </p>
         <div className="flex gap-6">
-          <Link href="/privacy-policy" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
+          <Link
+            href="/privacy-policy"
+            className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
+          >
             Privacy Policy
           </Link>
-          <Link href="/terms" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
+          <Link
+            href="/terms"
+            className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
+          >
             Terms & Conditions
           </Link>
-          <Link href="/disclaimer" className="font-sans text-xs text-cream/40 transition-colors hover:text-cream">
+          <Link
+            href="/disclaimer"
+            className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
+          >
             Disclaimer
           </Link>
         </div>

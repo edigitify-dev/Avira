@@ -25,7 +25,13 @@ export function VisionMissionSection() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <Section theme="slate" topLine stagger staggerChildren={0.15} className="flex flex-col gap-12">
+    <Section
+      theme="dark"
+      topLine
+      stagger
+      staggerChildren={0.15}
+      className="flex flex-col gap-12"
+    >
       <StaggerItem>
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/50">
           What drives us
@@ -53,7 +59,9 @@ export function VisionMissionSection() {
                 className="flex flex-col justify-between gap-10 py-12 sm:px-10 sm:py-16"
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="font-sans text-xs text-cream/35">{pillar.index}</span>
+                  <span className="font-sans text-xs text-cream/35">
+                    {pillar.index}
+                  </span>
                   <span className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
                     {pillar.label}
                   </span>

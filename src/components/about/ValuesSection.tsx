@@ -27,7 +27,13 @@ const values = [
 
 export function ValuesSection() {
   return (
-    <Section theme="forest" topLine stagger staggerChildren={0.12} className="flex flex-col items-center gap-16">
+    <Section
+      theme="dark"
+      topLine
+      stagger
+      staggerChildren={0.12}
+      className="flex flex-col items-center gap-16"
+    >
       <StaggerItem className="max-w-xl text-center">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60">
           What we stand for
@@ -36,8 +42,8 @@ export function ValuesSection() {
           The principles behind the practice
         </h2>
         <p className="mt-5 font-sans text-base leading-7 text-cream/65">
-          Values only mean something if they show up in the work, these are the ones our
-          clients tell us they notice first.
+          Values only mean something if they show up in the work, these are the
+          ones our clients tell us they notice first.
         </p>
       </StaggerItem>
 
@@ -47,7 +53,9 @@ export function ValuesSection() {
             <Icon className="h-7 w-7 text-cream/80" strokeWidth={1.5} />
             <p className="mt-6 font-serif text-xl text-cream">{title}</p>
             <span className="mt-3 h-px w-8 bg-cream/20" />
-            <p className="mt-4 font-sans text-sm leading-6 text-cream/60">{body}</p>
+            <p className="mt-4 font-sans text-sm leading-6 text-cream/60">
+              {body}
+            </p>
           </StaggerItem>
         ))}
       </div>
