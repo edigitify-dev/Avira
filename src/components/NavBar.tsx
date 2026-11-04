@@ -15,12 +15,14 @@ const links = [
   // { label: "Join Us", href: "/contact" },
   { label: "Reach Out", href: "/contact" },
 ];
-/** Pages with a dark hero — keep navbar transparent but flip links/logo to cream. */
-const DARK_HERO_ROUTES = ["/contact"];
+
+const ROUTE_THEMES: Record<string, { bg: string; lightText: boolean }> = {
+  "/contact": { bg: "bg-ink", lightText: true },
+};
 
 export function NavBar() {
   const pathname = usePathname();
-  const darkHero = DARK_HERO_ROUTES.includes(pathname);
+  const routeTheme = ROUTE_THEMES[pathname];
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [solid, setSolid] = useState(false);
@@ -31,15 +33,16 @@ export function NavBar() {
     setHidden(latest > previous && latest > 200);
   });
 
-  const light = solid || darkHero;
+  const light = routeTheme ? routeTheme.lightText : solid;
+  const background = routeTheme ? routeTheme.bg : solid ? "bg-ink/95" : "";
 
   return (
     <motion.header
       initial={false}
       animate={{ y: hidden ? "-100%" : "0%" }}
       transition={transitionPremiumFast}
-      className={`fixed inset-x-0 top-0 z-50 px-6 py-5 sm:px-16 sm:py-6 ${
-        solid ? "bg-ink/95 py-3 shadow-sm backdrop-blur-sm sm:py-4" : ""
+      className={`fixed inset-x-0 top-0 z-50 px-6 py-5 transition-colors duration-300 sm:px-16 sm:py-6 ${background} ${
+        solid ? "py-3 shadow-sm backdrop-blur-sm sm:py-4" : ""
       }`}
     >
       <nav className="flex items-center justify-between">

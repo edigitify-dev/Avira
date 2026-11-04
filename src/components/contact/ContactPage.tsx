@@ -2,6 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  Building2,
+  ChevronDown,
+  Lock,
+  Mail,
+  MapPin,
+  Pencil,
+  Phone,
+  Scale,
+  ShieldCheck,
+  User,
+  type LucideIcon,
+} from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { transitionPremium } from "@/lib/motion";
@@ -15,11 +28,14 @@ const practiceAreas = [
   "General enquiry",
 ];
 
+const MAX_MESSAGE = 500;
+
 type FormState = "idle" | "submitting" | "success";
 
 export function ContactPage() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [selectedArea, setSelectedArea] = useState("");
+  const [message, setMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,71 +45,75 @@ export function ContactPage() {
   }
 
   return (
-    <main className="relative flex min-h-dvh flex-col bg-ink text-cream lg:h-dvh lg:overflow-hidden">
-      {/* Watermark */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 translate-x-1/3 select-none font-serif text-[32rem] leading-[0.8] text-cream/3"
-      >
-        A
-      </span>
-
-      {/* ── Zones ── */}
-      <div className="relative flex flex-1 flex-col px-8 sm:px-16 lg:flex-row">
+    <main className="relative flex min-h-dvh flex-col bg-cream text-ink">
+      {/* ── Content ── */}
+      <div className="relative mx-auto grid w-full max-w-[1500px] flex-1 items-center gap-12 px-6 pb-12 pt-28 sm:px-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:px-16 lg:pt-32">
         {/* Left — editorial */}
-        <div className="flex flex-col justify-center py-24 lg:w-[44%] lg:py-0 lg:pr-16">
-          <AnimatedSection
-            as="div"
-            stagger
-            staggerChildren={0.13}
-            className="flex flex-col gap-10"
-          >
-            <StaggerItem className="flex flex-col gap-4">
-              <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-cream/30">
+        <AnimatedSection
+          as="div"
+          stagger
+          staggerChildren={0.13}
+          className="flex flex-col gap-10"
+        >
+          <StaggerItem className="flex flex-col gap-6">
+            <div className="flex items-center gap-5">
+              <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.25em] text-ink">
                 Contact
               </p>
-              <h1 className="font-serif text-[2.65rem] leading-[1.06] text-cream sm:text-[3.2rem]">
-                Tell us what
-                <br />
-                you&apos;re facing.
-              </h1>
-              <p className="max-w-xs font-sans text-[15px] leading-6 text-cream/45">
-                We respond within one business day with a straight answer on
-                whether — and how — we can help.
-              </p>
-            </StaggerItem>
+              <span className="block h-px w-16 bg-ink/40" />
+            </div>
+            <h1 className="font-serif text-[2.5rem] leading-[1.08] text-ink sm:text-[3.2rem] lg:text-[3.6rem]">
+              Tell us what
+              <br />
+              you&apos;re <em className="text-[#A67C52]">facing.</em>
+            </h1>
+            <p className="max-w-md font-sans text-base leading-7 text-ink/80">
+              We respond within one business day with a straight answer on
+              whether — and how — we can help.
+            </p>
+          </StaggerItem>
 
-            <StaggerItem className="flex flex-col gap-6">
-              <span className="block h-px w-10 bg-cream/15" />
-              <div className="flex flex-col gap-4">
-                <ContactItem label="Email">
-                  <a
-                    href="mailto:hello@avira.law"
-                    className="transition-colors hover:text-cream"
-                  >
-                    hello@avira.law
-                  </a>
-                </ContactItem>
-                <ContactItem label="Phone">+91 98765 43210</ContactItem>
-                <ContactItem label="Office">New Delhi, India</ContactItem>
+          <StaggerItem className="flex flex-col gap-5">
+            <ContactItem icon={Mail}>
+              <a
+                href="mailto:hello@avira.law"
+                className="transition-colors hover:text-ink/70"
+              >
+                hello@avira.law
+              </a>
+            </ContactItem>
+            <ContactItem icon={Phone}>+91 98765 43210</ContactItem>
+            <ContactItem icon={MapPin}>New Delhi, India</ContactItem>
+          </StaggerItem>
+        </AnimatedSection>
+
+        {/* Right — form card */}
+        <AnimatedSection
+          as="div"
+          stagger
+          staggerChildren={0.1}
+          delay={0.2}
+          className="w-full"
+        >
+          <StaggerItem>
+            <div className="rounded-3xl bg-ink p-6 text-cream shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)] sm:p-10">
+              {/* Card header */}
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h2 className="font-serif text-[1.8rem] leading-tight sm:text-[2.15rem]">
+                    Send an Enquiry
+                  </h2>
+                  <span className="mt-3 block h-[3px] w-14 rounded-full bg-[#C9AA88]" />
+                </div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-cream/10 px-4 py-2.5 font-sans text-xs text-cream/85">
+                  <ShieldCheck
+                    className="h-5 w-5 text-[#C9AA88]"
+                    strokeWidth={1.5}
+                  />
+                  Confidential &amp; Secure
+                </span>
               </div>
-            </StaggerItem>
-          </AnimatedSection>
-        </div>
 
-        {/* Vertical rule */}
-        <div className="hidden w-px bg-cream/8 lg:block" />
-
-        {/* Right — form */}
-        <div className="flex flex-1 flex-col justify-center pb-24 lg:py-0 lg:pl-16">
-          <AnimatedSection
-            as="div"
-            stagger
-            staggerChildren={0.1}
-            delay={0.2}
-            className="w-full max-w-md"
-          >
-            <StaggerItem className="mt-8">
               <AnimatePresence mode="wait">
                 {formState === "success" ? (
                   <motion.div
@@ -101,13 +121,11 @@ export function ContactPage() {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ ...transitionPremium, duration: 0.6 }}
-                    className="flex flex-col gap-5"
+                    className="flex min-h-[26rem] flex-col justify-center gap-5"
                   >
-                    <span className="block h-px w-10 bg-cream/20" />
-                    <p className="font-serif text-[2rem] text-cream">
-                      Thank you.
-                    </p>
-                    <p className="max-w-xs font-sans text-[15px] leading-6 text-cream/50">
+                    <span className="block h-px w-10 bg-cream/30" />
+                    <p className="font-serif text-[2rem]">Thank you.</p>
+                    <p className="max-w-sm font-sans text-[15px] leading-7 text-cream/80">
                       Your message has been received. We&apos;ll respond within
                       one business day with a direct answer.
                     </p>
@@ -119,88 +137,124 @@ export function ContactPage() {
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.25 }}
                     onSubmit={handleSubmit}
-                    className="flex flex-col gap-7"
+                    className="mt-8 flex flex-col gap-6"
                   >
-                    <Field
-                      id="name"
-                      label="Full name"
-                      type="text"
-                      required
-                      autoComplete="name"
-                    />
-                    <Field
-                      id="email"
-                      label="Email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                    />
-                    <Field
-                      id="org"
-                      label="Organisation"
-                      type="text"
-                      autoComplete="organization"
-                    />
-                    <SelectField
-                      id="area"
-                      label="Practice area"
-                      options={practiceAreas}
-                      value={selectedArea}
-                      onChange={setSelectedArea}
-                    />
-                    <div className="flex flex-col gap-2">
-                      <label
-                        htmlFor="message"
-                        className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-cream/35"
-                      >
-                        How can we help? *
-                      </label>
-                      <textarea
-                        id="message"
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      <Field
+                        id="name"
+                        label="Full name"
+                        type="text"
+                        icon={User}
+                        placeholder="Enter your full name"
                         required
-                        rows={3}
-                        placeholder="Briefly describe your matter…"
-                        className="w-full resize-none border-b border-cream/15 bg-transparent pb-2 pt-1 font-sans text-[15px] text-cream placeholder:text-cream/20 focus:border-cream/50 focus:outline-none transition-colors duration-200"
+                        autoComplete="name"
+                      />
+                      <Field
+                        id="email"
+                        label="Email"
+                        type="email"
+                        icon={Mail}
+                        placeholder="your@email.com"
+                        required
+                        autoComplete="email"
+                      />
+                      <Field
+                        id="org"
+                        label="Organisation"
+                        type="text"
+                        icon={Building2}
+                        placeholder="Your organisation (optional)"
+                        autoComplete="organization"
+                      />
+                      <SelectField
+                        id="area"
+                        label="Practice area"
+                        icon={Scale}
+                        placeholder="Select a practice area"
+                        options={practiceAreas}
+                        value={selectedArea}
+                        onChange={setSelectedArea}
                       />
                     </div>
 
-                    <div className="flex items-center justify-between gap-6 pt-1">
+                    {/* Message */}
+                    <div className="flex flex-col gap-2.5">
+                      <label
+                        htmlFor="message"
+                        className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em]"
+                      >
+                        How can we help? *
+                      </label>
+                      <div className="relative">
+                        <Pencil
+                          aria-hidden
+                          className="pointer-events-none absolute left-4 top-4 h-[18px] w-[18px] text-cream/60"
+                          strokeWidth={1.5}
+                        />
+                        <textarea
+                          id="message"
+                          required
+                          rows={4}
+                          maxLength={MAX_MESSAGE}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          placeholder="Briefly describe your matter…"
+                          className="w-full resize-none rounded-lg border border-cream/20 bg-cream/5 py-3.5 pb-9 pl-12 pr-4 font-sans text-sm text-cream placeholder:text-cream/50 transition-colors duration-200 focus:border-cream/60 focus:outline-none"
+                        />
+                        <span className="pointer-events-none absolute bottom-3 right-4 font-sans text-[11px] text-cream/60">
+                          {message.length} / {MAX_MESSAGE}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Submit row */}
+                    <div className="flex flex-col gap-6 pt-2 sm:flex-row sm:items-center">
                       <button
                         type="submit"
                         disabled={formState === "submitting"}
-                        className="inline-flex cursor-pointer items-center gap-3 border border-cream/25 px-7 py-3.5 font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-cream transition-all duration-300 hover:bg-cream hover:text-ink disabled:cursor-not-allowed disabled:opacity-40"
+                        className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-full bg-cream px-9 py-4 font-sans text-[15px] font-medium text-ink transition-colors duration-300 hover:bg-cream/85 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         {formState === "submitting" ? (
                           "Sending…"
                         ) : (
                           <>
-                            Send enquiry <span aria-hidden>→</span>
+                            Send Enquiry <span aria-hidden>→</span>
                           </>
                         )}
                       </button>
-                      <p className="font-sans text-[10px] leading-4 text-cream/20">
-                        Attorney–client
-                        <br />
-                        privilege applies.
-                      </p>
+
+                      <span
+                        aria-hidden
+                        className="hidden h-12 w-px bg-cream/20 sm:mx-4 sm:block"
+                      />
+
+                      <div className="flex items-center gap-4">
+                        <Lock
+                          className="h-8 w-8 shrink-0 text-[#C9AA88]"
+                          strokeWidth={1.25}
+                        />
+                        <p className="font-sans text-[13px] leading-6 text-cream/80">
+                          Attorney–client privilege applies.
+                          <br />
+                          Your information is kept confidential.
+                        </p>
+                      </div>
                     </div>
                   </motion.form>
                 )}
               </AnimatePresence>
-            </StaggerItem>
-          </AnimatedSection>
-        </div>
+            </div>
+          </StaggerItem>
+        </AnimatedSection>
       </div>
 
       {/* ── Bottom strip ── */}
-      <div className="relative shrink-0 border-t border-cream/[0.07] px-8 py-5 sm:px-16">
+      <div className="relative mx-6 shrink-0 border-t border-ink/15 py-6 sm:mx-12 lg:mx-16">
         <div className="flex items-center justify-between">
-          <p className="font-sans text-[11px] text-cream/20">
+          <p className="font-sans text-[13px] text-ink/70">
             © {new Date().getFullYear()} Avira Law · Established 2016
           </p>
-          <p className="font-sans text-[11px] text-cream/20">
-            New Delhi, India
-          </p>
+          <p className="font-sans text-[13px] text-ink/70">New Delhi, India</p>
         </div>
       </div>
     </main>
@@ -209,18 +263,20 @@ export function ContactPage() {
 
 // ── ContactItem ────────────────────────────────────────────
 function ContactItem({
-  label,
+  icon: Icon,
   children,
 }: {
-  label: string;
+  icon: LucideIcon;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-baseline gap-6">
-      <span className="w-12 shrink-0 font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-cream/25">
-        {label}
-      </span>
-      <span className="font-sans text-[15px] text-cream/55">{children}</span>
+    <div className="flex items-center gap-5">
+      <Icon
+        className="h-6 w-6 shrink-0 text-[#A67C52]"
+        strokeWidth={1.5}
+        aria-hidden
+      />
+      <span className="font-sans text-base text-ink">{children}</span>
     </div>
   );
 }
@@ -229,24 +285,32 @@ function ContactItem({
 type FieldProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label: string;
   id: string;
+  icon: LucideIcon;
 };
 
-function Field({ label, id, required, ...props }: FieldProps) {
+function Field({ label, id, icon: Icon, required, ...props }: FieldProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2.5">
       <label
         htmlFor={id}
-        className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-cream/35"
+        className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em]"
       >
         {label}
         {required && " *"}
       </label>
-      <input
-        id={id}
-        required={required}
-        className="w-full border-b border-cream/15 bg-transparent pb-2 pt-1 font-sans text-[15px] text-cream placeholder:text-cream/20 focus:border-cream/50 focus:outline-none transition-colors duration-200"
-        {...props}
-      />
+      <div className="relative">
+        <Icon
+          aria-hidden
+          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-cream/60"
+          strokeWidth={1.5}
+        />
+        <input
+          id={id}
+          required={required}
+          className="w-full rounded-lg border border-cream/20 bg-cream/5 py-3.5 pl-12 pr-4 font-sans text-sm text-cream placeholder:text-cream/50 transition-colors duration-200 focus:border-cream/60 focus:outline-none"
+          {...props}
+        />
+      </div>
     </div>
   );
 }
@@ -255,6 +319,8 @@ function Field({ label, id, required, ...props }: FieldProps) {
 type SelectFieldProps = {
   id: string;
   label: string;
+  icon: LucideIcon;
+  placeholder: string;
   options: string[];
   value: string;
   onChange: (v: string) => void;
@@ -263,27 +329,36 @@ type SelectFieldProps = {
 function SelectField({
   id,
   label,
+  icon: Icon,
+  placeholder,
   options,
   value,
   onChange,
 }: SelectFieldProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2.5">
       <label
         htmlFor={id}
-        className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-cream/35"
+        className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em]"
       >
         {label}
       </label>
       <div className="relative">
+        <Icon
+          aria-hidden
+          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-cream/60"
+          strokeWidth={1.5}
+        />
         <select
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full cursor-pointer appearance-none border-b border-cream/15 bg-transparent pb-2 pr-5 pt-1 font-sans text-[15px] text-cream/60 transition-colors duration-200 [color-scheme:dark] focus:border-cream/50 focus:outline-none"
+          className={`w-full cursor-pointer appearance-none rounded-lg border border-cream/20 bg-cream/5 py-3.5 pl-12 pr-11 font-sans text-sm transition-colors duration-200 [color-scheme:dark] focus:border-cream/60 focus:outline-none ${
+            value ? "text-cream" : "text-cream/50"
+          }`}
         >
           <option value="" className="bg-ink text-cream">
-            Select…
+            {placeholder}
           </option>
           {options.map((o) => (
             <option key={o} value={o} className="bg-ink text-cream">
@@ -291,12 +366,11 @@ function SelectField({
             </option>
           ))}
         </select>
-        <span
+        <ChevronDown
           aria-hidden
-          className="pointer-events-none absolute bottom-2.5 right-0 font-sans text-[11px] text-cream/30"
-        >
-          ↓
-        </span>
+          className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-cream/70"
+          strokeWidth={1.5}
+        />
       </div>
     </div>
   );
