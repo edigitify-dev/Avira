@@ -96,7 +96,7 @@ export function ContactPage() {
           className="w-full"
         >
           <StaggerItem>
-            <div className="rounded-3xl border border-[#1F2B2A]/10 bg-white p-6 text-[#1F2B2A] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.2)] sm:p-10">
+            <div className="rounded-none border border-[#1F2B2A]/10 bg-white p-6 text-[#1F2B2A] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.2)] sm:p-10">
               {/* Card header */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
@@ -192,7 +192,7 @@ export function ContactPage() {
                           value={message}
                           onChange={(e) => setMessage(e.target.value)}
                           placeholder="Briefly describe your matter…"
-                          className="w-full resize-none rounded-lg border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pb-9 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
+                          className="w-full resize-none rounded-none border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pb-9 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
                         />
                         <span className="pointer-events-none absolute bottom-3 right-4 font-sans text-[11px] text-[#1F2B2A]/60">
                           {message.length} / {MAX_MESSAGE}
@@ -205,7 +205,7 @@ export function ContactPage() {
                       <button
                         type="submit"
                         disabled={formState === "submitting"}
-                        className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-full bg-[#1F2B2A] px-9 py-4 font-sans text-[15px] font-medium text-white transition-colors duration-300 hover:bg-[#1F2B2A]/85 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-none bg-[#1F2B2A] px-9 py-4 font-sans text-[15px] font-medium text-white transition-colors duration-300 hover:bg-[#1F2B2A]/85 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         {formState === "submitting" ? (
                           "Sending…"
@@ -283,7 +283,7 @@ function Field({ label, id, icon: Icon, required, ...props }: FieldProps) {
         <input
           id={id}
           required={required}
-          className="w-full rounded-lg border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
+          className="w-full rounded-none border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
           {...props}
         />
       </div>
@@ -329,7 +329,7 @@ function SelectField({
           id={id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full cursor-pointer appearance-none rounded-lg border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-11 font-sans text-sm transition-colors duration-200 [color-scheme:light] focus:border-[#1F2B2A]/60 focus:outline-none ${
+          className={`w-full cursor-pointer appearance-none rounded-none border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-11 font-sans text-sm transition-colors duration-200 [color-scheme:light] focus:border-[#1F2B2A]/60 focus:outline-none ${
             value ? "text-[#1F2B2A]" : "text-[#1F2B2A]/50"
           }`}
         >
