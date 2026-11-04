@@ -9,19 +9,8 @@ export function ServicesHero() {
           What we do
         </p>
         <h1 className="mt-5 font-serif text-5xl leading-[1.05] text-ink sm:text-6xl">
-          Competition law, practiced end to end.
+          Our Expertise
         </h1>
-        <p className="mt-7 max-w-xl font-sans text-base leading-7 text-ink/65">
-          From cartel inquiries to merger clearances, we advise on every stage of competition
-          law — litigation, deals, compliance, and the policy shaping what comes next.
-        </p>
-      </StaggerItem>
-
-      <StaggerItem className="flex items-center gap-4 text-ink/40">
-        <span className="h-px w-10 bg-ink/20" />
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.15em]">
-          Five practice areas, below
-        </p>
       </StaggerItem>
     </Section>
   );

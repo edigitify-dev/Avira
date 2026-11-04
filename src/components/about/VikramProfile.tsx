@@ -1,10 +1,12 @@
+import Image from "next/image";
 import { Mail } from "lucide-react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
 const VIKRAM_EMAIL = "info@aviralaw.com";
-const VIKRAM_LINKEDIN = "https://www.linkedin.com/";
-const BIO =
+const VIKRAM_LINKEDIN = "https://www.linkedin.com/in/shah-vikram/";
+const VIKRAM_PHOTO = "/img.jpg";
+export const VIKRAM_BIO =
   "Vikram has more than eleven years of experience in dispute resolution, with a practice focused on domestic and international arbitration, white-collar matters, investigations and regulatory enforcement.";
 const INDICATIVE_WORK: string[] = [];
 
@@ -24,9 +26,21 @@ export function VikramProfile() {
       topLine
       stagger
       staggerChildren={0.15}
-      className="grid gap-16 lg:grid-cols-12 lg:gap-24"
+      className="grid items-center gap-16 lg:grid-cols-12 lg:gap-20"
     >
-      <StaggerItem className="lg:col-span-5">
+      <StaggerItem variant="slideInLeft" className="lg:col-span-4">
+        <div className="relative aspect-4/5 w-full max-w-sm overflow-hidden">
+          <Image
+            src={VIKRAM_PHOTO}
+            alt="Vikram Shah, Founding Partner"
+            fill
+            sizes="(min-width: 1024px) 30vw, 80vw"
+            className="object-cover grayscale"
+          />
+        </div>
+      </StaggerItem>
+
+      <StaggerItem className="lg:col-span-8">
         <p
           id="vikram"
           className="scroll-mt-32 font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60"
@@ -40,7 +54,11 @@ export function VikramProfile() {
           Founding Partner
         </p>
 
-        <dl className="mt-10 flex flex-col gap-5">
+        <p className="mt-10 font-serif text-2xl leading-[1.4] text-cream sm:text-[1.75rem]">
+          {VIKRAM_BIO}
+        </p>
+
+        <dl className="mt-10 grid gap-6 sm:grid-cols-3">
           {credentials.map((c) => (
             <div key={c.label}>
               <dt className="font-sans text-xs uppercase tracking-[0.15em] text-cream/35">
@@ -52,12 +70,6 @@ export function VikramProfile() {
             </div>
           ))}
         </dl>
-      </StaggerItem>
-
-      <StaggerItem className="lg:col-span-7">
-        <p className="font-serif text-2xl leading-[1.4] text-cream sm:text-[1.75rem]">
-          {BIO}
-        </p>
 
         {INDICATIVE_WORK.length > 0 && (
           <div className="mt-10">

@@ -1,27 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
-
-const highlights = [
-  "Strategic legal advisory",
-  "Corporate & litigation expertise",
-  "Pan-India presence",
-];
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-5 w-5 shrink-0 text-rust">
-      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M6.5 10.2 8.8 12.5 13.5 7.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export function AboutSection() {
   return (
@@ -36,31 +16,20 @@ export function AboutSection() {
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
           About Avira
         </p>
-        <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-          Passion, precision, and professionalism in law
-        </h2>
+        <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">Who we are</h2>
         <p className="mt-6 font-sans text-base leading-7 text-ink/65">
-          We&apos;re a boutique legal practice built for how modern businesses actually operate —
-          pairing rigorous legal craft with the kind of responsive, plain-spoken counsel clients
-          don&apos;t have to chase down.
+          Avira Law is an Indian law firm with a practice spanning corporate and commercial law,
+          litigation and arbitration, white-collar and regulatory matters, investigations,
+          corporate governance and employment.
         </p>
 
-        <ul className="mt-8 flex flex-col gap-4">
-          {highlights.map((item) => (
-            <li key={item} className="flex items-center gap-3 font-sans text-base font-medium text-ink">
-              <CheckIcon />
-              {item}
-            </li>
-          ))}
-        </ul>
-
-        <a
-          href="#contact"
+        <Link
+          href="/about"
           className="mt-10 inline-flex items-center gap-2 bg-ink px-8 py-4 font-sans text-sm font-medium uppercase tracking-widest text-cream transition-opacity hover:opacity-85"
         >
-          Learn more
-          <span aria-hidden>↗</span>
-        </a>
+          About Us
+          <span aria-hidden>→</span>
+        </Link>
       </StaggerItem>
 
       <StaggerItem variant="slideInRight" className="relative">
@@ -72,15 +41,6 @@ export function AboutSection() {
             sizes="(min-width: 1024px) 40vw, 90vw"
             className="object-cover"
           />
-        </div>
-
-        <div className="absolute -bottom-8 -left-6 border border-ink/15 bg-paper px-8 py-6 sm:-left-10">
-          <p className="font-serif text-4xl text-ink">40+</p>
-          <p className="mt-1 font-sans text-xs font-medium uppercase tracking-[0.15em] text-rust">
-            Years combined
-            <br />
-            experience
-          </p>
         </div>
       </StaggerItem>
     </Section>

@@ -9,10 +9,10 @@ import { transitionPremiumFast } from "@/lib/motion";
 
 const links = [
   { label: "Home", href: "/" },
-  { label: "Our Story", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Our Expertise", href: "/services" },
-  { label: "Leadership", href: "#" },
-  { label: "Join Us", href: "/contact" },
+  { label: "Insights", href: "/insights" },
+  // { label: "Join Us", href: "/contact" },
   { label: "Reach Out", href: "/contact" },
 ];
 /** Pages with a dark hero — keep navbar transparent but flip links/logo to cream. */
@@ -59,7 +59,9 @@ export function NavBar() {
               <Link
                 href={link.href}
                 className={`font-sans text-xs font-medium uppercase tracking-[0.15em] transition-colors ${
-                  light ? "text-cream/80 hover:text-cream" : "text-ink/70 hover:text-ink"
+                  light
+                    ? "text-cream/80 hover:text-cream"
+                    : "text-ink/70 hover:text-ink"
                 }`}
               >
                 {link.label}

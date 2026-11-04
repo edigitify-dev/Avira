@@ -5,9 +5,9 @@ import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Services | Avira Law",
+  title: "Our Expertise | Avira Law",
   description:
-    "Avira's competition law practice — litigation & enforcement, merger control, counselling & compliance, policy & advocacy, and pro bono work before the CCI, NCLAT, and Indian courts.",
+    "Avira Law advises on corporate and commercial, corporate governance, litigation, arbitration, white collar, investigations and employment matters.",
 };
 
 export default function ServicesPage() {

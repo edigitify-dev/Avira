@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
@@ -19,35 +20,34 @@ export function CtaSection() {
       </span>
 
       <StaggerItem className="relative max-w-2xl">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
-          Let&apos;s talk
-        </p>
-        <h2 className="mt-5 font-serif text-5xl leading-tight sm:text-6xl">
-          Ready to talk to counsel who gets it?
-        </h2>
+        <h2 className="font-serif text-5xl leading-tight sm:text-6xl">Reach Out</h2>
         <p className="mt-6 font-sans text-base leading-7 text-cream/65">
-          Tell us what you&apos;re facing — we&apos;ll respond within one business day with a
-          straight answer on how we can help.
+          For enquiries, write to{" "}
+          <a
+            href="mailto:info@aviralaw.com"
+            className="text-cream underline underline-offset-4 transition-opacity hover:opacity-80"
+          >
+            info@aviralaw.com
+          </a>{" "}
+          or reach us{" "}
+          <Link
+            href="/contact"
+            className="text-cream underline underline-offset-4 transition-opacity hover:opacity-80"
+          >
+            here
+          </Link>
+          .
         </p>
       </StaggerItem>
 
-      <StaggerItem className="relative flex flex-col items-center gap-5">
-        <a
-          href="#contact"
+      <StaggerItem className="relative">
+        <Link
+          href="/contact"
           className="inline-flex items-center gap-2 rounded-full bg-rust px-10 py-4 font-sans text-sm font-medium uppercase tracking-widest text-cream transition-opacity hover:opacity-85"
         >
-          Get legal help now
+          Reach Out
           <span aria-hidden>→</span>
-        </a>
-        <p className="font-sans text-xs text-cream/35">
-          Or email us at{" "}
-          <a
-            href="mailto:hello@avira.law"
-            className="text-cream/60 underline-offset-2 transition-colors hover:text-cream hover:underline"
-          >
-            hello@avira.law
-          </a>
-        </p>
+        </Link>
       </StaggerItem>
     </Section>
   );

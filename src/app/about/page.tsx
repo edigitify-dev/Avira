@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AboutHero } from "@/components/about/AboutHero";
+import { OurApproach } from "@/components/about/OurApproach";
 import { VisionMissionSection } from "@/components/about/VisionMissionSection";
 import { OurStorySection } from "@/components/about/OurStorySection";
 import { ValuesSection } from "@/components/about/ValuesSection";
@@ -12,13 +13,14 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: "About | Avira Law",
   description:
-    "Avira is a boutique legal practice built on judgment, rigor, and direct partner access — founded 2016, now a pan-India bench with cross-border reach.",
+    "Avira stands for strength and resolve - qualities reflected in clear thinking, sound judgment and purposeful advocacy.",
 };
 
 export default function AboutPage() {
   return (
     <div className="flex flex-col flex-1">
       <AboutHero />
+      <OurApproach />
       <VisionMissionSection />
       <OurStorySection />
       <ValuesSection />
