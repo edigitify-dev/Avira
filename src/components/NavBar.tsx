@@ -60,7 +60,7 @@ export function NavBar() {
             alt="Avira Law"
             width={200}
             height={100}
-            className={`h-10 w-auto brightness-0 ${light ? "invert" : ""}`}
+            className={`h-14 w-auto brightness-0 ${light ? "invert" : ""}`}
             priority
           />
         </Link>
