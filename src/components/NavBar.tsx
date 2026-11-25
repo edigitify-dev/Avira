@@ -14,7 +14,7 @@ const links = [
   { label: "Our Expertise", href: "/services" },
   { label: "Insights", href: "/insights" },
   { label: "Join Us", href: "/join-us" },
-  { label: "Reach Out", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const ROUTE_THEMES: Record<string, { bg: string; lightText: boolean }> = {

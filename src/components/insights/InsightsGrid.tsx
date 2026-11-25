@@ -14,7 +14,7 @@ export function InsightsGrid({ items }: { items: Insight[] }) {
   }
 
   return (
-    <AnimatedSection as="div" stagger amount={0.1} className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <AnimatedSection as="div" stagger amount={0.1} className={`grid gap-6 md:grid-cols-2 ${items.length > 2 ? "xl:grid-cols-3" : ""}`}>
       {items.map((item) => (
         <StaggerItem key={item.slug} className="h-full">
           <article className="h-full">

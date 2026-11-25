@@ -20,6 +20,8 @@ const paddings = {
 
 type SectionProps = {
   theme?: keyof typeof themes;
+  /** Disable scroll reveals for sections that should stay visible. */
+  animated?: boolean;
   /** Controls vertical padding scale. Defaults to `default`. */
   size?: keyof typeof paddings;
   /**
@@ -33,6 +35,7 @@ type SectionProps = {
 
 export function Section({
   theme = "light",
+  animated = true,
   size = "default",
   topLine = false,
   className = "",
@@ -40,16 +43,31 @@ export function Section({
   ...motionProps
 }: SectionProps) {
   const t = themes[theme];
-  return (
-    <AnimatedSection
-      as="section"
-      className={`relative ${paddings[size]} ${t.base} ${className}`}
-      {...motionProps}
-    >
+  const sectionClassName = `relative ${paddings[size]} ${t.base} ${className}`;
+  const content = (
+    <>
       {topLine && (
         <div className={`absolute inset-x-6 top-0 h-px sm:inset-x-16 ${t.line}`} />
       )}
       {children}
+    </>
+  );
+
+  if (!animated) {
+    return (
+      <section id={motionProps.id} className={sectionClassName}>
+        {content}
+      </section>
+    );
+  }
+
+  return (
+    <AnimatedSection
+      as="section"
+      className={sectionClassName}
+      {...motionProps}
+    >
+      {content}
     </AnimatedSection>
   );
 }

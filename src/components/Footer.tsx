@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { practiceAreas } from "@/components/services/practiceAreas";
 
 /** lucide-react no longer ships brand marks — minimal glyphs matched to its stroke style. */
 function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -22,48 +23,15 @@ function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function XIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} {...props}>
-      <path
-        d="M5 5l14 14M19 5L5 19"
-        stroke="currentColor"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" />
-      <circle cx="12" cy="12" r="4" stroke="currentColor" />
-      <circle cx="17" cy="7" r="0.8" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Our Expertise", href: "/services" },
   { label: "Join Us", href: "/join-us" },
   { label: "Reach Out", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms" },
-  { label: "Disclaimer", href: "/disclaimer" },
-];
-const practiceAreas = [
-  "Corporate advisory",
-  "Litigation",
-  "Compliance",
-  "Transparent engagement",
 ];
 const socials = [
   { icon: LinkedInIcon, label: "LinkedIn", href: "#" },
-  { icon: XIcon, label: "X (Twitter)", href: "#" },
-  { icon: InstagramIcon, label: "Instagram", href: "#" },
 ];
 
 export function Footer() {
@@ -133,13 +101,13 @@ export function Footer() {
           </p>
           <ul className="mt-5 flex flex-col gap-3">
             {practiceAreas.map((item) => (
-              <li key={item}>
-                <a
-                  href="#"
+              <li key={item.slug}>
+                <Link
+                  href={`/services#${item.slug}`}
                   className="font-sans text-sm text-cream/70 transition-colors hover:text-cream"
                 >
-                  {item}
-                </a>
+                  {item.title}
+                </Link>
               </li>
             ))}
           </ul>
@@ -152,18 +120,22 @@ export function Footer() {
           <ul className="mt-5 flex flex-col gap-3 font-sans text-sm text-cream/70">
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 shrink-0 text-rust" strokeWidth={1.5} />
-              hello@avira.law
+              <a href="mailto:info@aviralaw.com" className="transition-colors hover:text-cream">
+                info@aviralaw.com
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 shrink-0 text-rust" strokeWidth={1.5} />
-              +91 98765 43210
+              <a href="tel:+919818893922" className="transition-colors hover:text-cream">
+                +91 – 9818893922
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <MapPin
                 className="h-4 w-4 shrink-0 text-rust"
                 strokeWidth={1.5}
               />
-              New Delhi, India
+              Delhi NCR, India
             </li>
           </ul>
         </StaggerItem>
@@ -200,28 +172,22 @@ export function Footer() {
         </StaggerItem>
       </div>
 
-      <StaggerItem className="mt-16 flex flex-col gap-4 border-t border-cream/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+      <StaggerItem className="mt-16 flex flex-col items-center gap-4 border-t border-cream/10 pt-8 text-center">
         <p className="font-sans text-xs text-cream/40">
           © 2026. Avira Law. All rights reserved.
         </p>
-        <div className="flex gap-6">
-          <Link
-            href="/privacy-policy"
-            className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href="/terms"
-            className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
-          >
-            Terms & Conditions
-          </Link>
+        <div className="flex justify-center gap-6">
           <Link
             href="/disclaimer"
             className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
           >
             Disclaimer
+          </Link>
+          <Link
+            href="/privacy-policy"
+            className="font-sans text-xs text-cream/40 transition-colors hover:text-cream"
+          >
+            Privacy Policy
           </Link>
         </div>
       </StaggerItem>

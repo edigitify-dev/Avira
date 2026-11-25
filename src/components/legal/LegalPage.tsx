@@ -1,24 +1,29 @@
+import type { ReactNode } from "react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
 export type LegalBlock = {
   heading?: string;
-  paragraphs?: string[];
+  paragraphs?: ReactNode[];
   items?: string[];
+  closingParagraphs?: ReactNode[];
+  subsections?: { heading: string; paragraphs: ReactNode[] }[];
 };
 
 type Props = {
   title: string;
   intro?: string;
+  lastUpdated?: string;
   blocks: LegalBlock[];
 };
 
-export function LegalPage({ title, intro, blocks }: Props) {
+export function LegalPage({ title, intro, lastUpdated, blocks }: Props) {
   return (
     <Section theme="light" stagger staggerChildren={0.12} className="flex flex-col gap-12">
       <StaggerItem className="max-w-3xl pt-8">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">Legal</p>
         <h1 className="mt-5 font-serif text-4xl leading-[1.1] text-ink sm:text-5xl">{title}</h1>
+        {lastUpdated && <p className="mt-4 font-sans text-sm text-ink/65">Last updated: {lastUpdated}</p>}
         {intro && <p className="mt-6 font-sans text-base leading-7 text-ink/65">{intro}</p>}
       </StaggerItem>
 
@@ -48,6 +53,23 @@ export function LegalPage({ title, intro, blocks }: Props) {
                 ))}
               </ul>
             )}
+            {block.closingParagraphs?.map((paragraph, pi) => (
+              <p key={pi} className="mt-4 font-sans text-base leading-7 text-ink/65">
+                {paragraph}
+              </p>
+            ))}
+            {block.subsections?.map((subsection) => (
+              <div key={subsection.heading} className="mt-6">
+                <h3 className="font-sans text-base font-medium leading-7 text-ink">
+                  {subsection.heading}
+                </h3>
+                {subsection.paragraphs.map((paragraph, pi) => (
+                  <p key={pi} className="mt-4 font-sans text-base leading-7 text-ink/65">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            ))}
           </div>
         ))}
       </StaggerItem>

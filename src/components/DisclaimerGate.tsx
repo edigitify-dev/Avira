@@ -57,26 +57,35 @@ export function DisclaimerGate() {
 
             <div className="mt-6 space-y-4 font-sans text-sm leading-6 text-ink/70">
               <p>
-                The Bar Council of India prohibits legal practitioners and advocates from
-                engaging in any form of advertising and solicitation of work. By accessing this
-                website, you acknowledge and agree that:
+                The rules of the Bar Council of India prohibit law firms from
+                soliciting work or advertising in any manner. By clicking on
+                &apos;I AGREE&apos;, the user acknowledges that:
               </p>
+              <ul className="list-disc space-y-4 pl-5">
+                <li>
+                  The user wishes to gain more information about Avira Law, its
+                  practice areas and its attorneys, for his/her own information
+                  and use;
+                </li>
+                <li>
+                  The information is made available/provided to the user only on
+                  his/her specific request and any information obtained or
+                  material downloaded from this website is completely at the
+                  user&apos;s volition and any transmission, receipt or use of
+                  this site is not intended to, and will not, create any
+                  lawyer-client relationship; and
+                </li>
+                <li>
+                  None of the information contained on the website is in the
+                  nature of a legal opinion or otherwise amounts to any legal
+                  advice.
+                </li>
+              </ul>
               <p>
-                (1) You are accessing this website solely to obtain information about Avira Law
-                and the services it provides for your personal use and reference.
-              </p>
-              <p>
-                (2) There has been no solicitation of work, advertisement or inducement by Avira
-                Law or its constituents in any form.
-              </p>
-              <p>
-                (3) The content on this website does not constitute opinion or legal advice and
-                any information downloaded or obtained from this website does not create an
-                attorney-client relationship between you and Avira Law.
-              </p>
-              <p>
-                (4) All content and materials on this website are the intellectual property of
-                Avira Law.
+                Avira Law is not liable for any consequence of any action taken
+                by the user relying on material/information provided under this
+                website. In cases where the user has any legal issues, he/she in
+                all cases must seek independent legal advice.
               </p>
             </div>
 
@@ -86,7 +95,7 @@ export function DisclaimerGate() {
                 onClick={handleAgree}
                 className="flex-1 border border-ink px-6 py-3 font-sans text-sm font-medium uppercase tracking-widest text-ink transition-colors hover:bg-ink hover:text-cream"
               >
-                Agree
+                I AGREE
               </button>
               <button
                 type="button"

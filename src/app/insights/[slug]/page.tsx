@@ -7,7 +7,6 @@ import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { InsightsGrid } from "@/components/insights/InsightsGrid";
 import { CopyInsightLink } from "@/components/insights/CopyInsightLink";
-import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 import {
   formatInsightDate,
@@ -146,7 +145,6 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
             <InsightsGrid items={getRelatedInsights(insight)} />
           </div>
         </Section>
-        <CtaSection />
       </main>
       <Footer />
     </div>

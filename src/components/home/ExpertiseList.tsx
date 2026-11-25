@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
-import { practiceAreas } from "@/components/services/practiceAreas";
+
+const expertiseAreas = [
+  "Litigation",
+  "Arbitration",
+  "White Collar, Investigations & Regulatory Enforcement",
+  "Corporate & Commercial",
+  "Corporate Governance",
+  "Technology & Data Privacy",
+  "Employment",
+];
 
 export function ExpertiseList() {
   return (
@@ -15,13 +24,13 @@ export function ExpertiseList() {
 
       <StaggerItem>
         <ul className="grid sm:grid-cols-2 sm:gap-x-16">
-          {practiceAreas.map((area) => (
+          {expertiseAreas.map((title, index) => (
             <li
-              key={area.slug}
+              key={title}
               className="flex items-baseline gap-5 border-t border-cream/20 py-6"
             >
-              <span className="font-sans text-xs text-cream/65">{area.index}</span>
-              <span className="font-serif text-2xl text-cream">{area.title}</span>
+              <span className="font-sans text-xs text-cream/65">{String(index + 1).padStart(2, "0")}</span>
+              <span className="font-serif text-2xl text-cream">{title}</span>
             </li>
           ))}
         </ul>

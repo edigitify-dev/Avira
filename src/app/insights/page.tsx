@@ -5,7 +5,6 @@ import { ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { InsightsCollection } from "@/components/insights/InsightsCollection";
-import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 import { formatInsightDate, getReadingTime, insights } from "@/lib/insights";
 
@@ -73,8 +72,6 @@ export default function InsightsPage() {
             <StaggerItem><InsightsCollection items={insights} /></StaggerItem>
           </div>
         </Section>
-
-        <CtaSection />
       </main>
       <Footer />
     </div>

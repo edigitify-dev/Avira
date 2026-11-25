@@ -15,7 +15,7 @@ export function InsightsPreview() {
       </StaggerItem>
 
       <StaggerItem>
-        <InsightsGrid items={getLatestInsights(3)} />
+        <InsightsGrid items={getLatestInsights(2)} />
       </StaggerItem>
 
       <StaggerItem>

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
-import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 
 const careersEmail = "careers@aviralaw.com";
@@ -109,7 +108,6 @@ export default function JoinUsPage() {
             </div>
           </div>
         </Section>
-        <CtaSection theme="white" />
       </main>
       <Footer />
     </div>
