@@ -1,17 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
-  ChevronDown,
-  Lock,
   Mail,
   MapPin,
   Pencil,
   Phone,
-  Scale,
-  ShieldCheck,
   User,
   type LucideIcon,
 } from "lucide-react";
@@ -19,22 +16,12 @@ import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { transitionPremium } from "@/lib/motion";
 
-const practiceAreas = [
-  "Litigation & Enforcement",
-  "Merger Control",
-  "Counselling & Compliance",
-  "Policy & Advocacy",
-  "Pro Bono",
-  "General enquiry",
-];
-
 const MAX_MESSAGE = 500;
 
 type FormState = "idle" | "submitting" | "success";
 
 export function ContactPage() {
   const [formState, setFormState] = useState<FormState>("idle");
-  const [selectedArea, setSelectedArea] = useState("");
   const [message, setMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -56,34 +43,40 @@ export function ContactPage() {
           className="flex flex-col gap-10"
         >
           <StaggerItem className="flex flex-col gap-6">
-            <div className="flex items-center gap-5">
-              <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.25em] text-ink">
-                Contact
-              </p>
-              <span className="block h-px w-16 bg-ink/40" />
-            </div>
             <h1 className="font-serif text-[2.5rem] leading-[1.08] text-ink sm:text-[3.2rem] lg:text-[3.6rem]">
-              Tell us what
-              <br />
-              you&apos;re <em className="text-[#A67C52]">facing.</em>
+              Contact Us
             </h1>
             <p className="max-w-md font-sans text-base leading-7 text-ink/80">
-              We respond within one business day with a straight answer on
-              whether — and how — we can help.
+              For new matters and general enquiries, please get in touch:
             </p>
           </StaggerItem>
 
           <StaggerItem className="flex flex-col gap-5">
             <ContactItem icon={Mail}>
+              <span className="block font-semibold">Email:</span>
               <a
-                href="mailto:hello@avira.law"
+                href="mailto:info@aviralaw.com"
                 className="transition-colors hover:text-ink/70"
               >
-                hello@avira.law
+                info@aviralaw.com
               </a>
             </ContactItem>
-            <ContactItem icon={Phone}>+91 98765 43210</ContactItem>
-            <ContactItem icon={MapPin}>New Delhi, India</ContactItem>
+            <ContactItem icon={Phone}>
+              <span className="block font-semibold">Telephone:</span>
+              <a href="tel:+919818893922" className="transition-colors hover:text-ink/70">
+                +91 98188 93922
+              </a>
+            </ContactItem>
+            <ContactItem icon={MapPin}>
+              <span className="block font-semibold">Office:</span>
+              <span className="mt-1 block leading-7">
+                <strong className="font-semibold">Avira Law</strong>
+                <br />
+                Floor 19, C-001/A2, Berger Towers
+                <br />
+                Sector 16B, Noida, Uttar Pradesh
+              </span>
+            </ContactItem>
           </StaggerItem>
         </AnimatedSection>
 
@@ -103,7 +96,6 @@ export function ContactPage() {
                   <h2 className="font-serif text-[1.8rem] leading-tight sm:text-[2.15rem]">
                     Send an Enquiry
                   </h2>
-                  <span className="mt-3 block h-[3px] w-14 rounded-full bg-[#A67C52]" />
                 </div>
               </div>
 
@@ -159,14 +151,14 @@ export function ContactPage() {
                         placeholder="Your organisation (optional)"
                         autoComplete="organization"
                       />
-                      <SelectField
-                        id="area"
-                        label="Practice area"
-                        icon={Scale}
-                        placeholder="Select a practice area"
-                        options={practiceAreas}
-                        value={selectedArea}
-                        onChange={setSelectedArea}
+                      <Field
+                        id="phone"
+                        name="phone"
+                        label="Contact number"
+                        type="tel"
+                        icon={Phone}
+                        placeholder="Your contact number"
+                        autoComplete="tel"
                       />
                     </div>
 
@@ -225,14 +217,31 @@ export function ContactPage() {
       </div>
 
       {/* ── Bottom strip ── */}
-      <div className="relative mx-6 shrink-0 border-t border-ink/15 py-6 sm:mx-12 lg:mx-16">
-        <div className="flex items-center justify-between">
-          <p className="font-sans text-[13px] text-ink/70">
-            © {new Date().getFullYear()} Avira Law · Established 2016
+      <AnimatedSection
+        as="footer"
+        stagger
+        className="relative mx-6 flex shrink-0 flex-col items-center gap-4 border-t border-ink/15 py-6 text-center sm:mx-12 lg:mx-16"
+      >
+        <StaggerItem>
+          <p className="font-sans text-xs text-ink/70">
+            © 2026. Avira Law. All rights reserved.
           </p>
-          <p className="font-sans text-[13px] text-ink/70">New Delhi, India</p>
-        </div>
-      </div>
+        </StaggerItem>
+        <StaggerItem className="flex justify-center gap-6">
+          <Link
+            href="/disclaimer"
+            className="font-sans text-xs text-ink/70 transition-colors hover:text-ink"
+          >
+            Disclaimer
+          </Link>
+          <Link
+            href="/privacy-policy"
+            className="font-sans text-xs text-ink/70 transition-colors hover:text-ink"
+          >
+            Privacy Policy
+          </Link>
+        </StaggerItem>
+      </AnimatedSection>
     </main>
   );
 }
@@ -246,9 +255,9 @@ function ContactItem({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex items-start gap-5">
       <Icon
-        className="h-6 w-6 shrink-0 text-[#A67C52]"
+        className="mt-1 h-6 w-6 shrink-0 text-rust"
         strokeWidth={1.5}
         aria-hidden
       />
@@ -285,67 +294,6 @@ function Field({ label, id, icon: Icon, required, ...props }: FieldProps) {
           required={required}
           className="w-full rounded-none border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
           {...props}
-        />
-      </div>
-    </div>
-  );
-}
-
-// ── SelectField ────────────────────────────────────────────
-type SelectFieldProps = {
-  id: string;
-  label: string;
-  icon: LucideIcon;
-  placeholder: string;
-  options: string[];
-  value: string;
-  onChange: (v: string) => void;
-};
-
-function SelectField({
-  id,
-  label,
-  icon: Icon,
-  placeholder,
-  options,
-  value,
-  onChange,
-}: SelectFieldProps) {
-  return (
-    <div className="flex flex-col gap-2.5">
-      <label
-        htmlFor={id}
-        className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em]"
-      >
-        {label}
-      </label>
-      <div className="relative">
-        <Icon
-          aria-hidden
-          className="pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-[#1F2B2A]/60"
-          strokeWidth={1.5}
-        />
-        <select
-          id={id}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className={`w-full cursor-pointer appearance-none rounded-none border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-11 font-sans text-sm transition-colors duration-200 [color-scheme:light] focus:border-[#1F2B2A]/60 focus:outline-none ${
-            value ? "text-[#1F2B2A]" : "text-[#1F2B2A]/50"
-          }`}
-        >
-          <option value="" className="bg-white text-[#1F2B2A]">
-            {placeholder}
-          </option>
-          {options.map((o) => (
-            <option key={o} value={o} className="bg-white text-[#1F2B2A]">
-              {o}
-            </option>
-          ))}
-        </select>
-        <ChevronDown
-          aria-hidden
-          className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#1F2B2A]/70"
-          strokeWidth={1.5}
         />
       </div>
     </div>

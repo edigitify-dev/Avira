@@ -4,7 +4,7 @@ import { ContactPage } from "@/components/contact/ContactPage";
 export const metadata: Metadata = {
   title: "Contact | Avira Law",
   description:
-    "Reach Avira Law for competition law counsel — litigation, merger control, compliance, and policy. We respond within one business day.",
+    "Contact Avira Law for new matters and general enquiries. Email info@aviralaw.com, call +91 98188 93922, or visit our office in Noida, Uttar Pradesh.",
 };
 
 export default function Contact() {

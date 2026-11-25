@@ -3,25 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { practiceAreas } from "@/components/services/practiceAreas";
-
-/** lucide-react no longer ships brand marks — minimal glyphs matched to its stroke style. */
-function LinkedInIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.5} {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" />
-      <path
-        d="M7.5 10.5v6M7.5 7.5v.01M11.5 16.5v-4c0-1.1.9-2 2-2s2 .9 2 2v4"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -29,9 +14,6 @@ const quickLinks = [
   { label: "Our Expertise", href: "/services" },
   { label: "Join Us", href: "/join-us" },
   { label: "Reach Out", href: "/contact" },
-];
-const socials = [
-  { icon: LinkedInIcon, label: "LinkedIn", href: "#" },
 ];
 
 export function Footer() {
@@ -63,18 +45,13 @@ export function Footer() {
             Strategic legal counsel for modern businesses — clear, responsive,
             and always in your corner.
           </p>
-          <div className="mt-6 flex gap-4">
-            {socials.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="text-cream/50 transition-colors hover:text-rust"
-              >
-                <Icon className="h-5 w-5" strokeWidth={1.5} />
-              </a>
-            ))}
-          </div>
+          <a
+            href="#"
+            className="mt-5 inline-flex min-h-11 items-center gap-3 font-sans text-sm font-medium tracking-wide text-cream/75 outline-offset-4 transition-colors hover:text-cream focus-visible:outline-2 focus-visible:outline-cream motion-reduce:transition-none"
+          >
+            LinkedIn
+            <ArrowUpRight aria-hidden className="h-4 w-4" strokeWidth={1.5} />
+          </a>
         </StaggerItem>
 
         <StaggerItem>
@@ -97,7 +74,7 @@ export function Footer() {
 
         <StaggerItem>
           <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/40">
-            Practice areas
+            Expertise
           </p>
           <ul className="mt-5 flex flex-col gap-3">
             {practiceAreas.map((item) => (
