@@ -23,8 +23,8 @@ type AnimatedSectionProps = {
   variant?: MotionVariantName;
   /** Seconds to hold before the animation starts. */
   delay?: number;
-  /** How much of the section must be visible before it triggers (0–1). */
-  amount?: number;
+  /** How much of the section must be visible before it triggers (0–1, "some", or "all"). */
+  amount?: number | "some" | "all";
   /** Play the animation only the first time, instead of every scroll pass. */
   once?: boolean;
   /** Stagger direct children (pair with <StaggerItem>) instead of animating as one block. */

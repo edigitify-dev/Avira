@@ -4,21 +4,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { transitionPremiumFast } from "@/lib/motion";
 
-const STORAGE_KEY = "avira-disclaimer-agreed";
-
 /**
  * Bar Council of India requires this acknowledgement gate before a visitor
  * can view a law firm's site — content here counts as legal boilerplate,
  * not marketing copy, so it stays plain rather than brand-voiced.
  */
 export function DisclaimerGate() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (!window.localStorage.getItem(STORAGE_KEY)) {
-      setVisible(true);
-    }
-  }, []);
+  // Ask again on each full page load; the root layout preserves this state
+  // while the visitor navigates between pages after agreeing.
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     document.body.style.overflow = visible ? "hidden" : "";
@@ -28,7 +22,6 @@ export function DisclaimerGate() {
   }, [visible]);
 
   const handleAgree = () => {
-    window.localStorage.setItem(STORAGE_KEY, "true");
     setVisible(false);
   };
 
