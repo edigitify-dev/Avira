@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { AboutPattern } from "@/components/about/AboutPattern";
 
 export function OurStorySection() {
   return (
@@ -41,23 +41,15 @@ export function OurStorySection() {
         </blockquote>
       </StaggerItem>
 
-      <StaggerItem variant="slideInRight" className="relative">
-        <div className="relative aspect-4/5 w-full overflow-hidden sm:aspect-5/6">
-          <Image
-            src="https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg"
-            alt="Statue of Lady Justice holding the scales"
-            fill
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className="object-cover"
-          />
+      <StaggerItem variant="scaleIn" className="flex flex-col items-center">
+        <div className="aspect-square w-full max-w-lg text-forest">
+          <AboutPattern variant="rosette" />
         </div>
 
-        <div className="absolute -bottom-8 -right-6 border border-ink/15 bg-paper px-8 py-6 sm:-right-10">
+        <div className="mt-6 flex items-baseline justify-center gap-4">
           <p className="font-serif text-4xl text-ink">500+</p>
-          <p className="mt-1 font-sans text-xs font-medium uppercase tracking-[0.15em] text-rust">
-            Matters
-            <br />
-            resolved
+          <p className="font-sans text-sm font-medium uppercase tracking-[0.15em] text-forest">
+            Matters resolved
           </p>
         </div>
       </StaggerItem>

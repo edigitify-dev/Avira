@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { GeometryPattern } from "@/components/home/GeometryPattern";
 
 export function AboutSection() {
   return (
@@ -38,15 +38,9 @@ export function AboutSection() {
         </Link>
       </StaggerItem>
 
-      <StaggerItem variant="slideInRight" className="relative">
-        <div className="relative aspect-4/5 w-full overflow-hidden sm:aspect-5/6">
-          <Image
-            src="https://images.pexels.com/photos/5669602/pexels-photo-5669602.jpeg"
-            alt="Statue of Lady Justice holding the scales"
-            fill
-            sizes="(min-width: 1024px) 40vw, 90vw"
-            className="object-cover"
-          />
+      <StaggerItem variant="scaleIn" className="relative flex items-center justify-center">
+        <div className="flex aspect-square w-full max-w-lg items-center justify-center text-forest">
+          <GeometryPattern variant="balance" />
         </div>
       </StaggerItem>
     </Section>

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { AboutPattern } from "@/components/about/AboutPattern";
 
 export function AboutHero() {
   return (
@@ -30,16 +30,9 @@ export function AboutHero() {
         </p>
       </StaggerItem>
 
-      <StaggerItem variant="slideInRight" className="relative lg:col-span-7">
-        <div className="relative aspect-4/5 w-full overflow-hidden sm:aspect-16/10">
-          <Image
-            src="https://images.pexels.com/photos/3771097/pexels-photo-3771097.jpeg"
-            alt="Attorney reviewing legal documents at a desk"
-            fill
-            sizes="(min-width: 1024px) 55vw, 90vw"
-            className="object-cover"
-            priority
-          />
+      <StaggerItem variant="scaleIn" className="flex items-center justify-center lg:col-span-7">
+        <div className="aspect-square w-full max-w-lg text-forest">
+          <AboutPattern variant="structure" />
         </div>
       </StaggerItem>
     </Section>

@@ -1,36 +1,29 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { GeometryPattern } from "@/components/home/GeometryPattern";
 
 export function Hero() {
   return (
     <Section
       theme="light"
-      size="tall"
+      size="spacious"
       stagger
       staggerChildren={0.15}
-      className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-start lg:gap-8"
+      className="grid grid-cols-2 items-center gap-x-8 gap-y-12 lg:min-h-[46rem] lg:grid-cols-12 lg:gap-8"
     >
-      <StaggerItem className="lg:col-span-3">
-        <div className="relative mt-8 aspect-4/5 w-40 overflow-hidden sm:w-48">
-          <Image
-            src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg"
-            alt="Legal documents and a pen on a desk"
-            fill
-            sizes="200px"
-            className="object-cover"
-          />
+      <StaggerItem variant="scaleIn" className="lg:col-span-3 lg:self-start">
+        <div className="mx-auto w-full max-w-48 text-forest sm:max-w-60 lg:-mt-6 lg:max-w-72">
+          <GeometryPattern variant="fold" />
         </div>
       </StaggerItem>
 
-      <StaggerItem className="lg:col-span-6">
-        <p className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.25rem]">
+      <StaggerItem className="order-first col-span-2 lg:order-none lg:col-span-6">
+        <h1 className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.25rem]">
           Avira stands for strength and resolve - qualities reflected in clear thinking, sound
           judgment and purposeful advocacy.
-        </p>
-        <div className="mt-10 flex items-center gap-6">
-          <span className="h-px flex-1 bg-ink/15" />
+        </h1>
+        <div className="mt-10 flex items-center">
           <Link
             href="/about"
             className="inline-flex shrink-0 items-center gap-2 border border-forest/35 px-6 py-3 font-sans text-sm font-medium text-forest outline-offset-4 transition-colors hover:border-forest hover:bg-forest hover:text-cream focus-visible:outline-2 focus-visible:outline-forest motion-reduce:transition-none"
@@ -41,15 +34,9 @@ export function Hero() {
         </div>
       </StaggerItem>
 
-      <StaggerItem className="flex flex-col items-start gap-8 lg:col-span-3 lg:items-end lg:pt-16">
-        <div className="relative aspect-4/5 w-48 overflow-hidden sm:w-56">
-          <Image
-            src="https://images.pexels.com/photos/3771097/pexels-photo-3771097.jpeg"
-            alt="Attorney reviewing legal documents at a desk"
-            fill
-            sizes="240px"
-            className="object-cover"
-          />
+      <StaggerItem variant="scaleIn" className="lg:col-span-3 lg:self-end lg:pt-24">
+        <div className="mx-auto w-full max-w-48 text-forest sm:max-w-60 lg:max-w-72">
+          <GeometryPattern variant="halo" />
         </div>
       </StaggerItem>
     </Section>
