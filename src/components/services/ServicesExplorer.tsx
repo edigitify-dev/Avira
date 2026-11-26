@@ -10,7 +10,7 @@ export function ServicesExplorer() {
       theme="dark"
       topLine
       animated={false}
-      className="grid gap-14 lg:grid-cols-12 lg:gap-20"
+      className="isolate grid gap-14 lg:grid-cols-12 lg:gap-20"
     >
       {/* Left — sticky label and firm profile */}
       <div className="lg:col-span-4">

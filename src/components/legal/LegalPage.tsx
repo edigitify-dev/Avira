@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { BrandWatermark } from "@/components/BrandWatermark";
 
 export type LegalBlock = {
   heading?: string;
@@ -19,7 +20,8 @@ type Props = {
 
 export function LegalPage({ title, intro, lastUpdated, blocks }: Props) {
   return (
-    <Section theme="light" amount="some" stagger staggerChildren={0.12} className="flex flex-col gap-12">
+    <Section theme="light" amount="some" stagger staggerChildren={0.12} className="isolate flex flex-col gap-12">
+      <BrandWatermark tone="deep-teal" className="right-[2%] top-48 w-[min(34rem,60vw)]" />
       <StaggerItem className="max-w-3xl pt-8">
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">Legal</p>
         <h1 className="mt-5 font-serif text-4xl leading-[1.1] text-ink sm:text-5xl">{title}</h1>

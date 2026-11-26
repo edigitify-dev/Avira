@@ -12,10 +12,10 @@ const themes = {
 } as const;
 
 const paddings = {
-  slim:     "px-6 py-16 sm:px-16 sm:py-24",
-  default:  "px-6 py-24 sm:px-16 sm:py-32",
-  spacious: "px-6 py-32 sm:px-16 sm:py-44",
-  tall:     "px-6 py-40 sm:px-16 sm:py-56",
+  slim:     "section-gutter px-6 py-16 sm:px-16 sm:py-24",
+  default:  "section-gutter px-6 py-24 sm:px-16 sm:py-32",
+  spacious: "section-gutter px-6 py-32 sm:px-16 sm:py-44",
+  tall:     "section-gutter px-6 py-40 sm:px-16 sm:py-56",
 } as const;
 
 type SectionProps = {
@@ -47,7 +47,7 @@ export function Section({
   const content = (
     <>
       {topLine && (
-        <div className={`absolute inset-x-6 top-0 h-px sm:inset-x-16 ${t.line}`} />
+        <div className={`section-gutter-inset absolute top-0 h-px ${t.line}`} />
       )}
       {children}
     </>

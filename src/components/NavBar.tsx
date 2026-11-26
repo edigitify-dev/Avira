@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { transitionPremiumFast } from "@/lib/motion";
 
 const links = [
   { label: "Home", href: "/" },
@@ -17,40 +15,25 @@ const links = [
   { label: "Contact Us", href: "/contact" },
 ];
 
-const ROUTE_THEMES: Record<string, { bg: string; lightText: boolean }> = {
-  "/contact": { bg: "bg-ink", lightText: true },
-};
-
 export function NavBar() {
-  const pathname = usePathname();
-  const routeTheme = ROUTE_THEMES[pathname];
-  const { scrollY } = useScroll();
-  const [hidden, setHidden] = useState(false);
-  const [solid, setSolid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    setSolid(latest > 80);
-    setHidden(latest > previous && latest > 200);
+    setScrolled(latest > 8);
   });
 
-  const light = menuOpen || (routeTheme ? routeTheme.lightText : solid);
-  const background = menuOpen ? "bg-ink" : routeTheme ? routeTheme.bg : solid ? "bg-ink/95" : "";
-
   return (
-    <motion.header
-      initial={false}
+    <header
       onKeyDown={(event) => {
         if (event.key === "Escape" && menuOpen) {
           setMenuOpen(false);
           document.querySelector<HTMLButtonElement>('[aria-controls="mobile-navigation"]')?.focus();
         }
       }}
-      animate={{ y: hidden && !menuOpen ? "-100%" : "0%" }}
-      transition={transitionPremiumFast}
-      className={`fixed inset-x-0 top-0 z-50 px-6 py-5 transition-colors duration-300 sm:px-16 sm:py-6 ${background} ${
-        solid ? "py-3 shadow-sm backdrop-blur-sm sm:py-4" : ""
+      className={`fixed inset-x-0 top-0 z-50 px-6 py-5 transition-colors duration-300 sm:px-16 sm:py-6 ${
+        scrolled ? "bg-ink/90 backdrop-blur-sm" : "bg-ink"
       }`}
     >
       <nav className="flex items-center justify-between">
@@ -60,34 +43,32 @@ export function NavBar() {
             alt="Avira Law"
             width={200}
             height={100}
-            className={`h-14 w-auto brightness-0 ${light ? "invert" : ""}`}
+            className="h-16 w-auto brightness-0 invert"
             priority
           />
         </Link>
-        <ul className="hidden gap-4 md:flex lg:gap-7 xl:gap-10">
-          {links.map((link) => (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className={`whitespace-nowrap font-sans text-[10px] font-medium uppercase tracking-[0.15em] transition-colors lg:text-xs ${
-                  light
-                    ? "text-cream/80 hover:text-cream"
-                    : "text-ink/70 hover:text-ink"
-                }`}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden md:block">
+          <ul className="flex gap-4 lg:gap-7 xl:gap-10">
+            {links.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="whitespace-nowrap font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-cream/80 transition-colors hover:text-cream lg:text-xs"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
         <button
           type="button"
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           aria-label={menuOpen ? "Close navigation" : "Open navigation"}
           onClick={() => setMenuOpen((open) => !open)}
-          className={`inline-flex h-11 w-11 cursor-pointer items-center justify-center outline-offset-4 focus-visible:outline-2 md:hidden ${light ? "text-cream" : "text-ink"}`}
+          className="inline-flex h-11 w-11 cursor-pointer items-center justify-center text-cream outline-offset-4 focus-visible:outline-2 md:hidden"
         >
           {menuOpen ? <X aria-hidden className="h-6 w-6" strokeWidth={1.5} /> : <Menu aria-hidden className="h-6 w-6" strokeWidth={1.5} />}
         </button>
@@ -112,6 +93,6 @@ export function NavBar() {
           ))}
         </ul>
       </nav>
-    </motion.header>
+    </header>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -23,18 +23,40 @@ type FormState = "idle" | "submitting" | "success";
 export function ContactPage() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
+  const [formError, setFormError] = useState("");
+  const requestId = useRef<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (formState === "submitting") return;
+    const fields = new FormData(e.currentTarget);
+    requestId.current ??= crypto.randomUUID();
     setFormState("submitting");
-    await new Promise((r) => setTimeout(r, 1400));
-    setFormState("success");
+    setFormError("");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.get("name"), email: fields.get("email"),
+          organisation: fields.get("org"), phone: fields.get("phone"),
+          message: fields.get("message"), website: fields.get("website"),
+          requestId: requestId.current,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Your message couldn't be sent. Please try again.");
+      setFormState("success");
+    } catch (cause) {
+      setFormError(cause instanceof Error ? cause.message : "We couldn't connect. Please try again.");
+      setFormState("idle");
+    }
   }
 
   return (
-    <main className="relative flex min-h-dvh flex-col bg-cream text-ink">
+    <main className="relative isolate flex min-h-dvh flex-col overflow-hidden bg-cream text-ink lg:min-h-[46rem]">
       {/* ── Content ── */}
-      <div className="relative mx-auto grid w-full max-w-[1500px] flex-1 items-center gap-12 px-6 pb-12 pt-28 sm:px-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:px-16 lg:pt-32">
+      <div className="relative section-gutter mx-auto grid w-full flex-1 items-center gap-12 px-6 pb-12 pt-28 sm:px-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:pt-32">
         {/* Left — editorial */}
         <AnimatedSection
           as="div"
@@ -122,6 +144,8 @@ export function ContactPage() {
                     exit={{ opacity: 0, y: -8 }}
                     transition={{ duration: 0.25 }}
                     onSubmit={handleSubmit}
+                    aria-busy={formState === "submitting"}
+                    aria-describedby={formError ? "contact-form-error" : undefined}
                     className="mt-8 flex flex-col gap-6"
                   >
                     <div className="grid gap-6 sm:grid-cols-2">
@@ -133,6 +157,7 @@ export function ContactPage() {
                         placeholder="Enter your full name"
                         required
                         autoComplete="name"
+                        maxLength={120}
                       />
                       <Field
                         id="email"
@@ -142,6 +167,7 @@ export function ContactPage() {
                         placeholder="your@email.com"
                         required
                         autoComplete="email"
+                        maxLength={254}
                       />
                       <Field
                         id="org"
@@ -150,6 +176,7 @@ export function ContactPage() {
                         icon={Building2}
                         placeholder="Your organisation (optional)"
                         autoComplete="organization"
+                        maxLength={160}
                       />
                       <Field
                         id="phone"
@@ -159,6 +186,7 @@ export function ContactPage() {
                         icon={Phone}
                         placeholder="Your contact number"
                         autoComplete="tel"
+                        maxLength={40}
                       />
                     </div>
 
@@ -178,6 +206,7 @@ export function ContactPage() {
                         />
                         <textarea
                           id="message"
+                          name="message"
                           required
                           rows={4}
                           maxLength={MAX_MESSAGE}
@@ -191,6 +220,12 @@ export function ContactPage() {
                         </span>
                       </div>
                     </div>
+
+                    <div hidden aria-hidden="true">
+                      <label htmlFor="contact-website">Leave this field empty</label>
+                      <input id="contact-website" name="website" tabIndex={-1} autoComplete="off" />
+                    </div>
+                    {formError && <p id="contact-form-error" role="alert" className="border-l-2 border-forest pl-4 font-sans text-sm leading-6 text-ink">{formError}</p>}
 
                     {/* Submit row */}
                     <div className="flex flex-col gap-6 pt-2 sm:flex-row sm:items-center">
@@ -291,6 +326,7 @@ function Field({ label, id, icon: Icon, required, ...props }: FieldProps) {
         />
         <input
           id={id}
+          name={id}
           required={required}
           className="w-full rounded-none border border-[#1F2B2A]/20 bg-[#1F2B2A]/[0.03] py-3.5 pl-12 pr-4 font-sans text-sm text-[#1F2B2A] placeholder:text-[#1F2B2A]/50 transition-colors duration-200 focus:border-[#1F2B2A]/60 focus:outline-none"
           {...props}

@@ -28,3 +28,25 @@
 body {
   font-family: var(--font-sans), sans-serif;
 }
+
+.section-gutter-inset {
+  left: 1.5rem;
+  right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-gutter-inset {
+    left: 4rem;
+    right: 4rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .section-gutter {
+    padding-inline: calc((100% - 88rem) / 2);
+  }
+
+  .section-gutter-inset {
+    inset-inline: calc((100% - 88rem) / 2);
+  }
+}

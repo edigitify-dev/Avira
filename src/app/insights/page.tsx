@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { BrandWatermark } from "@/components/BrandWatermark";
 import { InsightsCollection } from "@/components/insights/InsightsCollection";
 import { Footer } from "@/components/Footer";
 import { formatInsightDate, getReadingTime, insights } from "@/lib/insights";
@@ -19,14 +20,13 @@ export default function InsightsPage() {
   return (
     <div className="flex flex-1 flex-col">
       <main>
-        <Section theme="light" stagger className="pb-16! pt-36! sm:pb-20! sm:pt-44!">
-          <div className="mx-auto max-w-7xl">
-            <StaggerItem>
-              <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">The Avira perspective</p>
-            </StaggerItem>
-            <div className="mt-7 grid gap-7 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-20">
+        <Section theme="light" size="spacious" stagger className="isolate overflow-hidden lg:flex lg:min-h-[46rem] lg:flex-col lg:justify-center">
+          <BrandWatermark tone="deep-teal" />
+          <div className="mx-auto w-full max-w-[88rem]">
+            <div className="grid gap-7 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-20">
               <StaggerItem>
-                <h1 className="font-serif text-6xl leading-[1.02] tracking-tight text-ink sm:text-8xl">Ideas with<br /><span className="italic text-forest">perspective.</span></h1>
+                <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">The Avira perspective</p>
+                <h1 className="mt-5 font-serif text-6xl leading-[1.02] tracking-tight text-ink sm:text-8xl">Ideas with<br /><span className="italic text-forest">perspective.</span></h1>
               </StaggerItem>
               <StaggerItem>
                 <p className="max-w-md font-sans text-base leading-8 text-ink/75">A closer look at competition, commerce and the questions shaping the law. Considered thinking. A clearer view.</p>
@@ -38,7 +38,7 @@ export default function InsightsPage() {
 
         {featured && (
           <Section theme="white" size="slim" stagger>
-            <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div className="mx-auto grid max-w-[88rem] gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
               <StaggerItem className="relative aspect-[4/3] overflow-hidden bg-ink">
                 <Image src="/hero.jpg" alt="A wooden judge’s gavel in warm light" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 <span className="absolute bottom-5 left-5 bg-cream px-4 py-2 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-ink">In focus</span>
@@ -61,7 +61,7 @@ export default function InsightsPage() {
         )}
 
         <Section id="all-insights" theme="light" stagger amount={0.05}>
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-[88rem]">
             <StaggerItem className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
               <div>
                 <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">From the journal</p>

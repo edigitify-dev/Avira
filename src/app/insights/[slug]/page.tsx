@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/Section";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { BrandWatermark } from "@/components/BrandWatermark";
 import { InsightsGrid } from "@/components/insights/InsightsGrid";
 import { CopyInsightLink } from "@/components/insights/CopyInsightLink";
 import { Footer } from "@/components/Footer";
@@ -48,8 +49,9 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
     <div className="flex flex-1 flex-col">
       <main>
         <article>
-          <Section theme="light" stagger className="pb-16! pt-32! sm:pb-20! sm:pt-40!">
-            <div className="mx-auto max-w-7xl">
+          <Section theme="light" stagger className="isolate overflow-hidden lg:flex lg:min-h-[46rem] lg:flex-col lg:justify-center pb-16! pt-32! sm:pb-20! sm:pt-40!">
+            <BrandWatermark tone="deep-teal" />
+            <div className="mx-auto max-w-[88rem]">
               <StaggerItem>
                 <Link href="/insights" className="inline-flex items-center gap-3 font-sans text-xs font-medium text-ink/70 outline-offset-4 hover:text-forest focus-visible:outline-2 focus-visible:outline-forest">
                   <ArrowLeft aria-hidden className="h-4 w-4" /> Back to insights
@@ -57,7 +59,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
               </StaggerItem>
               <StaggerItem className="mt-14">
                 <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">{insight.category}</p>
-                <h1 className="mt-6 max-w-5xl text-balance font-serif text-[2.65rem] leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-7xl">{insight.title}</h1>
+                <h1 className="mt-5 max-w-5xl text-balance font-serif text-[2.65rem] leading-[1.08] tracking-tight text-ink sm:text-6xl lg:text-7xl">{insight.title}</h1>
               </StaggerItem>
               <StaggerItem>
                 <p className="mt-7 max-w-2xl font-sans text-base leading-8 text-ink/75 sm:text-lg">{insight.summary}</p>
@@ -74,7 +76,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
           </Section>
 
           <Section theme="white" stagger amount={0.02}>
-            <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-20 xl:gap-28">
+            <div className="mx-auto grid max-w-[88rem] gap-14 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-20 xl:gap-28">
               <aside className="self-start lg:sticky lg:top-28">
                 <StaggerItem>
                   <nav aria-label="In this article">
@@ -134,7 +136,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
         </article>
 
         <Section theme="light" stagger amount={0.1}>
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-[88rem]">
             <StaggerItem className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div>
                 <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">Keep reading</p>

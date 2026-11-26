@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Section } from "@/components/Section";
+import { BrandWatermark } from "@/components/BrandWatermark";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
 const expertiseAreas = [
@@ -14,7 +15,8 @@ const expertiseAreas = [
 
 export function ExpertiseList() {
   return (
-    <Section theme="dark" stagger staggerChildren={0.12} className="flex flex-col gap-14">
+    <Section theme="dark" stagger staggerChildren={0.12} className="isolate flex flex-col gap-14 overflow-hidden">
+      <BrandWatermark tone="sand" />
       <StaggerItem className="max-w-2xl">
         <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-cream/70">
           Practice areas

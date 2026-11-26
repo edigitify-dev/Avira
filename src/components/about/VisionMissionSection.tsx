@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { BrandWatermark } from "@/components/BrandWatermark";
 import { transitionPremium } from "@/lib/motion";
 
 const pillars = [
@@ -30,8 +31,9 @@ export function VisionMissionSection() {
       topLine
       stagger
       staggerChildren={0.15}
-      className="flex flex-col gap-12"
+      className="isolate flex flex-col gap-12 overflow-hidden"
     >
+      <BrandWatermark tone="sand" />
       <StaggerItem>
         <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/50">
           What drives us

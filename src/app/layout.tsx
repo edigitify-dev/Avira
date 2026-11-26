@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Montserrat } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
-import { NavBar } from "@/components/NavBar";
-import { DisclaimerGate } from "@/components/DisclaimerGate";
+import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -36,8 +35,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <MotionProvider>
-          <DisclaimerGate />
-          <NavBar />
+          <SiteChrome />
           {children}
         </MotionProvider>
       </body>

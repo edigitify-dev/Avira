@@ -10,7 +10,7 @@ export function Hero() {
       size="spacious"
       stagger
       staggerChildren={0.15}
-      className="grid grid-cols-2 items-center gap-x-8 gap-y-12 lg:min-h-[46rem] lg:grid-cols-12 lg:gap-8"
+      className="isolate grid grid-cols-2 items-center gap-x-8 gap-y-12 overflow-hidden lg:min-h-[46rem] lg:grid-cols-12 lg:gap-8"
     >
       <StaggerItem variant="scaleIn" className="lg:col-span-3 lg:self-start">
         <div className="mx-auto w-full max-w-48 text-forest sm:max-w-60 lg:-mt-6 lg:max-w-72">
@@ -19,7 +19,7 @@ export function Hero() {
       </StaggerItem>
 
       <StaggerItem className="order-first col-span-2 lg:order-none lg:col-span-6">
-        <h1 className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.25rem]">
+        <h1 className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.75rem] lg:leading-[1.22]">
           Avira stands for strength and resolve - qualities reflected in clear thinking, sound
           judgment and purposeful advocacy.
         </h1>

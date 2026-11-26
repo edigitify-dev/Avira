@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ServicesHero } from "@/components/services/ServicesHero";
 import { ServicesExplorer } from "@/components/services/ServicesExplorer";
+import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export default function ServicesPage() {
     <div className="flex flex-col flex-1">
       <ServicesHero />
       <ServicesExplorer />
+      <CtaSection />
       <Footer />
     </div>
   );

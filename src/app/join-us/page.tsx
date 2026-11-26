@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
+import { BrandWatermark } from "@/components/BrandWatermark";
 import { Footer } from "@/components/Footer";
 
 const careersEmail = "careers@aviralaw.com";
@@ -16,46 +17,43 @@ export default function JoinUsPage() {
   return (
     <div className="flex flex-1 flex-col">
       <main>
-        <Section theme="light" stagger className="pb-20! pt-36! sm:pb-28! sm:pt-44!">
-          <div className="mx-auto max-w-7xl">
+        <Section theme="light" size="spacious" stagger className="isolate overflow-hidden lg:flex lg:min-h-[46rem] lg:flex-col lg:justify-center">
+          <BrandWatermark tone="deep-teal" />
+          <div className="mx-auto grid w-full max-w-[88rem] gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-20 xl:gap-28">
             <StaggerItem>
               <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">Join Us</p>
+              <h1 className="mt-5 font-serif text-6xl leading-[1.05] tracking-tight text-ink sm:text-7xl xl:text-8xl">
+                Working<br />at <span className="italic text-forest">Avira</span>
+              </h1>
+              <a
+                href="#join-avira"
+                className="mt-9 inline-flex items-center gap-5 font-sans text-xs font-medium text-forest outline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-forest lg:mt-14"
+              >
+                Explore opportunities <ArrowDown aria-hidden className="h-4 w-4" strokeWidth={1.5} />
+              </a>
             </StaggerItem>
-            <div className="mt-8 grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20 xl:gap-28">
+            <div className="lg:py-2">
               <StaggerItem>
-                <h1 className="font-serif text-6xl leading-[1.05] tracking-tight text-ink sm:text-7xl xl:text-8xl">
-                  Working<br />at <span className="italic text-forest">Avira</span>
-                </h1>
-                <a
-                  href="#join-avira"
-                  className="mt-9 inline-flex items-center gap-5 font-sans text-xs font-medium text-forest outline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-forest lg:mt-14"
-                >
-                  Explore opportunities <ArrowDown aria-hidden className="h-4 w-4" strokeWidth={1.5} />
-                </a>
+                <p className="max-w-xl font-serif text-2xl leading-relaxed text-ink sm:text-3xl">
+                  Avira is a firm where the quality of the work and the culture around it matter equally.
+                </p>
               </StaggerItem>
-              <div>
-                <StaggerItem>
-                  <p className="max-w-xl font-serif text-2xl leading-relaxed text-ink sm:text-3xl">
-                    Avira is a firm where the quality of the work and the culture around it matter equally.
-                  </p>
-                </StaggerItem>
-                <StaggerItem>
-                  <p className="mt-7 max-w-xl font-sans text-sm leading-8 text-ink/75 sm:text-base">
-                    Lawyers are expected to look beyond the immediate task, understand how a matter is developing and contribute to the thinking that shapes it. Avira values curiosity, candour and independent judgment, with responsibility growing alongside experience.
-                  </p>
-                </StaggerItem>
-                <StaggerItem>
-                  <p className="mt-5 max-w-xl font-sans text-sm leading-8 text-ink/75 sm:text-base">
-                    The emphasis is on doing demanding, interesting work in an environment where people are encouraged to think, contribute and develop their own point of view.
-                  </p>
-                </StaggerItem>
-              </div>
+              <StaggerItem>
+                <p className="mt-7 max-w-xl font-sans text-sm leading-8 text-ink/75 sm:text-base">
+                  Lawyers are expected to look beyond the immediate task, understand how a matter is developing and contribute to the thinking that shapes it. Avira values curiosity, candour and independent judgment, with responsibility growing alongside experience.
+                </p>
+              </StaggerItem>
+              <StaggerItem>
+                <p className="mt-5 max-w-xl font-sans text-sm leading-8 text-ink/75 sm:text-base">
+                  The emphasis is on doing demanding, interesting work in an environment where people are encouraged to think, contribute and develop their own point of view.
+                </p>
+              </StaggerItem>
             </div>
           </div>
         </Section>
 
         <Section id="join-avira" theme="ivory" stagger className="scroll-mt-24">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20 xl:gap-28">
+          <div className="mx-auto grid max-w-[88rem] gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20 xl:gap-28">
             <StaggerItem>
               <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-forest">01 / Lawyers</p>
               <h2 className="mt-5 font-serif text-4xl leading-tight tracking-tight sm:text-5xl">Join Avira</h2>
@@ -82,8 +80,8 @@ export default function JoinUsPage() {
           </div>
         </Section>
 
-        <Section id="internships" theme="forest" stagger>
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20 xl:gap-28">
+        <Section id="internships" theme="forest" stagger className="isolate">
+          <div className="mx-auto grid max-w-[88rem] gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20 xl:gap-28">
             <StaggerItem>
               <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-cream/70">02 / Law students</p>
               <h2 className="mt-5 font-serif text-4xl leading-tight tracking-tight sm:text-5xl">Internships</h2>

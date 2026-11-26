@@ -22,20 +22,13 @@ export function CtaSection({ theme = "forest" }: { theme?: "forest" | "white" })
       theme={theme}
       stagger
       staggerChildren={0.15}
-      className="flex flex-col items-center text-center"
+      className="isolate flex flex-col items-center text-center"
     >
       {/* ---- Your original CTA content (replace with your real copy) ---- */}
       <StaggerItem>
         <h2 className="max-w-3xl font-serif text-4xl leading-tight sm:text-5xl">
-          Ready to talk about your next step?
+          Have something you would like to discuss?
         </h2>
-      </StaggerItem>
-
-      <StaggerItem>
-        <p className={`mt-6 max-w-xl font-sans text-base ${theme === "white" ? "text-ink/70" : "text-cream/85"}`}>
-          Tell us what you&rsquo;re working through and we&rsquo;ll outline how
-          we can help.
-        </p>
       </StaggerItem>
 
       <StaggerItem>
@@ -43,7 +36,7 @@ export function CtaSection({ theme = "forest" }: { theme?: "forest" | "white" })
           href="/contact"
           className={`mt-10 inline-flex items-center gap-2 px-8 py-4 font-sans text-xs font-medium uppercase tracking-[0.15em] outline-offset-4 transition-colors duration-300 focus-visible:outline-2 motion-reduce:transition-none ${theme === "white" ? "bg-ink text-cream hover:bg-forest focus-visible:outline-forest" : "bg-cream text-ink hover:bg-ivory focus-visible:outline-cream"}`}
         >
-          Get in touch <span aria-hidden>→</span>
+          GET IN TOUCH <span aria-hidden>→</span>
         </Link>
       </StaggerItem>
 

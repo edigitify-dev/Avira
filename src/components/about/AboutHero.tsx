@@ -6,13 +6,13 @@ export function AboutHero() {
   return (
     <Section
       theme="white"
-      size="tall"
+      size="spacious"
       stagger
       staggerChildren={0.15}
-      className="grid items-center gap-16 lg:grid-cols-12 lg:gap-8"
+      className="isolate grid items-center gap-16 overflow-hidden lg:min-h-[46rem] lg:grid-cols-12 lg:gap-8 lg:py-24!"
     >
       <StaggerItem className="lg:col-span-5">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
+        <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-rust">
           About Us
         </p>
         <h1 className="mt-5 font-serif text-5xl leading-[1.05] text-ink sm:text-6xl lg:text-[3.75rem]">

@@ -7,7 +7,6 @@ import { ValuesSection } from "@/components/about/ValuesSection";
 import { JourneySection } from "@/components/about/JourneySection";
 import { VikramProfile } from "@/components/about/VikramProfile";
 import { TeamSection } from "@/components/TeamSection";
-import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
@@ -27,7 +26,6 @@ export default function AboutPage() {
       <JourneySection />
       <VikramProfile />
       <TeamSection />
-      <CtaSection />
       <Footer />
     </div>
   );
