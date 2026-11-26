@@ -1,3 +1,4 @@
+import { EditableText, EditableLink } from "@/components/cms/Editable";
 import { ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/Section";
 import { practiceAreas } from "./practiceAreas";
@@ -15,21 +16,20 @@ export function ServicesExplorer() {
       {/* Left — sticky label and firm profile */}
       <div className="lg:col-span-4">
         <div className="flex min-h-72 flex-col items-center justify-center px-2 py-10 text-center sm:min-h-80 lg:sticky lg:top-[calc(50vh-10rem)]">
-          <p className="font-serif text-4xl leading-[1.1] tracking-tight text-cream sm:text-5xl">
-            Practice <span className="block italic text-cream/75">areas</span>
+          <p className="font-serif text-4xl leading-[1.1] tracking-tight text-cream sm:text-5xl"><EditableText id="components-services-ServicesExplorer-1">{"Practice "}</EditableText><span className="block italic text-cream/75"><EditableText id="components-services-ServicesExplorer-2">{"areas"}</EditableText></span>
           </p>
 
-          <a
+          <EditableLink contentId="components-services-ServicesExplorer-3"
             href={FIRM_PROFILE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-9 inline-flex max-w-xs items-center gap-5 bg-cream px-6 py-4 font-sans text-base font-medium text-ink outline-offset-4 transition-colors hover:bg-paper focus-visible:outline-2 focus-visible:outline-cream motion-reduce:transition-none"
           >
-            <span>View the full firm profile</span>
+            <span><EditableText id="components-services-ServicesExplorer-4">{"View the full firm profile"}</EditableText></span>
             <span className="border-l border-ink/20 pl-4">
               <ArrowUpRight aria-hidden className="h-5 w-5" strokeWidth={1.5} />
             </span>
-          </a>
+          </EditableLink>
         </div>
       </div>
 
@@ -49,15 +49,15 @@ export function ServicesExplorer() {
               />
 
               <span className="font-sans text-xs font-medium tracking-[0.15em] text-rust sm:pt-3">
-                {area.index}
+                <EditableText id="components-services-ServicesExplorer-5" dynamic>{area.index}</EditableText>
               </span>
 
               <div>
                 <h2 className="font-serif text-2xl leading-snug text-cream transition-transform duration-500 group-hover:translate-x-1 sm:text-3xl">
-                  {area.title}
+                  <EditableText id="components-services-ServicesExplorer-6" dynamic>{area.title}</EditableText>
                 </h2>
                 <p className="mt-4 max-w-2xl font-sans text-base leading-7 text-cream/65 transition-colors duration-500 group-hover:text-cream/85">
-                  {area.description}
+                  <EditableText id="components-services-ServicesExplorer-7" dynamic>{area.description}</EditableText>
                 </p>
               </div>
             </li>

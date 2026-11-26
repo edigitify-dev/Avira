@@ -1,4 +1,24 @@
 export const schemaStatements = [
+  `CREATE TABLE IF NOT EXISTS cms_insights (
+    id uuid PRIMARY KEY,
+    slug varchar(120) NOT NULL UNIQUE,
+    draft jsonb NOT NULL,
+    published jsonb,
+    revision integer NOT NULL DEFAULT 1,
+    updated_at timestamptz NOT NULL DEFAULT now(),
+    published_at timestamptz
+  )`,
+  `CREATE TABLE IF NOT EXISTS cms_content_migrations (key varchar(80) PRIMARY KEY)`,
+  `CREATE TABLE IF NOT EXISTS cms_website_content (
+    id varchar(32) PRIMARY KEY,
+    draft jsonb NOT NULL DEFAULT '{}'::jsonb,
+    published jsonb NOT NULL DEFAULT '{}'::jsonb,
+    revision integer NOT NULL DEFAULT 0,
+    updated_at timestamptz,
+    published_at timestamptz,
+    updated_by varchar(64)
+  )`,
+  `INSERT INTO cms_website_content (id) VALUES ('website') ON CONFLICT (id) DO NOTHING`,
   `CREATE TABLE IF NOT EXISTS cms_enquiries (
     id uuid PRIMARY KEY,
     request_id uuid NOT NULL UNIQUE,

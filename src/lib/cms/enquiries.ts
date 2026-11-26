@@ -62,3 +62,10 @@ export async function updateEnquiry(id: string, status: unknown) {
   if (!rows[0]) throw new ApiError(404, "This enquiry could not be found.");
   return mapEnquiry(rows[0]);
 }
+
+export async function deleteEnquiry(id: string) {
+  await requireAdmin();
+  if (!uuidPattern.test(id)) throw new ApiError(404, "This enquiry could not be found.");
+  const rows = await database()`DELETE FROM cms_enquiries WHERE id = ${id} RETURNING id`;
+  if (!rows.length) throw new ApiError(404, "This enquiry was already deleted or could not be found.");
+}

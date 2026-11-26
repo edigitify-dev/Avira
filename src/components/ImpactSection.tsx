@@ -1,3 +1,4 @@
+import { EditableText } from "@/components/cms/Editable";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { CountUp } from "@/components/motion/CountUp";
@@ -20,15 +21,9 @@ export function ImpactSection() {
       className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-24"
     >
       <StaggerItem className="max-w-md">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60">
-          By the numbers
-        </p>
-        <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
-          Results our clients can point to
-        </h2>
-        <p className="mt-5 font-sans text-base leading-7 text-cream/70">
-          A decade of practice measured the way it should be — in outcomes, not billable hours.
-        </p>
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60"><EditableText id="components-ImpactSection-1">{"By the numbers"}</EditableText></p>
+        <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl"><EditableText id="components-ImpactSection-2">{"Results our clients can point to"}</EditableText></h2>
+        <p className="mt-5 font-sans text-base leading-7 text-cream/70"><EditableText id="components-ImpactSection-3">{"A decade of practice measured the way it should be — in outcomes, not billable hours."}</EditableText></p>
       </StaggerItem>
 
       <div className="grid flex-1 grid-cols-2 divide-x divide-y divide-cream/10 border border-cream/10 sm:grid-cols-4 sm:divide-y-0">
@@ -39,7 +34,7 @@ export function ImpactSection() {
             </span>
             <UnderlineDraw className="h-px w-8 bg-rust" />
             <span className="font-sans text-xs uppercase tracking-[0.15em] text-cream/50">
-              {stat.label}
+              <EditableText id="components-ImpactSection-4" dynamic>{stat.label}</EditableText>
             </span>
           </StaggerItem>
         ))}

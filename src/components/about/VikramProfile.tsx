@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { EditableImage, EditableText, EditableLink } from "@/components/cms/Editable";
 import { Mail } from "lucide-react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
@@ -30,7 +30,7 @@ export function VikramProfile() {
     >
       <StaggerItem variant="slideInLeft" className="lg:col-span-4">
         <div className="relative aspect-4/5 w-full max-w-sm overflow-hidden">
-          <Image
+          <EditableImage contentId="components-about-VikramProfile-1"
             src={VIKRAM_PHOTO}
             alt="Vikram Shah, Founding Partner"
             fill
@@ -44,28 +44,22 @@ export function VikramProfile() {
         <p
           id="vikram"
           className="scroll-mt-32 font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60"
-        >
-          Leadership
-        </p>
-        <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
-          Vikram Shah
-        </h2>
-        <p className="mt-3 font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/50">
-          Founding Partner
-        </p>
+        ><EditableText id="components-about-VikramProfile-2">{"Leadership"}</EditableText></p>
+        <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl"><EditableText id="components-about-VikramProfile-3">{"Vikram Shah"}</EditableText></h2>
+        <p className="mt-3 font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/50"><EditableText id="components-about-VikramProfile-4">{"Founding Partner"}</EditableText></p>
 
         <p className="mt-10 font-serif text-2xl leading-[1.4] text-cream sm:text-[1.75rem]">
-          {VIKRAM_BIO}
+          <EditableText id="components-about-VikramProfile-5" dynamic>{VIKRAM_BIO}</EditableText>
         </p>
 
         <dl className="mt-10 grid gap-6 sm:grid-cols-3">
           {credentials.map((c) => (
             <div key={c.label}>
               <dt className="font-sans text-xs uppercase tracking-[0.15em] text-cream/35">
-                {c.label}
+                <EditableText id="components-about-VikramProfile-6" dynamic>{c.label}</EditableText>
               </dt>
               <dd className="mt-1 font-sans text-sm leading-6 text-cream/75">
-                {c.value}
+                <EditableText id="components-about-VikramProfile-7" dynamic>{c.value}</EditableText>
               </dd>
             </div>
           ))}
@@ -73,9 +67,7 @@ export function VikramProfile() {
 
         {INDICATIVE_WORK.length > 0 && (
           <div className="mt-10">
-            <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/50">
-              Indicative work
-            </p>
+            <p className="font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/50"><EditableText id="components-about-VikramProfile-8">{"Indicative work"}</EditableText></p>
             <ul className="mt-4 flex flex-col divide-y divide-cream/10">
               {INDICATIVE_WORK.map((item) => (
                 <li key={item} className="flex gap-3 py-3.5">
@@ -84,7 +76,7 @@ export function VikramProfile() {
                     aria-hidden
                   />
                   <span className="font-sans text-sm leading-6 text-cream/70">
-                    {item}
+                    <EditableText id="components-about-VikramProfile-9" dynamic>{item}</EditableText>
                   </span>
                 </li>
               ))}
@@ -93,22 +85,18 @@ export function VikramProfile() {
         )}
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
-          <a
+          <EditableLink contentId="components-about-VikramProfile-10"
             href={`mailto:${VIKRAM_EMAIL}`}
             className="inline-flex items-center gap-2 border border-cream/25 px-6 py-3 font-sans text-sm font-medium text-cream transition-colors hover:bg-cream hover:text-ink"
           >
-            <Mail className="h-4 w-4" strokeWidth={1.5} />
-            Email Vikram
-          </a>
-          <a
+            <Mail className="h-4 w-4" strokeWidth={1.5} /><EditableText id="components-about-VikramProfile-11">{"Email Vikram"}</EditableText></EditableLink>
+          <EditableLink contentId="components-about-VikramProfile-12"
             href={VIKRAM_LINKEDIN}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 border border-cream/25 px-6 py-3 font-sans text-sm font-medium text-cream transition-colors hover:bg-cream hover:text-ink"
-          >
-            View LinkedIn profile
-            <span aria-hidden>↗</span>
-          </a>
+          ><EditableText id="components-about-VikramProfile-13">{"View LinkedIn profile"}</EditableText><span aria-hidden>↗</span>
+          </EditableLink>
         </div>
       </StaggerItem>
     </Section>

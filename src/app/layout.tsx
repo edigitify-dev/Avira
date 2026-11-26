@@ -3,6 +3,9 @@ import { Fraunces, Montserrat } from "next/font/google";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
+import "@/components/cms/editor.css";
+import { ContentProvider } from "@/components/cms/ContentProvider";
+import { getPublishedContent } from "@/lib/cms/content";
 
 const fraunces = Fraunces({
   variable: "--font-serif",
@@ -23,11 +26,12 @@ export const metadata: Metadata = {
   description: "Avira Legal Platform",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const content = await getPublishedContent();
   return (
     <html
       lang="en"
@@ -35,8 +39,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">
         <MotionProvider>
-          <SiteChrome />
-          {children}
+          <ContentProvider initial={content}>
+            <SiteChrome />
+            {children}
+          </ContentProvider>
         </MotionProvider>
       </body>
     </html>

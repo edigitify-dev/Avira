@@ -44,8 +44,8 @@ export function AdminLogin() {
         </div>
         <div className="mt-12 max-w-md lg:mt-auto">
           <p className="font-sans text-sm font-medium uppercase tracking-[0.2em] text-cream/70">Administration</p>
-          <p className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">Every conversation,<br />in one place.</p>
-          <p className="mt-5 leading-7 text-cream/70">Review enquiries, keep track of replies, and stay close to the people getting in touch.</p>
+          <p className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">Your firm.<br />Your voice.</p>
+          <p className="mt-5 leading-7 text-cream/70">Shape your website, publish considered updates, and manage every client enquiry in one place.</p>
         </div>
       </aside>
 
@@ -54,7 +54,7 @@ export function AdminLogin() {
           <StaggerItem>
             <p className="text-sm font-medium uppercase tracking-[0.2em] text-forest">Team access</p>
             <h1 className="mt-4 font-serif text-5xl">Sign in.</h1>
-            <p className="mt-5 leading-7 text-ink/70">Welcome to the Avira enquiry inbox.</p>
+            <p className="mt-5 leading-7 text-ink/70">Welcome to the Avira website studio.</p>
           </StaggerItem>
           <StaggerItem>
             <form onSubmit={submit} className="mt-10 space-y-6">

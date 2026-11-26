@@ -1,5 +1,7 @@
 "use client";
 
+import { EditableText } from "@/components/cms/Editable";
+
 import { useState } from "react";
 import { Check, Link as LinkIcon } from "lucide-react";
 
@@ -23,7 +25,7 @@ export function CopyInsightLink() {
         className="inline-flex cursor-pointer items-center gap-3 font-sans text-xs font-medium text-forest outline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-forest"
       >
         {status === "copied" ? <Check aria-hidden className="h-4 w-4" /> : <LinkIcon aria-hidden className="h-4 w-4" />}
-        {status === "copied" ? "Link copied" : "Copy article link"}
+        <EditableText id="components-insights-CopyInsightLink-1" dynamic>{status === "copied" ? "Link copied" : "Copy article link"}</EditableText>
       </button>
       <p role="status" className="mt-2 font-sans text-xs leading-5 text-ink/65">
         {status === "copied" && "Ready to share."}

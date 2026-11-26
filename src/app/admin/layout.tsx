@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: { default: "Enquiry inbox | Avira Law", template: "%s | Avira Law Admin" },
+  title: { default: "Website studio | Avira Law", template: "%s | Avira Law Admin" },
   robots: { index: false, follow: false },
   referrer: "no-referrer",
 };

@@ -28,7 +28,7 @@ export function requireSameOrigin(request: Request) {
   }
 }
 
-export async function readJson(request: Request): Promise<Record<string, unknown>> {
+export async function readJson(request: Request, maxBytes = 8192): Promise<Record<string, unknown>> {
   if (!request.headers.get("content-type")?.includes("application/json")) {
     throw new ApiError(415, "Please send a JSON request.");
   }
@@ -41,7 +41,7 @@ export async function readJson(request: Request): Promise<Record<string, unknown
       const { done, value } = await reader.read();
       if (done) break;
       size += value.byteLength;
-      if (size > 8192) {
+      if (size > maxBytes) {
         await reader.cancel();
         throw new ApiError(413, "Your request is too long.");
       }

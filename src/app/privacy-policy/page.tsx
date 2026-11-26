@@ -1,3 +1,4 @@
+import { EditableLink, EditableText } from "@/components/cms/Editable";
 import type { Metadata } from "next";
 import { LegalPage, type LegalBlock } from "@/components/legal/LegalPage";
 import { Footer } from "@/components/Footer";
@@ -8,12 +9,10 @@ export const metadata: Metadata = {
 };
 
 const contactEmail = (
-  <a
+  <EditableLink contentId="app-privacy-policy-page-1"
     href="mailto:info@aviralaw.com"
     className="text-forest underline underline-offset-4 outline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-forest"
-  >
-    info@aviralaw.com
-  </a>
+  ><EditableText id="app-privacy-policy-page-2">{"info@aviralaw.com"}</EditableText></EditableLink>
 );
 
 const blocks: LegalBlock[] = [
@@ -77,7 +76,7 @@ const blocks: LegalBlock[] = [
     heading: "4. Newsletter and other communications",
     paragraphs: [
       "If you subscribe to Avira’s newsletter or other updates, we may use the contact information you provide to send those communications.",
-      <>You may unsubscribe at any time by using the unsubscribe mechanism provided in the communication or by writing to {contactEmail}.</>,
+      <><EditableText id="app-privacy-policy-page-3">{"You may unsubscribe at any time by using the unsubscribe mechanism provided in the communication or by writing to "}</EditableText>{contactEmail}.</>,
     ],
   },
   {
@@ -116,7 +115,7 @@ const blocks: LegalBlock[] = [
     paragraphs: [
       "You may write to us to request access to personal information you have provided to Avira, or to ask us to correct, update or delete that information.",
       "Where processing is based on your consent, you may also withdraw that consent, subject to applicable law and any information that Avira is required or permitted to retain.",
-      <>Requests may be sent to {contactEmail}. We will consider and respond to requests in accordance with applicable law.</>,
+      <><EditableText id="app-privacy-policy-page-4">{"Requests may be sent to "}</EditableText>{contactEmail}<EditableText id="app-privacy-policy-page-5">{". We will consider and respond to requests in accordance with applicable law."}</EditableText></>,
     ],
   },
   {
@@ -136,7 +135,7 @@ const blocks: LegalBlock[] = [
   {
     heading: "12. Contact and grievances",
     paragraphs: [
-      <>Questions, requests or grievances concerning this Privacy Policy or Avira’s handling of personal information may be sent to: {contactEmail}</>,
+      <><EditableText id="app-privacy-policy-page-6">{"Questions, requests or grievances concerning this Privacy Policy or Avira’s handling of personal information may be sent to: "}</EditableText>{contactEmail}</>,
     ],
   },
 ];

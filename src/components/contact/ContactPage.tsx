@@ -1,7 +1,8 @@
 "use client";
 
+import { EditableText, EditableLink } from "@/components/cms/Editable";
+
 import { useRef, useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Building2,
@@ -65,39 +66,29 @@ export function ContactPage() {
           className="flex flex-col gap-10"
         >
           <StaggerItem className="flex flex-col gap-6">
-            <h1 className="font-serif text-[2.5rem] leading-[1.08] text-ink sm:text-[3.2rem] lg:text-[3.6rem]">
-              Contact Us
-            </h1>
-            <p className="max-w-md font-sans text-base leading-7 text-ink/80">
-              For new matters and general enquiries, please get in touch:
-            </p>
+            <h1 className="font-serif text-[2.5rem] leading-[1.08] text-ink sm:text-[3.2rem] lg:text-[3.6rem]"><EditableText id="components-contact-ContactPage-1">{"Contact Us"}</EditableText></h1>
+            <p className="max-w-md font-sans text-base leading-7 text-ink/80"><EditableText id="components-contact-ContactPage-2">{"For new matters and general enquiries, please get in touch:"}</EditableText></p>
           </StaggerItem>
 
           <StaggerItem className="flex flex-col gap-5">
             <ContactItem icon={Mail}>
-              <span className="block font-semibold">Email:</span>
-              <a
+              <span className="block font-semibold"><EditableText id="components-contact-ContactPage-3">{"Email:"}</EditableText></span>
+              <EditableLink contentId="components-contact-ContactPage-4"
                 href="mailto:info@aviralaw.com"
                 className="transition-colors hover:text-ink/70"
-              >
-                info@aviralaw.com
-              </a>
+              ><EditableText id="components-contact-ContactPage-5">{"info@aviralaw.com"}</EditableText></EditableLink>
             </ContactItem>
             <ContactItem icon={Phone}>
-              <span className="block font-semibold">Telephone:</span>
-              <a href="tel:+919818893922" className="transition-colors hover:text-ink/70">
+              <span className="block font-semibold"><EditableText id="components-contact-ContactPage-6">{"Telephone:"}</EditableText></span>
+              <EditableLink contentId="components-contact-ContactPage-7" href="tel:+919818893922" className="transition-colors hover:text-ink/70">
                 +91 98188 93922
-              </a>
+              </EditableLink>
             </ContactItem>
             <ContactItem icon={MapPin}>
-              <span className="block font-semibold">Office:</span>
+              <span className="block font-semibold"><EditableText id="components-contact-ContactPage-8">{"Office:"}</EditableText></span>
               <span className="mt-1 block leading-7">
-                <strong className="font-semibold">Avira Law</strong>
-                <br />
-                Floor 19, C-001/A2, Berger Towers
-                <br />
-                Sector 16B, Noida, Uttar Pradesh
-              </span>
+                <strong className="font-semibold"><EditableText id="components-contact-ContactPage-9">{"Avira Law"}</EditableText></strong>
+                <br /><EditableText id="components-contact-ContactPage-10">{"Floor 19, C-001/A2, Berger Towers"}</EditableText><br /><EditableText id="components-contact-ContactPage-11">{"Sector 16B, Noida, Uttar Pradesh"}</EditableText></span>
             </ContactItem>
           </StaggerItem>
         </AnimatedSection>
@@ -115,9 +106,7 @@ export function ContactPage() {
               {/* Card header */}
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <h2 className="font-serif text-[1.8rem] leading-tight sm:text-[2.15rem]">
-                    Send an Enquiry
-                  </h2>
+                  <h2 className="font-serif text-[1.8rem] leading-tight sm:text-[2.15rem]"><EditableText id="components-contact-ContactPage-12">{"Send an Enquiry"}</EditableText></h2>
                 </div>
               </div>
 
@@ -258,23 +247,17 @@ export function ContactPage() {
         className="relative mx-6 flex shrink-0 flex-col items-center gap-4 border-t border-ink/15 py-6 text-center sm:mx-12 lg:mx-16"
       >
         <StaggerItem>
-          <p className="font-sans text-xs text-ink/70">
-            © 2026. Avira Law. All rights reserved.
-          </p>
+          <p className="font-sans text-xs text-ink/70"><EditableText id="components-contact-ContactPage-13">{"© 2026. Avira Law. All rights reserved."}</EditableText></p>
         </StaggerItem>
         <StaggerItem className="flex justify-center gap-6">
-          <Link
+          <EditableLink contentId="components-contact-ContactPage-14" nextLink
             href="/disclaimer"
             className="font-sans text-xs text-ink/70 transition-colors hover:text-ink"
-          >
-            Disclaimer
-          </Link>
-          <Link
+          ><EditableText id="components-contact-ContactPage-15">{"Disclaimer"}</EditableText></EditableLink>
+          <EditableLink contentId="components-contact-ContactPage-16" nextLink
             href="/privacy-policy"
             className="font-sans text-xs text-ink/70 transition-colors hover:text-ink"
-          >
-            Privacy Policy
-          </Link>
+          ><EditableText id="components-contact-ContactPage-17">{"Privacy Policy"}</EditableText></EditableLink>
         </StaggerItem>
       </AnimatedSection>
     </main>
@@ -315,7 +298,7 @@ function Field({ label, id, icon: Icon, required, ...props }: FieldProps) {
         htmlFor={id}
         className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em]"
       >
-        {label}
+        <EditableText id="components-contact-ContactPage-18" dynamic>{label}</EditableText>
         {required && " *"}
       </label>
       <div className="relative">

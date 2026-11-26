@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { EditableText, EditableLink } from "@/components/cms/Editable";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 import { GeometryPattern } from "@/components/home/GeometryPattern";
@@ -19,18 +19,13 @@ export function Hero() {
       </StaggerItem>
 
       <StaggerItem className="order-first col-span-2 lg:order-none lg:col-span-6">
-        <h1 className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.75rem] lg:leading-[1.22]">
-          Avira stands for strength and resolve - qualities reflected in clear thinking, sound
-          judgment and purposeful advocacy.
-        </h1>
+        <h1 className="font-serif text-2xl leading-[1.35] text-ink sm:text-3xl lg:text-[2.75rem] lg:leading-[1.22]"><EditableText id="components-Hero-1">{"Avira stands for strength and resolve - qualities reflected in clear thinking, sound judgment and purposeful advocacy."}</EditableText></h1>
         <div className="mt-10 flex items-center">
-          <Link
+          <EditableLink contentId="components-Hero-2" nextLink
             href="/about"
             className="inline-flex shrink-0 items-center gap-2 border border-forest/35 px-6 py-3 font-sans text-sm font-medium text-forest outline-offset-4 transition-colors hover:border-forest hover:bg-forest hover:text-cream focus-visible:outline-2 focus-visible:outline-forest motion-reduce:transition-none"
-          >
-            Learn More
-            <span aria-hidden>→</span>
-          </Link>
+          ><EditableText id="components-Hero-3">{"Learn More"}</EditableText><span aria-hidden>→</span>
+          </EditableLink>
         </div>
       </StaggerItem>
 

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:cms": "node --conditions=react-server --experimental-strip-types --test tests/cms.test.mjs",
+    "test:cms": "node --conditions=react-server --experimental-strip-types --test tests/cms.test.mjs tests/content.test.mjs tests/insights.test.mjs",
     "cms:credentials": "node scripts/cms-credentials.mjs"
   },
   "dependencies": {

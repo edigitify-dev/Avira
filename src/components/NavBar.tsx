@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import { EditableLink, EditableImage, EditableText } from "@/components/cms/Editable";
+
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
@@ -37,8 +37,8 @@ export function NavBar() {
       }`}
     >
       <nav className="flex items-center justify-between">
-        <Link href="/" onClick={() => setMenuOpen(false)}>
-          <Image
+        <EditableLink contentId="components-NavBar-1" scope="site" nextLink href="/" onClick={() => setMenuOpen(false)}>
+          <EditableImage contentId="components-NavBar-2" scope="site"
             src="/logo.png"
             alt="Avira Law"
             width={200}
@@ -46,18 +46,18 @@ export function NavBar() {
             className="h-16 w-auto brightness-0 invert"
             priority
           />
-        </Link>
+        </EditableLink>
         <div className="hidden md:block">
           <ul className="flex gap-4 lg:gap-7 xl:gap-10">
             {links.map((link) => (
               <li key={link.label}>
-                <Link
+                <EditableLink contentId="components-NavBar-3" scope="site" nextLink
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className="whitespace-nowrap font-sans text-[10px] font-medium uppercase tracking-[0.15em] text-cream/80 transition-colors hover:text-cream lg:text-xs"
                 >
-                  {link.label}
-                </Link>
+                  <EditableText id="components-NavBar-4" dynamic scope="site">{link.label}</EditableText>
+                </EditableLink>
               </li>
             ))}
           </ul>
@@ -82,13 +82,13 @@ export function NavBar() {
         <ul className="flex flex-col gap-1">
           {links.map((link) => (
             <li key={link.href}>
-              <Link
+              <EditableLink contentId="components-NavBar-3" scope="site" nextLink
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="block py-3 font-sans text-xs font-medium uppercase tracking-[0.15em] text-cream/80 outline-offset-4 hover:text-cream focus-visible:outline-2 focus-visible:outline-cream"
               >
-                {link.label}
-              </Link>
+                <EditableText id="components-NavBar-4" dynamic scope="site">{link.label}</EditableText>
+              </EditableLink>
             </li>
           ))}
         </ul>

@@ -1,25 +1,22 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Archive, Check, ChevronLeft, ChevronRight, Inbox, LogOut, Mail, RefreshCw, Search, X } from "lucide-react";
+import { Archive, ArrowLeft, Building2, Check, ChevronLeft, ChevronRight, Inbox, LoaderCircle, Mail, MailCheck, MailOpen, Phone, RefreshCw, Search, Trash2, X } from "lucide-react";
 import { AnimatedSection } from "@/components/motion/AnimatedSection";
 import { enquiryStatuses, statusLabels, type Enquiry, type EnquiryStatus, type InboxData } from "@/lib/cms/types";
 import { emailLink } from "@/lib/cms/links";
+import { AdminSelect } from "./AdminSelect";
+import { ConfirmDialog } from "./ConfirmDialog";
 
 const formatDate = (date: string, detailed = false) => new Intl.DateTimeFormat("en-IN", {
   day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata",
   ...(detailed ? { hour: "numeric", minute: "2-digit", timeZoneName: "short" } : {}),
 }).format(new Date(date));
-
+const initials = (name: string) => name.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join("").toUpperCase();
+const statusClass: Record<EnquiryStatus, string> = { new: "bg-forest text-cream", read: "bg-forest/10 text-forest", replied: "bg-forest/10 text-forest", archived: "bg-ivory text-ink/55" };
 async function readResponse(response: Response) {
-  if (response.status === 401) {
-    window.location.assign("/admin/login");
-    throw new Error("Your session has ended. Please sign in again.");
-  }
   const result = await response.json();
-  if (!response.ok) throw new Error(result.error || "We couldn't complete your request.");
+  if (!response.ok) throw new Error(response.status === 401 ? "Your session has ended. Please sign in again." : result.error || "We couldn't complete your request.");
   return result;
 }
 
@@ -32,20 +29,18 @@ export function EnquiryInbox({ username }: { username: string }) {
   const [refresh, setRefresh] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [selected, setSelected] = useState<Enquiry | null>(null);
   const [saving, setSaving] = useState(false);
-  const [signingOut, setSigningOut] = useState(false);
+  const [deleting, setDeleting] = useState<Enquiry | null>(null);
+  const [deleteError, setDeleteError] = useState("");
   const detailHeading = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    if (window.innerWidth < 1024) detailHeading.current?.focus();
-  }, [selected?.id]);
-
+  useEffect(() => { if (window.innerWidth < 1024) detailHeading.current?.focus(); }, [selected?.id]);
   useEffect(() => {
     const controller = new AbortController();
     async function load() {
-      setLoading(true);
-      setError("");
+      setLoading(true); setError("");
       try {
         const params = new URLSearchParams({ q: query, status, page: String(page) });
         const result: InboxData = await readResponse(await fetch(`/api/admin/enquiries?${params}`, { signal: controller.signal, cache: "no-store" }));
@@ -53,200 +48,92 @@ export function EnquiryInbox({ username }: { username: string }) {
           const lastPage = Math.max(1, Math.ceil(result.total / result.pageSize));
           if (result.page > lastPage) { setPage(lastPage); return; }
           setData(result);
-          setSelected(current => current ? result.items.find(item => item.id === current.id) ?? current : null);
+          setSelected(current => current ? result.items.find(item => item.id === current.id) ?? null : null);
         }
-      } catch (cause) {
-        if (!controller.signal.aborted) setError(cause instanceof Error ? cause.message : "The inbox couldn't be loaded.");
-      } finally {
-        if (!controller.signal.aborted) setLoading(false);
-      }
+      } catch (cause) { if (!controller.signal.aborted) setError(cause instanceof Error ? cause.message : "The inbox couldn't be loaded."); }
+      finally { if (!controller.signal.aborted) setLoading(false); }
     }
-    void load();
-    return () => controller.abort();
+    void load(); return () => controller.abort();
   }, [query, status, page, refresh]);
 
   async function changeStatus(item: Enquiry, nextStatus: EnquiryStatus) {
-    setSaving(true);
-    setError("");
+    if (saving) return;
+    setSaving(true); setError(""); setNotice("");
     try {
-      const result: { item: Enquiry } = await readResponse(await fetch(`/api/admin/enquiries/${item.id}`, {
-        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: nextStatus }),
-      }));
+      const result: { item: Enquiry } = await readResponse(await fetch(`/api/admin/enquiries/${item.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status: nextStatus }) }));
       setSelected(current => current?.id === item.id ? result.item : current);
-      setData(current => {
-        if (!current) return current;
-        return {
-          ...current,
-          items: current.items.map(row => row.id === item.id ? result.item : row),
-        };
-      });
+      setData(current => current ? { ...current, items: current.items.map(row => row.id === item.id ? result.item : row) } : current);
       setRefresh(value => value + 1);
     } catch (cause) { setError(cause instanceof Error ? cause.message : "The status couldn't be updated."); }
     finally { setSaving(false); }
   }
-
   function openEnquiry(item: Enquiry) {
-    if (saving) return;
-    setSelected(item);
+    if (saving || loading) return;
+    setSelected(item); setNotice("");
     if (item.status === "new") void changeStatus(item, "read");
   }
-
-  async function logout() {
-    setSigningOut(true);
+  async function remove() {
+    if (!deleting || saving) return;
+    setSaving(true); setDeleteError("");
     try {
-      await readResponse(await fetch("/api/admin/logout", { method: "POST" }));
-      window.location.assign("/admin/login");
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Please try signing out again.");
-      setSigningOut(false);
-    }
+      await readResponse(await fetch(`/api/admin/enquiries/${deleting.id}`, { method: "DELETE" }));
+      setSelected(current => current?.id === deleting.id ? null : current);
+      setData(current => current ? { ...current, items: current.items.filter(item => item.id !== deleting.id), total: Math.max(0, current.total - 1) } : current);
+      setDeleting(null); setNotice("Enquiry permanently deleted."); setRefresh(value => value + 1);
+    } catch (cause) { setDeleteError(cause instanceof Error ? cause.message : "The enquiry couldn't be deleted."); }
+    finally { setSaving(false); }
   }
-
   const pages = Math.max(1, Math.ceil((data?.total ?? 0) / (data?.pageSize ?? 20)));
-  const buttonClass = "inline-flex min-h-11 items-center justify-center gap-2 border border-ink/20 px-4 py-2.5 text-sm text-forest outline-offset-4 transition-colors hover:border-forest hover:bg-forest hover:text-cream focus-visible:outline-2 focus-visible:outline-forest disabled:cursor-not-allowed disabled:opacity-45 motion-reduce:transition-none";
+  const buttonClass = "cms-button border border-ink/20 text-forest hover:bg-ivory";
 
-  return (
-    <main className="min-h-dvh bg-cream text-ink">
-      <header className="bg-ink px-6 py-5 text-cream sm:px-10">
-        <div className="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-5">
-          <Link href="/admin" className="flex items-center gap-6 outline-offset-4 focus-visible:outline-2">
-            <Image src="/logo.png" alt="Avira Law" width={200} height={100} className="h-12 w-auto brightness-0 invert" priority />
-            <span className="text-sm uppercase tracking-[0.18em] text-cream/70">Administration</span>
-          </Link>
-          <nav aria-label="Admin navigation" className="flex items-center gap-6 text-sm">
-            <Link href="/" className="text-cream/80 underline-offset-4 hover:underline">View website</Link>
-            <button onClick={logout} disabled={signingOut} className="inline-flex min-h-11 items-center gap-2 text-cream/80 hover:text-cream disabled:opacity-50">
-              <LogOut aria-hidden size={17} strokeWidth={1.5} /> {signingOut ? "Signing out…" : "Sign out"}
-            </button>
-          </nav>
-        </div>
-      </header>
-
-      <AnimatedSection as="div" variant="fadeIn" amount={0.05} className="mx-auto max-w-[1580px] px-6 py-10 sm:px-10 sm:py-12">
-        <div className="flex flex-col justify-between gap-8 xl:flex-row xl:items-end">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-forest">Contact inbox</p>
-            <h1 className="mt-3 font-serif text-5xl sm:text-6xl">Enquiries</h1>
-            <p className="mt-4 text-base leading-7 text-ink/70">Conversations with your next client. Signed in as {username}.</p>
+  return <main className="min-h-dvh bg-ivory text-ink">
+    <header className="flex flex-wrap items-center justify-between gap-5 border-b border-ink/10 bg-paper px-6 py-7 lg:px-10">
+      <div><p className="text-xs font-medium uppercase tracking-[0.2em] text-forest">Client correspondence</p><h1 className="mt-2 font-serif text-4xl">Enquiries</h1></div>
+      <div className="flex items-center gap-3 text-sm text-ink/55"><Mail size={19} strokeWidth={1.4} /><span>Contact Us inbox<span className="mt-1 block text-xs text-ink/45">Managed by {username}</span></span></div>
+    </header>
+    <AnimatedSection as="div" variant="fadeIn" amount={0.02} className="mx-auto max-w-[1600px] px-5 py-8 sm:px-8 lg:px-10">
+      <dl className="grid grid-cols-3 gap-3 sm:gap-4" aria-label="Enquiry summary">
+        {[{ label: "Total enquiries", value: data?.counts.total, icon: Inbox }, { label: "Awaiting review", value: data?.counts.new, icon: MailOpen }, { label: "Replied", value: data?.counts.replied, icon: MailCheck }].map(stat => <div key={stat.label} className="flex items-center justify-between gap-3 border border-ink/10 bg-paper px-4 py-5 sm:px-6 sm:py-6"><div><dt className="min-h-10 text-xs text-ink/55 sm:min-h-0 sm:text-sm">{stat.label}</dt><dd className="mt-2 font-serif text-3xl text-forest sm:text-4xl">{stat.value ?? "—"}</dd></div><stat.icon aria-hidden size={25} strokeWidth={1.2} className="hidden text-forest/55 lg:block" /></div>)}
+      </dl>
+      <div className="mt-7 flex flex-col gap-5 border border-ink/10 bg-paper p-5 xl:flex-row xl:items-end sm:p-6">
+        <form onSubmit={event => { event.preventDefault(); setQuery(search.trim()); setPage(1); setSelected(null); }} className="flex-1">
+          <label htmlFor="enquiry-search" className="text-sm font-medium">Find a conversation</label>
+          <div className="mt-2 flex min-h-12 items-center border border-ink/20 bg-paper focus-within:outline-2 focus-within:outline-forest"><Search aria-hidden size={18} strokeWidth={1.5} className="ml-4 shrink-0 text-ink/45" /><input id="enquiry-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Name, email, organisation or message" maxLength={160} className="min-w-0 flex-1 bg-transparent px-3 py-3 text-sm outline-none" /><button type="submit" className="min-h-12 px-4 text-sm font-medium text-forest outline-offset-[-2px] hover:bg-ivory focus-visible:outline-2 focus-visible:outline-forest">Search</button></div>
+        </form>
+        <div className="flex flex-wrap items-end gap-3"><div className="min-w-44 flex-1 xl:w-52"><label htmlFor="enquiry-status" className="text-sm font-medium">Filter by status</label><AdminSelect id="enquiry-status" value={status} wrapperClassName="mt-2" className="min-h-12" onChange={event => { setStatus(event.target.value); setPage(1); setSelected(null); }}><option value="">All enquiries</option>{enquiryStatuses.map(value => <option key={value} value={value}>{statusLabels[value]}</option>)}</AdminSelect></div><button onClick={() => setRefresh(value => value + 1)} disabled={loading || saving} className={`${buttonClass} min-h-12`}><RefreshCw aria-hidden size={17} strokeWidth={1.5} />Refresh</button></div>
+      </div>
+      {(error || notice) && <div role={error ? "alert" : "status"} className={`mt-5 flex flex-wrap items-center justify-between gap-3 border-l-2 bg-paper px-5 py-4 text-sm leading-6 ${error ? "border-danger text-danger" : "border-forest text-forest"}`}><p>{error || notice}</p>{error && <button onClick={() => setRefresh(value => value + 1)} className="underline underline-offset-4">Try again</button>}</div>}
+      <div className="mt-7 grid items-stretch border border-ink/10 bg-paper lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.4fr)]">
+        <div className={`${selected ? "hidden lg:flex" : "flex"} min-w-0 flex-col lg:border-r lg:border-ink/10`} aria-busy={loading}>
+          <div className="flex flex-wrap items-center justify-between gap-2 bg-ivory/60 px-5 py-4 text-sm text-ink/55 sm:px-6"><p aria-live="polite">{loading ? "Loading enquiries…" : `${data?.total ?? 0} ${data?.total === 1 ? "conversation" : "conversations"}`}</p>{(query || status) && <button onClick={() => { setQuery(""); setSearch(""); setStatus(""); setPage(1); setSelected(null); }} className="text-forest underline underline-offset-4">Clear filters</button>}</div>
+          <div className="min-h-64 flex-1 lg:max-h-[40rem] lg:overflow-y-auto">
+            {loading && !data && <div role="status" className="flex min-h-72 items-center justify-center gap-3 text-sm text-forest"><LoaderCircle size={22} className="motion-safe:animate-spin" />Loading conversations…</div>}
+            {!loading && !error && data?.items.length === 0 && <div className="flex min-h-96 flex-col items-center justify-center px-8 py-16 text-center"><Inbox aria-hidden size={32} strokeWidth={1.2} className="text-forest" /><h2 className="mt-5 font-serif text-3xl">{query || status ? "No matching enquiries." : "A new conversation starts here."}</h2><p className="mt-4 max-w-sm text-sm leading-7 text-ink/55">{query || status ? "Try another search or choose a different status." : "Messages from your contact form will appear here, ready for a considered response."}</p></div>}
+            {data?.items.map(item => <button key={item.id} onClick={() => openEnquiry(item)} disabled={saving || loading} aria-pressed={selected?.id === item.id} className={`block w-full border-t border-ink/10 border-l-[3px] px-5 py-6 text-left outline-offset-[-3px] focus-visible:outline-2 focus-visible:outline-forest disabled:opacity-60 sm:px-6 ${selected?.id === item.id ? "border-l-forest bg-forest/[0.055]" : "border-l-transparent hover:bg-ivory/60"}`}>
+              <div className="flex items-start gap-3"><span className={`flex h-10 w-10 shrink-0 items-center justify-center font-serif text-lg ${item.status === "new" ? "bg-forest text-cream" : "bg-ivory text-forest"}`}>{initials(item.name)}</span><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1"><h2 className={`break-words text-sm ${item.status === "new" ? "font-semibold" : "font-medium"}`}>{item.name}</h2><time dateTime={item.createdAt} className="text-xs text-ink/45">{formatDate(item.createdAt)}</time></div><p className="mt-1 truncate text-sm text-ink/50">{item.organisation || item.email}</p></div></div>
+              <p className="mt-4 line-clamp-2 text-sm leading-6 text-ink/65">{item.message}</p><span className={`mt-4 inline-flex px-2.5 py-1 text-xs font-medium ${statusClass[item.status]}`}>{statusLabels[item.status]}</span>
+            </button>)}
           </div>
-          <dl className="grid grid-cols-3 gap-4 sm:flex sm:gap-14" aria-label="Enquiry summary">
-            {[{ label: "Total enquiries", value: data?.counts.total }, { label: "Awaiting review", value: data?.counts.new }, { label: "Replied", value: data?.counts.replied }].map(stat => (
-              <div key={stat.label}>
-                <dt className="min-h-10 text-sm text-ink/65 sm:min-h-0">{stat.label}</dt>
-                <dd className="mt-2 font-serif text-4xl text-forest">{stat.value ?? "—"}</dd>
-              </div>
-            ))}
-          </dl>
+          {data && data.total > 0 && <div className="flex flex-wrap items-center justify-between gap-3 border-t border-ink/10 px-5 py-4 text-sm sm:px-6"><span className="text-ink/55">Page {page} of {pages}</span><div className="flex gap-2"><button aria-label="Previous page" disabled={page <= 1 || loading || saving} onClick={() => { setPage(value => value - 1); setSelected(null); }} className={`${buttonClass} px-3`}><ChevronLeft aria-hidden size={17} /></button><button aria-label="Next page" disabled={page >= pages || loading || saving} onClick={() => { setPage(value => value + 1); setSelected(null); }} className={`${buttonClass} px-3`}><ChevronRight aria-hidden size={17} /></button></div></div>}
         </div>
-
-        <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-end">
-          <form onSubmit={event => { event.preventDefault(); setQuery(search.trim()); setPage(1); setSelected(null); }} className="flex flex-1 flex-col gap-2">
-            <label htmlFor="enquiry-search" className="text-sm font-medium">Search enquiries</label>
-            <div className="flex border border-ink/25 bg-paper focus-within:outline-2 focus-within:outline-forest">
-              <Search aria-hidden className="ml-4 mt-3.5 shrink-0 text-forest" size={20} strokeWidth={1.5} />
-              <input id="enquiry-search" type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Name, email, organisation or message" maxLength={160}
-                className="min-w-0 flex-1 bg-transparent px-3 py-3.5 text-base outline-none" />
-              <button type="submit" className="px-5 text-sm font-medium text-forest hover:bg-forest hover:text-cream focus-visible:outline-2 focus-visible:outline-forest">Search</button>
+        <div className={`${selected ? "flex" : "hidden lg:flex"} min-w-0 flex-col`}>
+          {selected ? <article className="flex h-full flex-col p-6 sm:p-8 xl:p-10">
+            <div className="flex flex-wrap items-center justify-between gap-3"><button onClick={() => setSelected(null)} disabled={saving} className="inline-flex min-h-11 items-center gap-2 text-sm text-forest lg:hidden"><ArrowLeft size={16} />All enquiries</button><span className={`inline-flex px-3 py-1.5 text-xs font-medium ${statusClass[selected.status]}`}>{statusLabels[selected.status]}</span><button aria-label="Close enquiry" onClick={() => setSelected(null)} disabled={saving} className="hidden h-11 w-11 items-center justify-center text-ink/45 hover:text-forest lg:inline-flex"><X size={20} /></button></div>
+            <div className="mt-6"><h2 ref={detailHeading} tabIndex={-1} className="break-words font-serif text-4xl leading-tight outline-none">{selected.name}</h2><time dateTime={selected.createdAt} className="mt-3 block text-xs leading-6 text-ink/50">Received {formatDate(selected.createdAt, true)}</time></div>
+            <dl className="mt-8 grid gap-6 bg-ivory/60 p-5 sm:grid-cols-2 sm:p-6">
+              <div className="min-w-0"><dt className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-ink/45"><Mail size={14} />Email</dt><dd className="mt-2 break-all text-sm text-forest"><a href={emailLink(selected.email)} className="underline-offset-4 hover:underline">{selected.email}</a></dd></div>
+              <div><dt className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-ink/45"><Phone size={14} />Telephone</dt><dd className="mt-2 break-words text-sm text-forest">{selected.phone ? <a href={`tel:${selected.phone.replace(/[^+\d]/g, "")}`} className="underline-offset-4 hover:underline">{selected.phone}</a> : <span className="text-ink/45">Not provided</span>}</dd></div>
+              <div className="sm:col-span-2"><dt className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-ink/45"><Building2 size={14} />Organisation</dt><dd className="mt-2 break-words text-sm">{selected.organisation || <span className="text-ink/45">Not provided</span>}</dd></div>
+            </dl>
+            <div className="my-8"><h3 className="text-xs font-medium uppercase tracking-[0.16em] text-forest">Message</h3><p className="mt-4 whitespace-pre-wrap break-words text-base leading-8 text-ink/80">{selected.message}</p></div>
+            <div className="mt-auto border-t border-ink/10 pt-7"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div className="w-full sm:max-w-56"><label htmlFor="detail-status" className="text-sm font-medium">Enquiry status</label><AdminSelect id="detail-status" wrapperClassName="mt-2" value={selected.status} disabled={saving} onChange={event => void changeStatus(selected, event.target.value as EnquiryStatus)}>{enquiryStatuses.map(value => <option key={value} value={value}>{statusLabels[value]}</option>)}</AdminSelect></div><p aria-live="polite" className="text-xs text-ink/45">{saving ? "Saving changes…" : "Status saves automatically"}</p></div>
+              <div className="mt-6 flex flex-wrap items-center gap-3"><a href={`${emailLink(selected.email)}?subject=${encodeURIComponent("Your enquiry to Avira Law")}`} className="cms-button bg-forest text-cream hover:bg-ink"><Mail size={16} />Reply by email</a>{selected.status !== "replied" && <button onClick={() => void changeStatus(selected, "replied")} disabled={saving} className={buttonClass}><Check size={16} />Mark replied</button>}{selected.status !== "archived" && <button onClick={() => void changeStatus(selected, "archived")} disabled={saving} className={buttonClass}><Archive size={16} />Archive</button>}</div>
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-3"><p className="max-w-sm text-xs leading-6 text-ink/45">Replies open in your email app. Mark the enquiry as replied after sending.</p><button onClick={() => { setDeleting(selected); setDeleteError(""); }} disabled={saving} className="inline-flex min-h-11 items-center gap-2 text-sm text-danger disabled:opacity-40"><Trash2 size={16} />Delete enquiry</button></div>
             </div>
-          </form>
-          <div className="flex flex-wrap items-end gap-4">
-            <div className="flex min-w-44 flex-1 flex-col gap-2">
-              <label htmlFor="enquiry-status" className="text-sm font-medium">Status</label>
-              <select id="enquiry-status" value={status} onChange={event => { setStatus(event.target.value); setPage(1); setSelected(null); }}
-                className="min-h-13 border border-ink/25 bg-paper px-4 py-3 text-base outline-offset-2 focus:outline-2 focus:outline-forest">
-                <option value="">All enquiries</option>
-                {enquiryStatuses.map(value => <option key={value} value={value}>{statusLabels[value]}</option>)}
-              </select>
-            </div>
-            <button onClick={() => setRefresh(value => value + 1)} disabled={loading} className={`${buttonClass} min-h-13`}>
-              <RefreshCw aria-hidden size={18} strokeWidth={1.5} /> Refresh
-            </button>
-          </div>
+          </article> : <div className="flex min-h-[36rem] flex-1 flex-col items-center justify-center px-8 py-16 text-center"><div className="flex h-20 w-20 items-center justify-center border border-forest/15 text-forest"><MailOpen size={32} strokeWidth={1.1} /></div><p className="mt-7 text-xs font-medium uppercase tracking-[0.18em] text-forest">A thoughtful response starts here</p><h2 className="mt-4 font-serif text-4xl">Every conversation matters.</h2><p className="mt-4 max-w-sm text-sm leading-7 text-ink/55">Select an enquiry to read the message, review the details, and manage your response.</p></div>}
         </div>
-
-        {error && <div role="alert" className="mt-6 flex flex-wrap items-center justify-between gap-4 border-l-2 border-forest bg-paper px-5 py-4 text-sm leading-6">
-          <p>{error}</p><button onClick={() => setRefresh(value => value + 1)} className="font-medium text-forest underline underline-offset-4">Try again</button>
-        </div>}
-
-        <div className="mt-6 grid border border-ink/15 bg-paper lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.25fr)]">
-          <div className={`${selected ? "hidden lg:block" : ""} min-w-0 lg:border-r lg:border-ink/15`} aria-busy={loading}>
-            <div className="flex items-center justify-between bg-ivory px-5 py-4 text-sm text-ink/70 sm:px-6">
-              <p aria-live="polite">{loading ? "Loading enquiries…" : `${data?.total ?? 0} ${data?.total === 1 ? "enquiry" : "enquiries"}${query ? " matching your search" : ""}`}</p>
-              {query && <button onClick={() => { setQuery(""); setSearch(""); setPage(1); }} className="text-forest underline underline-offset-4">Clear search</button>}
-            </div>
-            {!loading && !error && data?.items.length === 0 && (
-              <div className="flex min-h-96 flex-col items-center justify-center px-8 py-16 text-center">
-                <Inbox aria-hidden size={32} strokeWidth={1.25} className="text-forest" />
-                <h2 className="mt-6 font-serif text-3xl">{query || status ? "No matching enquiries." : "A new conversation starts here."}</h2>
-                <p className="mt-4 max-w-sm text-sm leading-7 text-ink/65">{query || status ? "Try another search or choose a different status." : "Messages submitted through your contact form will appear in this inbox."}</p>
-              </div>
-            )}
-            {data?.items.map(item => (
-              <button key={item.id} onClick={() => openEnquiry(item)} disabled={saving || loading}
-                aria-pressed={selected?.id === item.id}
-                className={`block w-full border-t border-ink/10 px-5 py-5 text-left outline-offset-[-3px] transition-colors focus-visible:outline-2 focus-visible:outline-forest disabled:opacity-60 motion-reduce:transition-none sm:px-6 ${selected?.id === item.id ? "bg-forest/10" : "hover:bg-ivory"}`}>
-                <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
-                  <h2 className={`break-words text-base ${item.status === "new" ? "font-semibold" : "font-medium"}`}>{item.name}</h2>
-                  <time dateTime={item.createdAt} className="text-sm text-ink/60">{formatDate(item.createdAt)}</time>
-                </div>
-                <p className="mt-1 break-all text-sm text-forest">{item.email}</p>
-                <p className="mt-3 line-clamp-2 text-sm leading-6 text-ink/65">{item.message}</p>
-                <span className={`mt-3 inline-block px-2.5 py-1 text-xs font-medium uppercase tracking-wider ${item.status === "new" ? "bg-forest text-cream" : "bg-ivory text-forest"}`}>{statusLabels[item.status]}</span>
-              </button>
-            ))}
-            {data && data.total > 0 && <div className="flex flex-wrap items-center justify-between gap-4 border-t border-ink/15 px-5 py-4 text-sm sm:px-6">
-              <span className="text-ink/65">Page {page} of {pages}</span>
-              <div className="flex gap-2">
-                <button aria-label="Previous page" disabled={page <= 1 || loading} onClick={() => { setPage(value => value - 1); setSelected(null); }} className={buttonClass}><ChevronLeft aria-hidden size={17} /></button>
-                <button aria-label="Next page" disabled={page >= pages || loading} onClick={() => { setPage(value => value + 1); setSelected(null); }} className={buttonClass}><ChevronRight aria-hidden size={17} /></button>
-              </div>
-            </div>}
-          </div>
-
-          <div className={`${selected ? "" : "hidden lg:flex"} min-w-0 flex-col`}>
-            {selected ? (
-              <article className="p-6 sm:p-9">
-                <div className="mb-7 flex items-center justify-between gap-4">
-                  <button onClick={() => setSelected(null)} className="inline-flex min-h-11 items-center gap-2 text-sm text-forest lg:hidden"><ChevronLeft aria-hidden size={18} /> Back to enquiries</button>
-                  <span className="text-sm text-ink/60">Enquiry details</span>
-                  <button aria-label="Close enquiry" onClick={() => setSelected(null)} className="hidden h-11 w-11 items-center justify-center text-forest lg:inline-flex"><X aria-hidden size={20} /></button>
-                </div>
-                <h2 ref={detailHeading} tabIndex={-1} className="break-words font-serif text-4xl outline-none">{selected.name}</h2>
-                <time dateTime={selected.createdAt} className="mt-3 block text-sm text-ink/60">Received {formatDate(selected.createdAt, true)}</time>
-                <dl className="mt-8 grid gap-6 sm:grid-cols-2">
-                  <div><dt className="text-sm text-ink/60">Email address</dt><dd className="mt-2 break-all text-base text-forest"><a href={emailLink(selected.email)} className="underline underline-offset-4">{selected.email}</a></dd></div>
-                  <div><dt className="text-sm text-ink/60">Contact number</dt><dd className="mt-2 break-words text-base">{selected.phone ? <a href={`tel:${selected.phone.replace(/[^+\d]/g, "")}`} className="text-forest underline underline-offset-4">{selected.phone}</a> : "Not provided"}</dd></div>
-                  <div className="sm:col-span-2"><dt className="text-sm text-ink/60">Organisation</dt><dd className="mt-2 break-words text-base">{selected.organisation || "Not provided"}</dd></div>
-                </dl>
-                <div className="mt-9">
-                  <h3 className="text-sm font-medium text-forest">Message</h3>
-                  <p className="mt-4 whitespace-pre-wrap break-words font-sans text-base leading-8 text-ink/80">{selected.message}</p>
-                </div>
-                <div className="mt-10 bg-ivory p-5">
-                  <label htmlFor="detail-status" className="block text-sm font-medium">Enquiry status</label>
-                  <select id="detail-status" value={selected.status} disabled={saving} onChange={event => void changeStatus(selected, event.target.value as EnquiryStatus)}
-                    className="mt-3 w-full border border-ink/25 bg-paper px-3 py-3 text-base outline-offset-2 focus:outline-2 focus:outline-forest disabled:opacity-60">
-                    {enquiryStatuses.map(value => <option key={value} value={value}>{statusLabels[value]}</option>)}
-                  </select>
-                  <p aria-live="polite" className="mt-3 text-sm text-ink/60">{saving ? "Saving…" : "Status changes are saved automatically."}</p>
-                </div>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <a href={`${emailLink(selected.email)}?subject=${encodeURIComponent("Your enquiry to Avira Law")}`} className="inline-flex min-h-11 items-center gap-2 bg-forest px-5 py-3 text-sm text-cream hover:bg-ink"><Mail aria-hidden size={17} strokeWidth={1.5} /> Reply by email</a>
-                  {selected.status !== "replied" && <button onClick={() => void changeStatus(selected, "replied")} disabled={saving} className={buttonClass}><Check aria-hidden size={17} strokeWidth={1.5} /> Mark replied</button>}
-                  {selected.status !== "archived" && <button onClick={() => void changeStatus(selected, "archived")} disabled={saving} className={buttonClass}><Archive aria-hidden size={17} strokeWidth={1.5} /> Archive</button>}
-                </div>
-                <p className="mt-5 text-sm leading-6 text-ink/60">Replies open in your email app. Mark the enquiry as replied after you send your response.</p>
-              </article>
-            ) : (
-              <div className="flex min-h-[34rem] flex-1 flex-col items-center justify-center px-10 py-16 text-center">
-                <Mail aria-hidden size={36} strokeWidth={1.1} className="text-forest" />
-                <h2 className="mt-6 font-serif text-3xl">The details matter.</h2>
-                <p className="mt-4 max-w-xs text-sm leading-7 text-ink/65">Select an enquiry to read the message, view contact information, and manage your response.</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </AnimatedSection>
-    </main>
-  );
+      </div>
+    </AnimatedSection>
+    {deleting && <ConfirmDialog title="Delete this enquiry?" pending={saving} error={deleteError} onCancel={() => { if (!saving) setDeleting(null); }} onConfirm={() => void remove()}><p>The message from <strong className="font-medium text-ink">{deleting.name}</strong> and their contact details will be permanently deleted. This cannot be undone.</p></ConfirmDialog>}
+  </main>;
 }

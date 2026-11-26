@@ -1,4 +1,4 @@
-import { updateEnquiry } from "@/lib/cms/enquiries";
+import { updateEnquiry, deleteEnquiry } from "@/lib/cms/enquiries";
 import { apiError, json, readJson, requireSameOrigin } from "@/lib/cms/http";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -7,5 +7,14 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     const { id } = await params;
     const body = await readJson(request);
     return json({ item: await updateEnquiry(id, body.status) });
+  } catch (error) { return apiError(error); }
+}
+
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  try {
+    requireSameOrigin(request);
+    const { id } = await params;
+    await deleteEnquiry(id);
+    return json({ ok: true });
   } catch (error) { return apiError(error); }
 }

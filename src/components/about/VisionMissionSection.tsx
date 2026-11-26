@@ -1,5 +1,7 @@
 "use client";
 
+import { EditableText } from "@/components/cms/Editable";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Section } from "@/components/Section";
@@ -35,9 +37,7 @@ export function VisionMissionSection() {
     >
       <BrandWatermark tone="sand" />
       <StaggerItem>
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/50">
-          What drives us
-        </p>
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/50"><EditableText id="components-about-VisionMissionSection-1">{"What drives us"}</EditableText></p>
       </StaggerItem>
 
       {/*
@@ -65,7 +65,7 @@ export function VisionMissionSection() {
                     {pillar.index}
                   </span>
                   <span className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
-                    {pillar.label}
+                    <EditableText id="vision-label" dynamic>{pillar.label}</EditableText>
                   </span>
                 </div>
 
@@ -74,7 +74,7 @@ export function VisionMissionSection() {
                   transition={transitionPremium}
                   className="font-serif text-xl leading-[1.4] text-cream sm:text-2xl lg:text-[1.75rem]"
                 >
-                  {pillar.statement}
+                  <EditableText id="vision-statement" dynamic>{pillar.statement}</EditableText>
                 </motion.p>
 
                 <motion.span

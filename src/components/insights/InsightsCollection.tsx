@@ -1,5 +1,7 @@
 "use client";
 
+import { EditableText } from "@/components/cms/Editable";
+
 import { useState } from "react";
 import { InsightsGrid } from "@/components/insights/InsightsGrid";
 import { insightCategories, type Insight } from "@/lib/insights";
@@ -23,12 +25,12 @@ export function InsightsCollection({ items }: { items: Insight[] }) {
                 : "border-ink/20 text-ink/75 hover:border-forest hover:bg-paper"
             }`}
           >
-            {item}
+            <EditableText id="components-insights-InsightsCollection-1" dynamic>{item}</EditableText>
           </button>
         ))}
       </div>
       <p role="status" className="mb-5 font-sans text-xs text-ink/65">
-        {String(filtered.length).padStart(2, "0")} {filtered.length === 1 ? "insight" : "insights"}
+        <EditableText id="components-insights-InsightsCollection-2" dynamic>{String(filtered.length).padStart(2, "0")}</EditableText> <EditableText id="components-insights-InsightsCollection-3" dynamic>{filtered.length === 1 ? "insight" : "insights"}</EditableText>
         {category !== "All insights" && ` in ${category}`}
       </p>
       <InsightsGrid key={category} items={filtered} />

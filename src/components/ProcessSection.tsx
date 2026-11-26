@@ -1,3 +1,4 @@
+import { EditableText } from "@/components/cms/Editable";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
@@ -28,16 +29,9 @@ export function ProcessSection() {
   return (
     <Section theme="slate" topLine stagger staggerChildren={0.12} className="flex flex-col gap-16">
       <StaggerItem className="max-w-2xl">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60">
-          Our process
-        </p>
-        <h2 className="mt-4 font-serif text-5xl leading-tight sm:text-6xl">
-          Our expertise & process
-        </h2>
-        <p className="mt-5 font-sans text-base leading-7 text-cream/65">
-          Strategic legal guidance tailored to ensure compliance, strengthen businesses, and resolve
-          complex corporate challenges.
-        </p>
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-cream/60"><EditableText id="components-ProcessSection-1">{"Our process"}</EditableText></p>
+        <h2 className="mt-4 font-serif text-5xl leading-tight sm:text-6xl"><EditableText id="components-ProcessSection-2">{"Our expertise & process"}</EditableText></h2>
+        <p className="mt-5 font-sans text-base leading-7 text-cream/65"><EditableText id="components-ProcessSection-3">{"Strategic legal guidance tailored to ensure compliance, strengthen businesses, and resolve complex corporate challenges."}</EditableText></p>
       </StaggerItem>
 
       {/*
@@ -57,23 +51,23 @@ export function ProcessSection() {
                 aria-hidden
                 className="pointer-events-none absolute -right-2 -top-2 select-none font-serif text-[7rem] leading-none text-cream/[0.06]"
               >
-                {step.number}
+                <EditableText id="components-ProcessSection-4" dynamic>{step.number}</EditableText>
               </span>
 
               {/* Small step label */}
-              <p className="font-sans text-xs text-cream/30">{step.number}</p>
+              <p className="font-sans text-xs text-cream/30"><EditableText id="components-ProcessSection-5" dynamic>{step.number}</EditableText></p>
 
               {/* Push content to bottom */}
               <div className="flex-1" />
 
               {/* Title */}
-              <p className="font-serif text-2xl text-cream">{step.title}</p>
+              <p className="font-serif text-2xl text-cream"><EditableText id="components-ProcessSection-6" dynamic>{step.title}</EditableText></p>
 
               {/* Hairline rule */}
               <div className="mt-4 h-px w-8 bg-cream/20" />
 
               {/* Body */}
-              <p className="mt-4 font-sans text-sm leading-6 text-cream/60">{step.body}</p>
+              <p className="mt-4 font-sans text-sm leading-6 text-cream/60"><EditableText id="components-ProcessSection-7" dynamic>{step.body}</EditableText></p>
             </div>
           ))}
         </div>

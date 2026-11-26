@@ -16,6 +16,10 @@ export type InsightSection = {
 
 export type Insight = {
   slug: string;
+  author?: string;
+  image?: string;
+  imageAlt?: string;
+  sample?: boolean;
   title: string;
   date: string;
   category: InsightCategory;
@@ -291,8 +295,8 @@ export function getLatestInsights(count: number): Insight[] {
   return insights.slice(0, count);
 }
 
-export function getRelatedInsights(insight: Insight, count = 3): Insight[] {
-  const others = insights.filter((item) => item.slug !== insight.slug);
+export function getRelatedInsights(insight: Insight, count = 3, collection: Insight[] = insights): Insight[] {
+  const others = collection.filter((item) => item.slug !== insight.slug);
   return [
     ...others.filter((item) => item.category === insight.category),
     ...others.filter((item) => item.category !== insight.category),

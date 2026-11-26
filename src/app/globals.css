@@ -2,6 +2,7 @@
 
 :root {
   /* Ako brand palette (teal-to-sand, per brand board) */
+  --color-danger: #973d35;
   --color-ink: #1f2b2a;
   --color-slate: #1f282a;
   --color-forest: #3e5f5b;
@@ -13,6 +14,7 @@
 }
 
 @theme inline {
+  --color-danger: var(--color-danger);
   --color-ink: var(--color-ink);
   --color-slate: var(--color-slate);
   --color-forest: var(--color-forest);

@@ -1,5 +1,7 @@
 "use client";
 
+import { EditableText } from "@/components/cms/Editable";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
@@ -77,9 +79,7 @@ export function TestimonialSection() {
       </StaggerItem>
 
       <StaggerItem className="relative lg:col-span-8">
-        <span className="pointer-events-none absolute -left-4 -top-16 select-none font-serif text-[14rem] leading-none text-cream/[0.06] sm:-top-20 sm:text-[18rem]">
-          &rdquo;
-        </span>
+        <span className="pointer-events-none absolute -left-4 -top-16 select-none font-serif text-[14rem] leading-none text-cream/[0.06] sm:-top-20 sm:text-[18rem]"><EditableText id="components-TestimonialSection-1">{"”"}</EditableText></span>
 
         <div className="relative min-h-56 sm:min-h-48">
           <AnimatePresence>
@@ -102,9 +102,9 @@ export function TestimonialSection() {
           <div className="flex items-center gap-4">
             <span className="h-px w-10 bg-cream/30" />
             <div>
-              <p className="font-serif text-base text-cream">{current.name}</p>
+              <p className="font-serif text-base text-cream"><EditableText id="components-TestimonialSection-2" dynamic>{current.name}</EditableText></p>
               <p className="font-sans text-xs uppercase tracking-[0.15em] text-cream/50">
-                {current.role}
+                <EditableText id="components-TestimonialSection-3" dynamic>{current.role}</EditableText>
               </p>
             </div>
           </div>

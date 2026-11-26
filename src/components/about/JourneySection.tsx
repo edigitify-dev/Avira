@@ -1,5 +1,7 @@
 "use client";
 
+import { EditableText } from "@/components/cms/Editable";
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -50,16 +52,9 @@ export function JourneySection() {
   return (
     <Section theme="white" topLine stagger staggerChildren={0.12} className="flex flex-col gap-14">
       <StaggerItem className="max-w-2xl">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">
-          Our journey
-        </p>
-        <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-          A decade, in milestones
-        </h2>
-        <p className="mt-5 font-sans text-base leading-7 text-ink/65">
-          The short version of how a two-person practice became a pan-India bench without losing
-          the parts that mattered.
-        </p>
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust"><EditableText id="components-about-JourneySection-1">{"Our journey"}</EditableText></p>
+        <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl"><EditableText id="components-about-JourneySection-2">{"A decade, in milestones"}</EditableText></h2>
+        <p className="mt-5 font-sans text-base leading-7 text-ink/65"><EditableText id="components-about-JourneySection-3">{"The short version of how a two-person practice became a pan-India bench without losing the parts that mattered."}</EditableText></p>
       </StaggerItem>
 
       <StaggerItem>
@@ -74,7 +69,7 @@ export function JourneySection() {
               className="group relative pb-3 font-sans text-sm font-medium tracking-wide transition-colors"
             >
               <span className={i === active ? "text-ink" : "text-ink/35 group-hover:text-ink/60"}>
-                {m.year}
+                <EditableText id="components-about-JourneySection-4" dynamic>{m.year}</EditableText>
               </span>
               <span
                 className={`absolute inset-x-0 -bottom-px h-px bg-rust transition-transform duration-500 ease-out ${
@@ -111,7 +106,7 @@ export function JourneySection() {
         {/* Controls */}
         <div className="mt-8 flex items-center justify-between border-t border-ink/10 pt-6">
           <p className="font-sans text-xs uppercase tracking-[0.15em] text-ink/40">
-            {String(active + 1).padStart(2, "0")} / {String(milestones.length).padStart(2, "0")}
+            <EditableText id="components-about-JourneySection-5" dynamic>{String(active + 1).padStart(2, "0")}</EditableText> / <EditableText id="components-about-JourneySection-6" dynamic>{String(milestones.length).padStart(2, "0")}</EditableText>
           </p>
           <div className="flex gap-3">
             <button

@@ -1,7 +1,8 @@
 "use client";
 
+import { EditableText, EditableLink } from "@/components/cms/Editable";
+
 // import { useState } from "react";
-import Link from "next/link";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
 
@@ -26,18 +27,15 @@ export function CtaSection({ theme = "forest" }: { theme?: "forest" | "white" })
     >
       {/* ---- Your original CTA content (replace with your real copy) ---- */}
       <StaggerItem>
-        <h2 className="max-w-3xl font-serif text-4xl leading-tight sm:text-5xl">
-          Have something you would like to discuss?
-        </h2>
+        <h2 className="max-w-3xl font-serif text-4xl leading-tight sm:text-5xl"><EditableText id="components-CtaSection-1">{"Have something you would like to discuss?"}</EditableText></h2>
       </StaggerItem>
 
       <StaggerItem>
-        <Link
+        <EditableLink contentId="components-CtaSection-2" nextLink
           href="/contact"
           className={`mt-10 inline-flex items-center gap-2 px-8 py-4 font-sans text-xs font-medium uppercase tracking-[0.15em] outline-offset-4 transition-colors duration-300 focus-visible:outline-2 motion-reduce:transition-none ${theme === "white" ? "bg-ink text-cream hover:bg-forest focus-visible:outline-forest" : "bg-cream text-ink hover:bg-ivory focus-visible:outline-cream"}`}
-        >
-          GET IN TOUCH <span aria-hidden>→</span>
-        </Link>
+        ><EditableText id="components-CtaSection-3">{"GET IN TOUCH "}</EditableText><span aria-hidden>→</span>
+        </EditableLink>
       </StaggerItem>
 
       {/* ---- Newsletter (moved from Footer), below the CTA ----

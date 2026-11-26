@@ -1,0 +1,15 @@
+html[data-cms-editing] [data-cms-key] { cursor: text; outline-offset: 5px; }
+html[data-cms-editing] a[data-cms-key], html[data-cms-editing] img[data-cms-key] { cursor: pointer; }
+html[data-cms-editing] [data-cms-key]:hover { outline: 1px dashed #6f8c89; }
+html[data-cms-editing] [data-cms-selected], html[data-cms-editing] [contenteditable]:focus { outline: 2px solid #6f8c89; border-radius: 1px; }
+html[data-cms-editing] [contenteditable] { white-space: pre-wrap; min-width: 0.5em; }
+html[data-cms-canvas] [style*="opacity: 0"] { opacity: 1 !important; transform: none !important; }
+@layer components {
+.cms-control { min-height: 2.75rem; border: 1px solid color-mix(in srgb, var(--color-ink) 18%, transparent); background: var(--color-paper); padding: .625rem .875rem; font-size: .875rem; outline-offset: 3px; }
+.cms-control:focus-visible { outline: 2px solid var(--color-forest); }
+.cms-control:disabled { opacity: .45; cursor: not-allowed; }
+.cms-button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; padding: .625rem 1rem; font-size: .875rem; font-weight: 500; outline-offset: 3px; }
+.cms-button:focus-visible { outline: 2px solid var(--color-slate); }
+.cms-button:disabled { opacity: .45; cursor: not-allowed; }
+
+}

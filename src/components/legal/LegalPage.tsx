@@ -1,3 +1,4 @@
+import { EditableText } from "@/components/cms/Editable";
 import type { ReactNode } from "react";
 import { Section } from "@/components/Section";
 import { StaggerItem } from "@/components/motion/StaggerItem";
@@ -23,17 +24,17 @@ export function LegalPage({ title, intro, lastUpdated, blocks }: Props) {
     <Section theme="light" amount="some" stagger staggerChildren={0.12} className="isolate flex flex-col gap-12">
       <BrandWatermark tone="deep-teal" className="right-[2%] top-48 w-[min(34rem,60vw)]" />
       <StaggerItem className="max-w-3xl pt-8">
-        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust">Legal</p>
-        <h1 className="mt-5 font-serif text-4xl leading-[1.1] text-ink sm:text-5xl">{title}</h1>
-        {lastUpdated && <p className="mt-4 font-sans text-sm text-ink/65">Last updated: {lastUpdated}</p>}
-        {intro && <p className="mt-6 font-sans text-base leading-7 text-ink/65">{intro}</p>}
+        <p className="font-sans text-xs font-medium uppercase tracking-[0.2em] text-rust"><EditableText id="components-legal-LegalPage-1">{"Legal"}</EditableText></p>
+        <h1 className="mt-5 font-serif text-4xl leading-[1.1] text-ink sm:text-5xl"><EditableText id="components-legal-LegalPage-2" dynamic>{title}</EditableText></h1>
+        {lastUpdated && <p className="mt-4 font-sans text-sm text-ink/65"><EditableText id="components-legal-LegalPage-3">{"Last updated: "}</EditableText><EditableText id="components-legal-LegalPage-4" dynamic>{lastUpdated}</EditableText></p>}
+        {intro && <p className="mt-6 font-sans text-base leading-7 text-ink/65"><EditableText id="components-legal-LegalPage-5" dynamic>{intro}</EditableText></p>}
       </StaggerItem>
 
       <StaggerItem className="flex max-w-3xl flex-col gap-10">
         {blocks.map((block, i) => (
           <div key={i}>
             {block.heading && (
-              <h2 className="font-serif text-2xl leading-snug text-ink">{block.heading}</h2>
+              <h2 className="font-serif text-2xl leading-snug text-ink"><EditableText id="components-legal-LegalPage-6" dynamic>{block.heading}</EditableText></h2>
             )}
             {block.paragraphs?.map((p, pi) => (
               <p
@@ -42,7 +43,7 @@ export function LegalPage({ title, intro, lastUpdated, blocks }: Props) {
                   block.heading || pi > 0 ? "mt-4" : ""
                 }`}
               >
-                {p}
+                {typeof p === "string" ? <EditableText id={`legal-paragraph-${i}-${pi}`} dynamic>{p}</EditableText> : p}
               </p>
             ))}
             {block.items && (
@@ -50,24 +51,24 @@ export function LegalPage({ title, intro, lastUpdated, blocks }: Props) {
                 {block.items.map((item) => (
                   <li key={item} className="flex items-start gap-3 font-sans text-base leading-7 text-ink/65">
                     <span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-ink/40" aria-hidden />
-                    {item}
+                    <EditableText id="components-legal-LegalPage-7" dynamic>{item}</EditableText>
                   </li>
                 ))}
               </ul>
             )}
             {block.closingParagraphs?.map((paragraph, pi) => (
               <p key={pi} className="mt-4 font-sans text-base leading-7 text-ink/65">
-                {paragraph}
+                {typeof paragraph === "string" ? <EditableText id={`legal-copy-${i}-${pi}`} dynamic>{paragraph}</EditableText> : paragraph}
               </p>
             ))}
             {block.subsections?.map((subsection) => (
               <div key={subsection.heading} className="mt-6">
                 <h3 className="font-sans text-base font-medium leading-7 text-ink">
-                  {subsection.heading}
+                  <EditableText id="components-legal-LegalPage-8" dynamic>{subsection.heading}</EditableText>
                 </h3>
                 {subsection.paragraphs.map((paragraph, pi) => (
                   <p key={pi} className="mt-4 font-sans text-base leading-7 text-ink/65">
-                    {paragraph}
+                    {typeof paragraph === "string" ? <EditableText id={`legal-copy-${i}-${pi}`} dynamic>{paragraph}</EditableText> : paragraph}
                   </p>
                 ))}
               </div>
