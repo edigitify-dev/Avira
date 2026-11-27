@@ -36,18 +36,18 @@ export function NavBar() {
         scrolled ? "bg-ink/90 backdrop-blur-sm" : "bg-ink"
       }`}
     >
-      <nav className="flex items-center justify-between">
-        <EditableLink contentId="components-NavBar-1" scope="site" nextLink href="/" onClick={() => setMenuOpen(false)}>
+      <div className="flex h-16 items-center justify-between">
+        <EditableLink contentId="components-NavBar-1" scope="site" nextLink href="/" onClick={() => setMenuOpen(false)} className="flex h-16 shrink-0 items-center">
           <EditableImage contentId="components-NavBar-2" scope="site"
             src="/logo.png"
             alt="Avira Law"
             width={200}
             height={100}
-            className="h-16 w-auto brightness-0 invert"
+            className="h-18 w-auto brightness-0 invert"
             priority
           />
         </EditableLink>
-        <div className="hidden md:block">
+        <nav aria-label="Main navigation" className="hidden md:block">
           <ul className="flex gap-4 lg:gap-7 xl:gap-10">
             {links.map((link) => (
               <li key={link.label}>
@@ -61,7 +61,7 @@ export function NavBar() {
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
         <button
           type="button"
           aria-expanded={menuOpen}
@@ -72,7 +72,7 @@ export function NavBar() {
         >
           {menuOpen ? <X aria-hidden className="h-6 w-6" strokeWidth={1.5} /> : <Menu aria-hidden className="h-6 w-6" strokeWidth={1.5} />}
         </button>
-      </nav>
+      </div>
       <nav
         id="mobile-navigation"
         aria-label="Mobile navigation"
