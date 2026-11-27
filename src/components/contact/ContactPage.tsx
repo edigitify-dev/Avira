@@ -55,9 +55,9 @@ export function ContactPage() {
   }
 
   return (
-    <main className="relative isolate flex min-h-dvh flex-col overflow-hidden bg-cream text-ink lg:min-h-[46rem]">
+    <main className="relative isolate flex min-h-dvh flex-col overflow-hidden bg-cream text-ink">
       {/* ── Content ── */}
-      <div className="relative section-gutter mx-auto grid w-full flex-1 items-center gap-12 px-6 pb-12 pt-28 sm:px-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:pt-32">
+      <div className="relative section-gutter mx-auto grid w-full flex-1 items-center gap-12 px-6 pb-4 pt-32 sm:px-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 lg:pt-36">
         {/* Left — editorial */}
         <AnimatedSection
           as="div"
@@ -244,7 +244,7 @@ export function ContactPage() {
       <AnimatedSection
         as="footer"
         stagger
-        className="relative mx-6 flex shrink-0 flex-col items-center gap-4 border-t border-ink/15 py-6 text-center sm:mx-12 lg:mx-16"
+        className="relative mx-6 flex shrink-0 flex-col items-center gap-2 border-t border-ink/15 py-1 text-center sm:mx-16 2xl:mx-auto 2xl:w-full 2xl:max-w-[88rem]"
       >
         <StaggerItem>
           <p className="font-sans text-xs text-ink/70"><EditableText id="components-contact-ContactPage-13">{"© 2026. Avira Law. All rights reserved."}</EditableText></p>
